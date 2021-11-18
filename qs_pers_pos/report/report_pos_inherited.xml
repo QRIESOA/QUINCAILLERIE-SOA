@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pos_report_inherit" inherit_id="point_of_sale.report_saledetails">
+            <xpath expr="(//strong)[2]" position="after">
+                <strong>test report</strong>
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>
