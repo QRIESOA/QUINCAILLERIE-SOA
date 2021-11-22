@@ -6,10 +6,31 @@
                 <t t-call="web.external_layout">
 
                     <div class="page">
-                        <h2>Session Summary:
-                            <span t-field="o.name"/>
-                        </h2>
+                        <h2><span t-field="o.total_payments_amount"/></h2>
+                        <h2><span t-field="o.payment_method"/></h2>
 
+                        <div class="row mt32 mb32">
+                            <div class="col-auto mw-100 mb-3">
+                                <strong>Starting Balance</strong>:
+                                <br/>
+                                c
+                            </div>
+                            <div class="col-auto mw-100 mb-3">
+                                <strong>Ending Balance</strong>:
+                                <br/>
+                                <span t-field="o.cash_register_balance_end_real"/>
+                            </div>
+                            <div class="col-auto mw-100 mb-3">
+                                <strong>Difference</strong>:
+                                <br/>
+                                <span t-field="o.cash_real_difference"/>
+                            </div>
+                            <div class="col-auto mw-100 mb-3">
+                                <strong>Before Closing Difference</strong>:
+                                <br/>
+                                <span t-field="o.cash_register_difference"/>
+                            </div>
+                        </div>
                         <div class="row mt32 mb32">
                             <div class="col-auto mw-100 mb-3">
                                 <strong>Responsible</strong>:
@@ -32,6 +53,94 @@
                                 <span t-field="o.stop_at"/>
                             </div>
                         </div>
+                        <table class="table table-sm o_main_table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>Reference</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Client</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Date</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Facture lié</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>journal</strong>
+                                    </th>
+                                    <th
+                                            class="text-right"
+                                            groups="base.group_multi_currency"
+                                    >
+                                        <strong>Sub total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Devise</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.order_ids" t-as="statement">
+                                    <td>
+                                        <span t-field="statement.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="statement.partner_id.name"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.date_order"
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.account_move.name"
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.amount_total"
+                                                t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.currency_id.name"
+                                        />
+                                    </td>
+                                    <td
+                                            class="text-right"
+                                    >
+                                        <table class="table">
+                                            <tr t-foreach="statement.payment_ids" t-as="value">
+                                                <td>
+                                                    <span
+                                                            t-field="value.payment_method_id.name"
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <span
+                                                            t-field="value.amount"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.amount_tax"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
 
                         <h4>Statement Summary</h4>
 
