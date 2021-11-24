@@ -38,7 +38,7 @@ class qs_pers_pos(models.Model):
             'currency_id': self.pricelist_id.currency_id.id,
             'invoice_user_id': self.user_id.id,
             'invoice_date': self.date_order.astimezone(timezone).date(),
-            'invoice_date_due': self.date_order.astimezone(timezone).date() + timedelta(days=self.partner_id.property_payment_term_id.line_ids[0].days),
+            # 'invoice_date_due': self.date_order.astimezone(timezone).date() + timedelta(days=self.partner_id.property_payment_term_id.line_ids[0].days),
             'fiscal_position_id': self.fiscal_position_id.id,
             'invoice_line_ids': self._prepare_invoice_lines(),
             'invoice_cash_rounding_id': self.config_id.rounding_method.id

@@ -95,6 +95,7 @@
                             <strong>LISTE DES FACTURE A CREDIT</strong>
                         </h4>
 
+
                         <table class="table table-sm o_main_table table-bordered">
                             <thead>
                                 <tr>
@@ -219,56 +220,122 @@
                                                         t-out="salesperson"
                                                 />
                                             </t>
+
+
                                         </td>
+
                                     </t>
                                 </tr>
                             </tbody>
                         </table>
-                        <br/>
-                        <br/>
-                        <h4>
-                            <strong>ENCAISSEMENT / DECAISSEMENT</strong>
-                        </h4>
 
 
-                        <table class="table table-sm o_main_table table-bordered">
+                        <h4>Statement Summary</h4>
+
+
+                        <table class="table table-sm o_main_table">
                             <thead>
                                 <tr>
                                     <th>
-                                        <strong>Date</strong>
+                                        <strong>Reference</strong>
                                     </th>
                                     <th>
-                                        <strong>Raison/label</strong>
-                                    </th>
-                                    <th class="text-right">
                                         <strong>Client</strong>
                                     </th>
                                     <th class="text-right">
-                                        <strong> Total</strong>
+                                        <strong>Date</strong>
                                     </th>
-
+                                    <th class="text-right">
+                                        <strong>Facture lié</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>journal</strong>
+                                    </th>
+                                    <th
+                                            class="text-right"
+                                            groups="base.group_multi_currency"
+                                    >
+                                        <strong>Sub total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Vendeur</strong>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="o.cash_register_id.line_ids" t-as="statement">
-                                    <t t-set="credit" t-value="True"/>
+                                <tr t-foreach="o.order_ids" t-as="statement">
+                                    <t t-set="credit" t-value="False"/>
 
+                                    <t t-foreach="statement.payment_ids" t-as="value">
+
+                                        <t t-if="value.payment_method_id.name == 'Customer Account'">
+                                            <t t-set="credit" t-value="True"/>
+
+                                        </t>
+                                    </t>
                                     <t t-if="credit">
                                         <td>
-                                            <span t-field="statement.date"/>
+                                            <span t-field="statement.name"/>
                                         </td>
                                         <td>
-                                            <span t-field="statement.payment_ref"/>
+                                            <span t-field="statement.partner_id.name"/>
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                    t-out="Zoly"
+                                                    t-field="statement.date_order"
                                             />
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                    t-field="statement.amount"
+                                                    t-field="statement.account_move.name"
                                             />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.amount_total"
+                                                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.currency_id.name"
+                                            />
+                                        </td>
+                                        <td
+                                                class="text-right"
+                                        >
+                                            <table class="table">
+                                                <tr t-foreach="statement.payment_ids" t-as="value">
+                                                    <td>
+                                                        <span
+                                                                t-field="value.payment_method_id.name"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                                t-field="value.amount"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-set="salesperson" t-value=""/>
+
+                                            <t t-foreach="statement.lines.sale_order_line_id" t-as="value">
+                                                <t t-set="salesperson" t-value="value.salesman_id.name"/>
+                                            </t>
+
+                                            <t t-if="salesperson">
+                                                <span
+                                                        t-out="salesperson"
+                                                />
+                                            </t>
+
+
                                         </td>
 
                                     </t>
@@ -276,6 +343,130 @@
                             </tbody>
                         </table>
 
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>Reference</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Journal</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Starting Balance</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Total Transactions</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Ending Balance</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Difference</strong>
+                                    </th>
+                                    <th
+                                            class="text-right"
+                                            groups="base.group_multi_currency"
+                                    >
+                                        <strong>Currency</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Status</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.statement_ids" t-as="statement">
+                                    <td>
+                                        <span t-field="statement.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="statement.journal_id"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.balance_start"
+                                                t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.total_entry_encoding"
+                                                t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.balance_end_real"
+                                                t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.difference"
+                                                t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'
+                                        />
+                                    </td>
+                                    <td
+                                            class="text-right"
+                                            groups="base.group_multi_currency"
+                                    >
+                                        <span t-field="statement.currency_id"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                                t-field="statement.state"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <t t-foreach="o.statement_ids" t-as="statement">
+                            <h4 t-if="statement.line_ids">Statement Details:
+                                <span
+                                        t-esc="statement.name"
+                                />
+                            </h4>
+
+                            <table
+                                    class="table table-sm o_main_table"
+                                    t-if="statement.line_ids"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Reference</th>
+                                        <th>Partner</th>
+
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="statement.line_ids" t-as="line">
+                                        <td>
+                                            <span t-field="line.date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.ref"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.partner_id"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="line.amount"
+                                                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id"}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
                     </div>
                 </t>
             </t>

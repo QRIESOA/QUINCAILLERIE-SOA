@@ -14,11 +14,7 @@
                 <field name="invoice_date_due" position="attributes">
                     <attribute name="widget">date</attribute>
                 </field>
-                <field name="activity_ids" position="after">
-                    <field name="invoice_date_due" position="attributes">
-                        <attribute name="widget">remaining_days</attribute>
-                    </field>
-                </field>
+
 
 
             </field>
