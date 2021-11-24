@@ -13,7 +13,7 @@ class qs_pers_acc(models.Model):
         readonly=True)
 
     email_partner = fields.Char(
-        'Mobile phone',
+        'Email',
         related='partner_id.email',
         readonly=True)
 

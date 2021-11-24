@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo >
     <data>
         <record id="paper_format_small58" model="report.paperformat">
             <field name="name">report format</field>
