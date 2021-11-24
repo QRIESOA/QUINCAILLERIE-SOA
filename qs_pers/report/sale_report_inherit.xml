@@ -5,7 +5,7 @@
             <t t-call="qs_pers.small_external_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <div class="page"
-                     style="margin-top:10px;text-align: left;width: 350px;background-color: white;font-size: 14px;display: solid 1px rgb(220,220,220);">
+                     style="margin-top:10px;text-align: left;width: 330px;background-color: white;font-size: 14px;display: solid 1px rgb(220,220,220);">
                     <t t-if="not o and doc">
                         <t t-set="o" t-value="doc"/>
                     </t>
