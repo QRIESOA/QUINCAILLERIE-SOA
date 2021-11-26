@@ -3,6 +3,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import logging
 from datetime import timedelta
+from datetime import date
+
 from functools import partial
 
 import psycopg2
@@ -25,7 +27,8 @@ class qs_pers_pos(models.Model):
     _inherit = 'pos.order'
 
     def _prepare_invoice_vals(self):
+        to_day = date.today() + timedelta(days=60)
         timezone = pytz.timezone(self._context.get('tz') or self.env.user.tz or 'UTC')
         invoice_vals = super(qs_pers_pos, self)._prepare_invoice_vals()
-        invoice_vals['invoice_date_due'] = self.date_order.astimezone(timezone).date() + timedelta(days=self.partner_id.property_payment_term_id.line_ids[0].days)
+        invoice_vals['invoice_date_due'] = to_day
         return invoice_vals
