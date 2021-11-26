@@ -30,7 +30,7 @@ class qs_pers(models.Model):
             if self.credit_sale_limit < self.partner_id.total_due + self.amount_total:
                 raise UserError("Ce client doit payer son credit")
 
-    def _action_confirm(self):
+    def _action_confirm_qs(self):
         """ Implementation of additionnal mecanism of Sales Order confirmation.
             This method should be extended when the confirmation should generated
             other documents. In this method, the SO are in 'sale' state (not yet 'done').
@@ -45,7 +45,7 @@ class qs_pers(models.Model):
 
         return True
 
-    def action_confirm(self):
+    def action_confirm_qs(self):
         self.check_credit_limit()
         if self._get_forbidden_state_confirm() & set(self.mapped('state')):
             raise UserError(_(
@@ -61,7 +61,7 @@ class qs_pers(models.Model):
         context = self._context.copy()
         context.pop('default_name', None)
 
-        self.with_context(context)._action_confirm()
+        self.with_context(context)._action_confirm_qs()
         if self.env.user.has_group('sale.group_auto_done_setting'):
             self.action_done()
         return True

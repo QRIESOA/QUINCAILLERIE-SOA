@@ -10,6 +10,9 @@
                     <field name="mobil_name_sale"/>
                     <field name="credit_sale_limit"/>
                 </field>
+                <field name="activity_ids" position="replace">
+                    <field name="activity_ids" string="Raison de perte" widget="list_activity" optional="show"/>
+                </field>
 
             </field>
         </record>
@@ -23,6 +26,7 @@
                     <field name="mobil_name_sale"/>
                     <field name="email_sale"/>
                 </field>
+
             </field>
         </record>
         <record id="view_partner_form_inherited" model="ir.ui.view">
@@ -33,6 +37,34 @@
                 <field name="vat" position="after">
                     <field name="credit_limit"/>
                 </field>
+            </field>
+        </record>
+
+        <record id="view_partner_form_inherited" model="ir.ui.view">
+            <field name="name">base.view_partner_form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="credit_limit"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="sale_view_form_inherited" model="ir.ui.view">
+            <field name="name">sale.view_order_form.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <button id="action_confirm" position="replace">
+                    <button name="action_confirm_qs" id="action_confirm" data-hotkey="v" string="Confirm"
+                            class="btn-primary"
+                            type="object" attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+                </button>
+                <button name="action_confirm" position="replace">
+                    <button name="action_confirm_qs" data-hotkey="v" string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                </button>
             </field>
         </record>
 

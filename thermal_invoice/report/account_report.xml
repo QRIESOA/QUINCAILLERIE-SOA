@@ -2,7 +2,6 @@
 <odoo>
     <data>
         <!-- QWeb Reports -->
-
         <report
                 id="account_invoice_small"
                 model="account.move"
