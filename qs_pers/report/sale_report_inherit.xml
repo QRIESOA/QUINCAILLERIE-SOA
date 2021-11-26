@@ -5,8 +5,12 @@
             <t t-call="qs_pers.small_external_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <div class="page"
+<<<<<<< HEAD
                      style="margin-top:10px;text-align: left;width: 330px;background-color: white;font-size: 14pt;display: solid 1px rgb(220,220,220);">
 
+=======
+                     style="margin-top:10px;text-align: left;width: 330px;background-color: white;font-size: 15pt;display: solid 1px rgb(220,220,220);">
+>>>>>>> stage
                     <t t-if="not o and doc">
                         <t t-set="o" t-value="doc"/>
                     </t>
@@ -41,7 +45,11 @@
                     </div>
 
 
+<<<<<<< HEAD
                     <table style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:13pt">
+=======
+                    <table style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:14pt">
+>>>>>>> stage
                         <colgroup>
                             <col width='24%'/>
                             <col width='1%'/>
@@ -113,7 +121,11 @@
                     <t t-set="display_discount" t-value="any(l.discount for l in o.order_line)"/>
 
                     <table class="table table-sm"
+<<<<<<< HEAD
                            style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:13pt">
+=======
+                           style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:14pt">
+>>>>>>> stage
                         <!-- In case we want to repeat the header, remove "display: table-row-group" -->
                         <thead style="display: table-row-group">
                             <tr>
