@@ -61,11 +61,6 @@
                                 <br/>
                                 <span t-field="o.cash_real_difference"/>
                             </div>
-                            <div class="col-auto mw-100 mb-3">
-                                <strong>Before Closing Difference</strong>:
-                                <br/>
-                                <span t-field="o.cash_register_difference"/>
-                            </div>
                         </div>
                         <div class="row mt32 mb32">
                             <div class="col-auto mw-100 mb-3">
@@ -226,6 +221,279 @@
                         </table>
                         <br/>
                         <br/>
+
+
+
+                        <h4>
+                            <strong>DETAILS DES PAYMENTS EN CASH</strong>
+                        </h4>
+
+                        <table class="table table-sm o_main_table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>Reference</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Client</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Date</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Facture lié</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>journal</strong>
+                                    </th>
+                                    <th
+                                            class="text-right"
+                                            groups="base.group_multi_currency"
+                                    >
+                                        <strong>Sub total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Discount</strong>
+                                    </th>
+
+                                    <th class="text-right">
+                                        <strong>Vendeur</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.order_ids" t-as="statement">
+                                    <t t-set="credit" t-value="False"/>
+
+                                    <t t-foreach="statement.payment_ids" t-as="value">
+
+                                        <t t-if="value.payment_method_id.name == 'Cash'">
+                                            <t t-set="credit" t-value="True"/>
+                                        </t>
+                                    </t>
+                                    <t t-if="credit">
+                                        <td>
+                                            <span t-field="statement.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="statement.partner_id.name"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.date_order"
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.account_move.name"
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.amount_total"
+                                                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.currency_id.name"
+                                            />
+                                        </td>
+                                        <td
+                                                class="text-right"
+                                        >
+                                            <table class="table">
+                                                <tr t-foreach="statement.payment_ids" t-as="value">
+                                                    <td>
+                                                        <span
+                                                                t-field="value.payment_method_id.name"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                                t-field="value.amount"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <t t-set="discount" t-value="0"/>
+
+                                            <t t-foreach="statement.lines" t-as="value">
+
+                                                <t t-if="value.full_product_name == 'Discount'">
+                                                    <t t-set="discount" t-value="discount + value.price_unit"/>
+                                                </t>
+                                            </t>
+
+                                            <t t-if="discount">
+                                                <span
+                                                        t-out="discount"
+                                                />
+                                            </t>
+
+
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-set="salesperson" t-value=""/>
+
+                                            <t t-foreach="statement.lines.sale_order_line_id" t-as="value">
+                                                <t t-set="salesperson" t-value="value.salesman_id.name"/>
+                                            </t>
+
+                                            <t t-if="salesperson">
+                                                <span
+                                                        t-out="salesperson"
+                                                />
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+
+                        <h4>
+                            <strong>DETAILS DES PAYMENTS BANK</strong>
+                        </h4>
+
+                        <table class="table table-sm o_main_table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>Reference</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Client</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Date</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Facture lié</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>journal</strong>
+                                    </th>
+                                    <th
+                                            class="text-right"
+                                            groups="base.group_multi_currency"
+                                    >
+                                        <strong>Sub total</strong>
+                                    </th>
+                                    <th class="text-right">
+                                        <strong>Discount</strong>
+                                    </th>
+
+                                    <th class="text-right">
+                                        <strong>Vendeur</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.order_ids" t-as="statement">
+                                    <t t-set="credit" t-value="False"/>
+
+                                    <t t-foreach="statement.payment_ids" t-as="value">
+
+                                        <t t-if="value.payment_method_id.name == 'Bank  '">
+                                            <t t-set="credit" t-value="True"/>
+                                        </t>
+                                    </t>
+                                    <t t-if="credit">
+                                        <td>
+                                            <span t-field="statement.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="statement.partner_id.name"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.date_order"
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.account_move.name"
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.amount_total"
+                                                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                    t-field="statement.currency_id.name"
+                                            />
+                                        </td>
+                                        <td
+                                                class="text-right"
+                                        >
+                                            <table class="table">
+                                                <tr t-foreach="statement.payment_ids" t-as="value">
+                                                    <td>
+                                                        <span
+                                                                t-field="value.payment_method_id.name"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                                t-field="value.amount"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <t t-set="discount" t-value="0"/>
+
+                                            <t t-foreach="statement.lines" t-as="value">
+
+                                                <t t-if="value.full_product_name == 'Discount'">
+                                                    <t t-set="discount" t-value="discount + value.price_unit"/>
+                                                </t>
+                                            </t>
+
+                                            <t t-if="discount">
+                                                <span
+                                                        t-out="discount"
+                                                />
+                                            </t>
+
+
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-set="salesperson" t-value=""/>
+
+                                            <t t-foreach="statement.lines.sale_order_line_id" t-as="value">
+                                                <t t-set="salesperson" t-value="value.salesman_id.name"/>
+                                            </t>
+
+                                            <t t-if="salesperson">
+                                                <span
+                                                        t-out="salesperson"
+                                                />
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
                         <h4>
                             <strong>ENCAISSEMENT / DECAISSEMENT</strong>
                         </h4>
