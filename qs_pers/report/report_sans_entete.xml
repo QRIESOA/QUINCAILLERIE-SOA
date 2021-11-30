@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_NTA_document2">
+
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <div style="margin-top:0px;" class="article din" t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-id="o and o.id">
+                <t t-raw="0"/>
+
+                <div class="page"
+                     style="margin-top:10px;text-align: left;width: 330px;background-color: white;font-size: 15pt;display: solid 1px rgb(220,220,220);">
+                    <t t-if="not o and doc">
+                        <t t-set="o" t-value="doc"/>
+                    </t>
+                    <t t-if="o and 'company_id' in o">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-if="not o or not 'company_id' in o">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+
+
+                    <table style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:14pt">
+                        <colgroup>
+                            <col width='24%'/>
+                            <col width='1%'/>
+                            <col width='49%'/>
+                            <col width='1%'/>
+                            <col width='25%'/>
+                        </colgroup>
+                        <tr t-if="o.partner_id">
+                            <td style="padding-top:3pt;padding-bottom:3pt">Customer</td>
+                            <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
+                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
+                                <span t-field="o.partner_id"
+                                      t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                                ,
+                                <t t-if="o.partner_id.street"><span t-esc="o.partner_id.street"/>,
+                                </t>
+                                <t t-if="o.partner_id.street2"><span t-esc="o.partner_id.street2"/>,
+                                </t>
+                                <t t-if="o.partner_id.city"><span t-esc="o.partner_id.city"/>,
+                                </t>
+                                <t t-if="o.partner_id.state_id"><span t-esc="o.partner_id.state_id.name"/>.
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:bottom;">
+                                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                    <span t-if="o.state not in ['draft','sent']">Order N°</span>
+                                    <span t-if="o.state in ['draft','sent']">Quotation N°</span>
+                                </t>
+                                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                    <span>Pro-Forma Invoice N°</span>
+                                </t>
+                            </td>
+                            <td style="vertical-align:bottom;padding-left:3pt">:</td>
+                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
+                                <t t-esc="o.name"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.client_order_ref" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Your Reference:</strong>
+                            <p class="m-0" t-field="o.client_order_ref"/>
+                        </div>
+                        <div t-if="o.date_order and o.state not in ['draft','sent']"
+                             class="col-auto col-3 mw-100 mb-2">
+                            <strong>Order Date:</strong>
+                            <p class="m-0" t-field="o.date_order"/>
+                        </div>
+                        <div t-if="o.date_order and o.state in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Quotation Date:</strong>
+                            <p class="m-0" t-field="o.date_order" t-options='{"widget": "date"}'/>
+                        </div>
+                        <div t-if="o.validity_date and o.state in ['draft', 'sent']"
+                             class="col-auto col-3 mw-100 mb-2"
+                             name="expiration_date">
+                            <strong>Expiration:</strong>
+                            <p class="m-0" t-field="o.validity_date"/>
+                        </div>
+                        <div t-if="o.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Salesperson:</strong>
+                            <p class="m-0" t-field="o.user_id"/>
+                        </div>
+                    </div>
+
+                    <!-- Is there a discount on at least one line? -->
+                    <t t-set="display_discount" t-value="any(l.discount for l in o.order_line)"/>
+
+                    <table class="table table-sm"
+                           style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:14pt">
+                        <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th name="th_description" class="text-left">Description</th>
+                                <th name="th_quantity" class="text-right">Qtt</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+
+                            <t t-set="current_subtotal" t-value="0"/>
+
+                            <t t-foreach="o.order_line" t-as="line">
+
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                                   groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                                   groups="account.group_show_line_subtotals_tax_included"/>
+
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type">
+                                        <td name="td_name">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td name="td_quantity" class="text-right">
+                                            <span t-field="line.product_uom_qty"/>
+                                            <span t-field="line.product_uom"/>
+                                        </td>
+
+                                    </t>
+                                    <t t-if="line.display_type == 'line_section'">
+                                        <td name="td_section_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_note'">
+                                        <td name="td_note_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                    </t>
+                                </tr>
+
+
+                            </t>
+                        </tbody>
+                    </table>
+
+
+                    <p t-field="o.note"/>
+                </div>
+            </div>
+        </template>
+
+        <template id="report_small_invoice2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                       t-value="o.partner_id.lang"/>
+                    <t t-call="qs_pers.report_NTA_document2" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
+
