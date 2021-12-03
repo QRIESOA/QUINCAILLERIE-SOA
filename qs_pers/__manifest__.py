@@ -27,7 +27,7 @@
         'data/paper_format.xml',
         'views/views.xml',
         'views/templates.xml',
-        'report/report_sans_entete.xml',
+        'report/report_with_price.xml',
         'report/sale_report_inherit.xml',
         'report/sale_report.xml',
         'report/A7_paperformat.xml',
