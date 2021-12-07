@@ -67,7 +67,13 @@
                             </td>
                             <td style="vertical-align:bottom;padding-left:3pt">:</td>
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
-                                <t t-esc="o.payment_term_id.name"/>
+                                <t t-if="o.payment_term_id.name == 'IMMEDIAT'">
+                                    <span>COMPTANT</span>
+                                </t>
+                                <t t-else="">
+                                    <span>CREDIT</span>
+                                </t>
+
                             </td>
                         </tr>
                     </table>

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="pos_report_inherit" inherit_id="point_of_sale.report_saledetails">
-            <xpath expr="(//strong)[2]" position="after">
-                <strong>test report</strong>
+        <template id="qs_pers_pos.pos_invoice_report_inherit" inherit_id="point_of_sale.report_invoice_document">
+            <xpath expr="//div[@name='due_date']" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2"
+                     t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'">
+                    <strong>Due Date:</strong>
+                    <p></p>
+                </div>
             </xpath>
 
         </template>
