@@ -49,7 +49,7 @@
             </field>
         </record>
 
-        <record id="view_partner_form_inherited" model="ir.ui.view">
+       <!-- <record id="view_partner_form_inherited" model="ir.ui.view">
             <field name="name">base.view_partner_form.inherited</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -59,7 +59,7 @@
                 </field>
             </field>
         </record>
-
+-->
         <record id="sale_view_form_inherited" model="ir.ui.view">
             <field name="name">sale.view_order_form.inherited</field>
             <field name="model">sale.order</field>
@@ -74,16 +74,24 @@
                     <button name="action_confirm_qs" data-hotkey="v" string="Confirm" type="object"
                             attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
                 </button>
-                <field name="price_unit" position="attributes">
-                    <!--                    <attribute name="attrs">{'readonly': [('compute_field_sale', '=', True)]}</attribute>-->
-                    <attribute name="attrs">{}</attribute>
-                    <attribute name="force_save">True</attribute>
-                    <attribute name="readonly">1</attribute>
+                <field name="price_unit" position="after">
+                    <field name="compute_field_sale" invisible="1"/>
 
+                    <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
+                           position="attributes">
+<!--                        <attribute name="attrs">{'readonly': [('compute_field_sale', '=', True)]}</attribute>-->
+                        <attribute name="readonly">1</attribute>
+                    </xpath>
+                </field>
+
+                <field name="payment_term_id" position="attributes">
+                        <attribute name="readonly">1</attribute>
                 </field>
 
             </field>
         </record>
+
+
 
 
     </data>

@@ -76,17 +76,6 @@ class qs_pers(models.Model):
             self.action_done()
         return True
 
-    compute_field_sale = fields.Boolean(string="check field", compute='get_user_sale')
-
-    @api.depends('compute_field_sale')
-    def get_user_sale(self):
-        res_user = self.env['res.users'].search([('id', '=', self._uid)])
-        if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(
-                'sales_team.group_sale_salesman_all_leads'):
-            self.compute_field_sale = True
-        else:
-            self.compute_field_sale = False
-
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
@@ -202,3 +191,16 @@ class SaleOrderLineInherited(models.Model):
         remaining.forecast_expected_date = False
         remaining.free_qty_today = False
         remaining.qty_available_today = False
+
+    compute_field_sale = fields.Boolean(string="check field", compute='get_user_sale')
+
+    @api.depends('compute_field_sale')
+    def get_user_sale(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(
+                'sales_team.group_sale_salesman_all_leads'):
+            print("ato izy true")
+            self.compute_field_sale = True
+        else:
+            print("ato izy false eh")
+            self.compute_field_sale = False
