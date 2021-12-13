@@ -76,10 +76,31 @@ class qs_pers(models.Model):
             self.action_done()
         return True
 
+    compute_field_sale = fields.Boolean(string="check field", compute='get_user_sale')
+
+    @api.depends('compute_field_sale')
+    def get_user_sale(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(
+                'sales_team.group_sale_salesman_all_leads'):
+            self.compute_field_sale = True
+        else:
+            self.compute_field_sale = False
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    credit_limit = fields.Monetary("Limite de credit")
+    credit_limit = fields.Monetary("Limite de credit", index=True)
+    compute_field = fields.Boolean(string="check field", compute='get_user')
+
+    @api.depends('compute_field')
+    def get_user(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(
+                'sales_team.group_sale_salesman_all_leads'):
+            self.compute_field = True
+        else:
+            self.compute_field = False
 
 
 class SaleOrderLineInherited(models.Model):
@@ -167,6 +188,8 @@ class SaleOrderLineInherited(models.Model):
                     product_qty = line.product_uom._compute_quantity(product_qty, line.product_id.uom_id)
                 qty_processed_per_product[line.product_id.id] += product_qty
             treated |= lines
+
+            print(self.env.user.name)
 
             msg = _('La quantité en stock est insuffisante, il ne reste que %s') % (free_qty_today)
             if treated:

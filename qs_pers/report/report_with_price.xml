@@ -30,7 +30,7 @@
                             <col width='25%'/>
                         </colgroup>
                         <tr t-if="o.partner_id">
-                            <td style="padding-top:3pt;padding-bottom:3pt">Customer</td>
+                            <td style="padding-top:3pt;padding-bottom:3pt">Client</td>
                             <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
                                 <span t-field="o.partner_id"
@@ -63,7 +63,7 @@
                         </tr>
                         <tr>
                             <td style="vertical-align:bottom;">
-                                <span>Terms</span>
+                                <span>Paiement</span>
                             </td>
                             <td style="vertical-align:bottom;padding-left:3pt">:</td>
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt">

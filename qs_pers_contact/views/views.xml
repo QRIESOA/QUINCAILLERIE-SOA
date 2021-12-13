@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_partner_contact_inherited_qs" model="ir.ui.view">
+            <field name="name">res.partner.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <field name="vat" position="replace">
+                    <field name="vat" string="NIF"/>
+                    <field name="STAT"/>
+                    <field name="RCS"/>
+                    <field name="CIF"/>
+<!--                    <field name="compute_field" invisible="1"/>-->
+                    <!--                    <field name="property_payment_term_id" attrs="{'readonly': [('compute_field', '=', False)]}"/>-->
+                </field>
+
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <!--<record id="res_partner_contact_inherited_qs_block" model="ir.ui.view">
+            <field name="name">res.partner.blocked</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='credit_limit']" position="attributes">
+                    &lt;!&ndash; Add your fields or attributes here &ndash;&gt;
+                    <attribute name="readonly">0</attribute>
+
+                </xpath>
+
+            </field>
+        </record>-->
+
+<!--        <record id="res_partner_contact_inherited_qs_eval" model="ir.ui.view">-->
+<!--            <field name="name">res.partner.inherited.eval</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_salesman')])]"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="vat" position="after">-->
+<!--                    <field name="credit_limit" readonly="True"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>
