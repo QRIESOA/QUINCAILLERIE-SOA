@@ -27,10 +27,14 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'report/report_pos_inherited.xml'
+        'report/report_pos_inherited.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+    ],
+    'web.assets_qweb': [
+        'qs_pers_pos/static/src/xml/**/*',
     ],
 }
