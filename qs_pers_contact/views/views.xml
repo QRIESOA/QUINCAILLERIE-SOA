@@ -12,12 +12,56 @@
                     <field name="STAT"/>
                     <field name="RCS"/>
                     <field name="CIF"/>
-<!--                    <field name="compute_field" invisible="1"/>-->
+                    <!--                    <field name="compute_field" invisible="1"/>-->
                     <!--                    <field name="property_payment_term_id" attrs="{'readonly': [('compute_field', '=', False)]}"/>-->
                 </field>
 
 
             </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_inherit" model="ir.ui.view">
+            <field name="name">product.template.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='group_standard_price']" position="replace">
+                    <!-- Add your fields or attributes here -->
+                    <label for="list_price" class="mt-1"/>
+                    <div name="pricing">
+                        <field name="list_price" class="oe_inline" widget="monetary"
+                               options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    </div>
+                    <label for="standard_price" groups="sales_team.group_sale_manager"
+                           attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+                    <div name="standard_price_uom" groups="sales_team.group_sale_manager"
+                         attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"
+                         class="o_row">
+                        <field name="standard_price" widget="monetary"
+                               options="{'currency_field': 'cost_currency_id', 'field_digits': True}"/>
+                        <span groups="uom.group_uom" class="oe_read_only">per
+                            <field name="uom_name"/>
+                        </span>
+                    </div>
+                    <field name="categ_id" string="Product Category"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="cost_currency_id" invisible="1"/>
+                    <field name="product_variant_id" invisible="1"/>
+                </xpath>
+
+            </field>
+
+        </record>
+        <record id="hr.menu_hr_root" model="ir.ui.menu">
+            <field name="action" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_manager'), ref('hr.group_hr_user')])]"/>
+            <field name="name">Employés</field>
+            <field name="parent_id" eval="False"/>
+            <field name="sequence">185</field>
+            <field name="web_icon">hr,static/description/icon.png</field>
         </record>
 
 
@@ -37,16 +81,16 @@
             </field>
         </record>-->
 
-<!--        <record id="res_partner_contact_inherited_qs_eval" model="ir.ui.view">-->
-<!--            <field name="name">res.partner.inherited.eval</field>-->
-<!--            <field name="model">res.partner</field>-->
-<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
-<!--            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_salesman')])]"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <field name="vat" position="after">-->
-<!--                    <field name="credit_limit" readonly="True"/>-->
-<!--                </field>-->
-<!--            </field>-->
-<!--        </record>-->
+        <!--        <record id="res_partner_contact_inherited_qs_eval" model="ir.ui.view">-->
+        <!--            <field name="name">res.partner.inherited.eval</field>-->
+        <!--            <field name="model">res.partner</field>-->
+        <!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+        <!--            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_salesman')])]"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <field name="vat" position="after">-->
+        <!--                    <field name="credit_limit" readonly="True"/>-->
+        <!--                </field>-->
+        <!--            </field>-->
+        <!--        </record>-->
     </data>
 </odoo>

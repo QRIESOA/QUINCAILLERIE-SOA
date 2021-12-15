@@ -30,6 +30,26 @@
             <field name="perm_unlink" eval="False"/>
             <field name="perm_write" eval="False"/>
         </record>
+        <record id="sale_stock.access_stock_picking_salesman" model="ir.model.access">
+            <field name="active" eval="True"/>
+            <field name="group_id" ref="sales_team.group_sale_salesman"/>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="name">stock_picking salesman</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>
+        <record id="stock.access_stock_scrap_user" model="ir.model.access">
+            <field name="active" eval="True"/>
+            <field name="group_id" ref="stock.group_stock_user"/>
+            <field name="model_id" ref="stock.model_stock_scrap"/>
+            <field name="name">stock.scrap.user</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>
 
     </data>
 </odoo>
