@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- QWeb Reports -->
-
-        <!--        <report-->
-        <!--                id="note_d_achat"-->
-        <!--                model="sale.order"-->
-        <!--                string="Note d'achat"-->
-        <!--                report_type="qweb-pdf"-->
-        <!--                name="qs_pers.report_small_invoice"-->
-        <!--                file="qs_pers.report_small_invoice"-->
-        <!--                attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"-->
-        <!--                paperformat='qs_pers.paper_format_small58'-->
-        <!--                print_report_name="'NTA %s' %(object._get_report_base_filename())"-->
-        <!--        />-->
-
-
-        <!--        <report-->
-        <!--                id="note_d_achat_2"-->
-        <!--                model="sale.order"-->
-        <!--                string="Note d'achat"-->
-        <!--                report_type="qweb-pdf"-->
-        <!--                name="qs_pers.report_small_invoice2"-->
-        <!--                file="qs_pers.report_small_invoice2"-->
-        <!--                attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"-->
-        <!--                paperformat='qs_pers.A7_paperformat'-->
-        <!--                print_report_name="'NTA %s' %(object._get_report_base_filename())"-->
-        <!--        />-->
         <record id="note_d_achat_2" model="ir.actions.report">
             <field name="name">Note d'achat</field>
             <field name="model">sale.order</field>
