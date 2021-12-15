@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="note_d_achat_2" model="ir.actions.report">
+        <!--<record id="note_d_achat_2" model="ir.actions.report">
             <field name="name">Note d'achat</field>
             <field name="model">sale.order</field>
             <field name="report_type">qweb-pdf</field>
@@ -10,7 +10,7 @@
             <field name="paperformat_id" ref="qs_pers.A7_paperformat"/>
             <field name="print_report_name">'NTA %s' %(object._get_report_base_filename())</field>
             <field name="binding_model_id" ref="model_sale_order"/>
-        </record>
+        </record>-->
     </data>
 </odoo>
 
