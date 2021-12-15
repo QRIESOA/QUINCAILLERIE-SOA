@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="res.partner_form_inherit" model="ir.ui.view">
+        <!--<record id="res.partner_form_inherit" model="ir.ui.view">
             <field name="name">res.partner.inherited</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -10,6 +10,6 @@
                     <field name="term_pdv"/>
                 </field>
             </field>
-        </record>
+        </record>-->
     </data>
 </odoo>

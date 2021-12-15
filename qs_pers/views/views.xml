@@ -10,9 +10,7 @@
                     <field name="mobil_name_sale"/>
                     <field name="email_sale"/>
                 </field>
-                <field name="activity_ids" position="replace">
-                    <field name="activity_ids" string="Raison de perte" widget="list_activity" optional="show"/>
-                </field>
+
 
             </field>
         </record>
@@ -31,7 +29,7 @@
         </record>
 
 
-        <!--<record id="view_partner_form_inherited" model="ir.ui.view">
+        <record id="view_partner_form_inherited" model="ir.ui.view">
             <field name="name">base.view_partner_form.inherited</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -51,7 +49,7 @@
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </field>
             </field>
-        </record>-->
+        </record>
 
 
         <record id="sale_view_form_inherited" model="ir.ui.view">
