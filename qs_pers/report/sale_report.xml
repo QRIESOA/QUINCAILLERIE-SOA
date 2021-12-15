@@ -35,10 +35,7 @@
             <field name="report_file">qs_pers.report_small_invoice2</field>
             <field name="paperformat_id" ref="qs_pers.A7_paperformat"/>
             <field name="print_report_name">'NTA %s' %(object._get_report_base_filename())</field>
-<!--            <field name="paperformat_id">qs_pers.A7_paperformat</field>-->
             <field name="binding_model_id" ref="model_sale_order"/>
-
-
         </record>
     </data>
 </odoo>
