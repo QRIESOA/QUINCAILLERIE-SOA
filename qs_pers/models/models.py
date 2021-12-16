@@ -14,7 +14,8 @@ from collections import defaultdict
 
 from odoo import api, fields, models, _
 from odoo.tools import float_compare, float_round
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, Warning
+import pytz
 
 _logger = logging.getLogger(__name__)
 
@@ -110,6 +111,19 @@ class SaleOrderLineInherited(models.Model):
     is_mto = fields.Boolean(compute='_compute_is_mto')
     display_qty_widget = fields.Boolean(compute='_compute_qty_to_deliver')
 
+    def notification_test(self):
+        notification = {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': ('Your Custom Title'),
+                'message': 'Your Custom Message',
+                'type': 'success',  # types: success,warning,danger,info
+                'sticky': True,  # True/False will display for few seconds if false
+            },
+        }
+        return notification
+
     @api.depends(
         'product_id', 'customer_lead', 'product_uom_qty', 'product_uom', 'order_id.commitment_date',
         'move_ids', 'move_ids.forecast_expected_date', 'move_ids.forecast_availability')
@@ -183,7 +197,8 @@ class SaleOrderLineInherited(models.Model):
             msg = _('La quantité en stock est insuffisante, il ne reste que %s') % (free_qty_today)
             if treated:
                 if free_qty_today < treated[-1].product_uom_qty:
-                    raise UserError(msg)
+                    self.notification_test()
+                    print("efa vita print notification test")
 
         remaining = (self - treated)
         remaining.virtual_available_at_date = False
