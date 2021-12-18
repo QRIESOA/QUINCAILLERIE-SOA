@@ -210,7 +210,6 @@ class SaleOrderLineInherited(models.Model):
             msg = _('La quantité en stock est insuffisante, il ne reste que %s') % (free_qty_today)
             if treated:
                 if free_qty_today < treated[-1].product_uom_qty:
-                    self.notification_test()
                     print("efa vita print notification test")
 
         remaining = (self - treated)
