@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'point_of_sale'],
+    'depends': ['base', 'point_of_sale', 'pos_discount'],
 
     # always loaded
     'data': [
@@ -28,8 +28,12 @@
         'views/views.xml',
         'views/templates.xml',
         'report/report_pos_inherited.xml',
-
     ],
+    'assets': {
+        'point_of_sale.assets': [
+            '/qs_pers_pos/static/src/js/lock_price_discount.js',
+        ],
+    },
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

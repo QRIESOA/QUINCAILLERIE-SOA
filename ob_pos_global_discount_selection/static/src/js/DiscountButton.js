@@ -16,7 +16,7 @@ odoo.define('ob_pos_global_discount_selection.DiscountButton', function(require)
                     isInputSelected: true
                 });
                 if (confirmed) {
-                    const val = Math.round(Math.max(0,Math.min(100,parseFloat(payload))));
+                    const val = Math.round(Math.max(0,Math.min(100000000,parseFloat(payload))));
                     await self.apply_discount(val, discount_type);
                 }
 
