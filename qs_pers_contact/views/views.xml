@@ -12,9 +12,7 @@
                     <field name="STAT"/>
                     <field name="RCS"/>
                     <field name="CIF"/>
-
                 </field>
-
 
             </field>
         </record>

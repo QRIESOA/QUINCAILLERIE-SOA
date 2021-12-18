@@ -25,6 +25,19 @@ logger = logging.getLogger(__name__)
 class qs_pers(models.Model):
     _inherit = 'sale.order'
 
+    compute_field_sale = fields.Boolean(string="check field", compute='get_user_sale')
+
+    @api.depends('compute_field_sale', 'user_id')
+    def get_user_sale(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(
+                'sales_team.group_sale_salesman_all_leads'):
+            print("ato izy true")
+            self.compute_field_sale = True
+        else:
+            print("ato izy false eh")
+            self.compute_field_sale = False
+
     mobil_name_sale = fields.Char(
         'Mobile phone',
         related='partner_id.phone',
@@ -111,18 +124,18 @@ class SaleOrderLineInherited(models.Model):
     is_mto = fields.Boolean(compute='_compute_is_mto')
     display_qty_widget = fields.Boolean(compute='_compute_qty_to_deliver')
 
-    def notification_test(self):
-        notification = {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'title': ('Your Custom Title'),
-                'message': 'Your Custom Message',
-                'type': 'success',  # types: success,warning,danger,info
-                'sticky': True,  # True/False will display for few seconds if false
-            },
-        }
-        return notification
+    # def notification_test(self):
+    #     notification = {
+    #         'type': 'ir.actions.client',
+    #         'tag': 'display_notification',
+    #         'params': {
+    #             'title': ('Your Custom Title'),
+    #             'message': 'Your Custom Message',
+    #             'type': 'success',  # types: success,warning,danger,info
+    #             'sticky': True,  # True/False will display for few seconds if false
+    #         },
+    #     }
+    #     return notification
 
     @api.depends(
         'product_id', 'customer_lead', 'product_uom_qty', 'product_uom', 'order_id.commitment_date',
