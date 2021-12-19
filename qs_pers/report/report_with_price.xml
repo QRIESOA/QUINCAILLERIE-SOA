@@ -35,25 +35,30 @@
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
                                 <span t-field="o.partner_id"
                                       t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/>
-                                ,
-                                <t t-if="o.partner_id.street"><span t-esc="o.partner_id.street"/>,
-                                </t>
-                                <t t-if="o.partner_id.street2"><span t-esc="o.partner_id.street2"/>,
-                                </t>
-                                <t t-if="o.partner_id.city"><span t-esc="o.partner_id.city"/>,
-                                </t>
-                                <t t-if="o.partner_id.state_id"><span t-esc="o.partner_id.state_id.name"/>.
-                                </t>
+
                             </td>
+
+                        </tr>
+                        <tr t-if="o.partner_id">
+                            <td style="padding-top:3pt;padding-bottom:3pt">Telephone</td>
+                            <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
+                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
+                                <t t-if="o.partner_id.mobile"><span t-esc="o.partner_id.mobile"/>,
+                                </t>
+                                <t t-if="o.partner_id.phone"><span t-esc="o.partner_id.phone"/>,
+                                </t>
+
+                            </td>
+
                         </tr>
                         <tr>
                             <td style="vertical-align:bottom;">
                                 <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                                    <span t-if="o.state not in ['draft','sent']">Order N°</span>
-                                    <span t-if="o.state in ['draft','sent']">Quotation N°</span>
+                                    <span t-if="o.state not in ['draft','sent']">Commande N°</span>
+                                    <span t-if="o.state in ['draft','sent']">Devis N°</span>
                                 </t>
                                 <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                                    <span>Pro-Forma Invoice N°</span>
+                                    <span>Pro-Forma N°</span>
                                 </t>
                             </td>
                             <td style="vertical-align:bottom;padding-left:3pt">:</td>
@@ -67,39 +72,40 @@
                             </td>
                             <td style="vertical-align:bottom;padding-left:3pt">:</td>
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
-                                <t t-if="o.payment_term_id.name == 'IMMEDIAT'">
+                                <t t-if="o.pricelist_id.id == 1">
+
                                     <span>COMPTANT</span>
                                 </t>
+
                                 <t t-else="">
                                     <span>CREDIT</span>
                                 </t>
-
                             </td>
                         </tr>
                     </table>
 
                     <div class="row mt32 mb32" id="informations">
                         <div t-if="o.client_order_ref" class="col-auto col-3 mw-100 mb-2">
-                            <strong>Your Reference:</strong>
+                            <strong>Reference :</strong>
                             <p class="m-0" t-field="o.client_order_ref"/>
                         </div>
                         <div t-if="o.date_order and o.state not in ['draft','sent']"
                              class="col-auto col-3 mw-100 mb-2">
-                            <strong>Order Date:</strong>
+                            <strong>Date :</strong>
                             <p class="m-0" t-field="o.date_order"/>
                         </div>
                         <div t-if="o.date_order and o.state in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
-                            <strong>Quotation Date:</strong>
+                            <strong>Date :</strong>
                             <p class="m-0" t-field="o.date_order" t-options='{"widget": "date"}'/>
                         </div>
                         <div t-if="o.validity_date and o.state in ['draft', 'sent']"
                              class="col-auto col-3 mw-100 mb-2"
                              name="expiration_date">
-                            <strong>Expiration:</strong>
+                            <strong>Expiration :</strong>
                             <p class="m-0" t-field="o.validity_date"/>
                         </div>
                         <div t-if="o.user_id.name" class="col-auto col-3 mw-100 mb-2">
-                            <strong>Salesperson:</strong>
+                            <strong>Vendeur :</strong>
                             <p class="m-0" t-field="o.user_id"/>
                         </div>
                     </div>
@@ -108,15 +114,14 @@
                     <t t-set="display_discount" t-value="any(l.discount for l in o.order_line)"/>
 
 
-                    <table class="table table-sm o_main_table" style="border-bottom:1pt dashed black;margin-top:5pt;padding:1pt;font-size:16pt">
+                    <table class="table"
+                            style="font-size:13pt">
                         <!-- In case we want to repeat the header, remove "display: table-row-group" -->
                         <thead style="display: table-row-group">
                             <tr>
-                                <th name="th_description" class="text-left">Descript</th>
+                                <th name="th_description" class="text-left">Article</th>
                                 <th name="th_quantity" class="text-right">Qtt</th>
                                 <th name="th_priceunit" class="text-right">Prix</th>
-
-
                             </tr>
                         </thead>
                         <tbody class="sale_tbody">
@@ -132,14 +137,29 @@
 
                                 <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                                     <t t-if="not line.display_type">
-                                        <td name="td_name"><span t-field="line.name"/></td>
-                                        <td name="td_quantity" class="text-right">
-                                            <span t-field="line.product_uom_qty"/>
-                                            <span t-field="line.product_uom"/>
-                                        </td>
-                                        <td name="td_priceunit" class="text-right">
-                                            <span t-field="line.price_unit"/>
-                                        </td>
+                                        <tr>
+                                            <td name="td_name" colspan="3"><span t-field="line.product_id.name"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td name="td_default_code" class="text-left" colspan="2">
+                                                <span t-field="line.product_id.default_code"/>
+                                                <span>|</span>
+                                                <span t-field="line.product_uom_qty"/>
+                                                <span>x</span>
+                                                <span t-field="line.price_unit"/>
+                                            </td>
+                                            <td name="td_quantity" class="text-left">
+                                                <!--<span t-field="line.product_uom_qty"/>
+                                                <span t-field="line.price_unit"/>-->
+                                                <span t-field="line.price_subtotal"/>
+
+                                            </td>
+                                            <!-- <td name="td_priceunit" class="text-right">
+                                                 <span t-field="line.price_subtotal"/>
+                                             </td>-->
+                                        </tr>
+
 
                                     </t>
                                     <t t-if="line.display_type == 'line_section'">
@@ -155,12 +175,20 @@
                                         </td>
                                     </t>
                                 </tr>
-
-
                             </t>
                         </tbody>
                     </table>
-
+                    <div class="clearfix" name="so_total_summary">
+                        <div id="total" name="total">
+                            <div>
+                                <table class="table table-sm">
+                                    <!-- Tax totals -->
+                                    <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                    <t t-call="account.document_tax_totals"/>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                     <p t-field="o.note"/>
                 </div>

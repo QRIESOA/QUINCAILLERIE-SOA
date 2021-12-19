@@ -96,7 +96,7 @@ class ResPartner(models.Model):
     credit_limit = fields.Monetary("Limite de credit", index=True)
     compute_field = fields.Boolean(string="check field", compute='get_user')
 
-    @api.depends('compute_field')
+    @api.depends('compute_field', 'user_id')
     def get_user(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(

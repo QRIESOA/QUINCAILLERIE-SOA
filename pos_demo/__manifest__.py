@@ -11,14 +11,13 @@
     'data': [
         'views/pos_assets.xml'
     ],
-    'qweb': [
-        'static/src/xml/pos_demo.xml'
-    ],
-
     'assets': {
         'point_of_sale.assets': [
             'pos_demo/static/src/scss/pos_demo.scss',
             'pos_demo/static/src/js/pos_demo.js',
+        ],
+        'web.assets_qweb': [
+            'pos_demo/static/src/xml/**/*',
         ],
     }
 }

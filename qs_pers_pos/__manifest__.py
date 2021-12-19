@@ -31,7 +31,7 @@
     ],
     'assets': {
         'point_of_sale.assets': [
-            '/qs_pers_pos/static/src/js/lock_price_discount.js',
+            'qs_pers_pos/static/src/js/lock_price_discount.js',
         ],
     },
     # only loaded in demonstration mode

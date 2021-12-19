@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment'],
+    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment', 'thermal_invoice'],
 
     # always loaded
     'data': [
