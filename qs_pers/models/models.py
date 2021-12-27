@@ -91,6 +91,11 @@ class qs_pers(models.Model):
             self.action_done()
         return True
 
+    @api.depends('amount_total')
+    def get_amount_letter(self):
+        amount = self.currency_id.amount_to_text(self.amount_total)
+        return amount
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"

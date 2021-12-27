@@ -72,19 +72,19 @@
                             </td>
                             <td style="vertical-align:bottom;padding-left:3pt">:</td>
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
-                               <!-- <t t-if="o.payment_term_id.name == 'IMMEDIAT'">
-                                    <span>COMPTANT</span>
-                                    <span>TETO</span>
+                                <t t-if="o.payment_term_id.name == 'IMMEDIAT'">
+                                    <!--<span>COMPTANT</span>
+                                    <span>TETO</span>-->
                                 </t>
 
                                 <t t-elif="o.payment_term_id">
-                                    <span>COMPTANT</span>
-                                    <span>TSISY</span>
+                                    <!--<span>COMPTANT</span>
+                                    <span>TSISY</span>-->
                                 </t>
 
                                 <t t-else="">
-                                    <span>CREDIT</span>
-                                </t>-->
+                                    <!--<span>CREDIT</span>-->
+                                </t>
                             </td>
                         </tr>
                     </table>
@@ -239,8 +239,7 @@
 
                                 </table>
 
-                                <!-- <t t-set="tax_total_fmg" t-value="o.amount_total * 5"/>
-                                 <p class="text-right"><t t-out="tax_total_fmg"/>FMG</p>-->
+                                
                             </div>
                         </div>
                     </div>
