@@ -239,10 +239,11 @@
 
                                 </table>
 
-                                
+
                             </div>
                         </div>
                     </div>
+<!--                    Commentaire stage-->
 
                     <p t-field="o.note_nda"/>
                 </div>
