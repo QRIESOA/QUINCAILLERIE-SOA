@@ -70,7 +70,7 @@
                 </xpath>
 
                 <field name="payment_term_id" position="attributes">
-                    <attribute name="attrs">{'readonly': [('compute_field_sale', '=', True)]}</attribute>
+                    <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </field>
                 <field name="pricelist_id" position="after">
                     <field name="compute_field_sale" invisible="1"/>
@@ -85,27 +85,17 @@
                 <xpath expr="//page[@name='customer_signature']" position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </xpath>
+                <xpath expr="//page[@name='optional_products']" position="attributes">
+                    <attribute name="groups">sales_team.group_sale_manager</attribute>
+                </xpath>
+                <field name="note" position="after">
+                    <field name="note_nda"/>
+                </field>
+                <field name="note" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
 
             </field>
-        </record>
-
-        <record id="contacts.menu_contacts" model="ir.ui.menu">
-            <field name="action" eval="False"/>
-            <field name="active" eval="True"/>
-            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_manager')])]"/>
-            <field name="name">Contacts</field>
-            <field name="parent_id" eval="False"/>
-            <field name="sequence">20</field>
-            <field name="web_icon">contacts,static/description/icon.png</field>
-        </record>
-        <record id="utm.menu_link_tracker_root" model="ir.ui.menu">
-            <field name="action" eval="False"/>
-            <field name="active" eval="True"/>
-            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_manager')])]"/>
-            <field name="name">Suivi de liens</field>
-            <field name="parent_id" eval="False"/>
-            <field name="sequence">270</field>
-            <field name="web_icon">utm,static/description/icon.png</field>
         </record>
 
 

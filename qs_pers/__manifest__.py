@@ -27,6 +27,7 @@
         'data/paper_format.xml',
         'views/views.xml',
         'views/templates.xml',
+        'views/security.xml',
         'report/report_with_price.xml',
         'report/sale_report_inherit.xml',
         'report/sale_report.xml',

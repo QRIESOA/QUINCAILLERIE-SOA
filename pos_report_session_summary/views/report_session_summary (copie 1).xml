@@ -163,7 +163,6 @@
                                         <td class="text-right">
                                             <span
                                                     t-field="statement.amount_total"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
                                             />
                                         </td>
                                         <td class="text-right">

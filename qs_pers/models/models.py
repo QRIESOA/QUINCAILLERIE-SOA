@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 
 class qs_pers(models.Model):
     _inherit = 'sale.order'
+    note_nda = fields.Text(string="Note sur NDA", index=1)
 
     compute_field_sale = fields.Boolean(string="check field", compute='get_user_sale')
 
