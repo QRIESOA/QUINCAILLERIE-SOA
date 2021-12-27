@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+
+
+            <xpath expr="//table[@name='invoice_line_table']" position="attributes">
+                <attribute name="class">table table-sm</attribute>
+            </xpath>
+            <xpath expr="//div[@class='page']" position="attributes">
+                <attribute name="style">font-size:9pt;</attribute>
+            </xpath>
+            <xpath expr="//address" position="attributes">
+                <attribute name="t-options-fields">['name', 'phone', 'mobile']</attribute>
+                <attribute name="style">font-size:9pt;</attribute>
+            </xpath>
+            <xpath expr="//p[@name='payment_communication']" position="replace">
+                <span>
+
+                </span>
+            </xpath>
+            <xpath expr="//p[@name='payment_term']" position="replace">
+                <span>
+
+                </span>
+            </xpath>
+            <!--<xpath expr="//div[@name='comment']" position="replace">
+                <span>
+
+                </span>
+            </xpath>-->
+
+            <xpath expr="//p[@name='note']" position="replace">
+                <span>
+
+                </span>
+            </xpath>
+
+            <!--<field name="payment_communication" position="replace">
+                <span></span>
+            </field>-->
+            <!--<field name="payment_term" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="comment" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="comment" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="incoterm" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>-->
+            <xpath expr="//div[@class='page']/h2" position="replace">
+                <h6>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Facture</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Facture brouillon</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Facture annulée</span>
+                    <span t-if="o.move_type == 'out_refund'">Credit Note</span>
+                    <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
+                    <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                    <span t-if="o.name != '/'" t-field="o.name"/>
+                </h6>
+            </xpath>
+            <xpath expr="//div[@class='page']/p[position()=last()]" position="after">
+                <p>
+                    <strong>Arrêter la facture à la somme de:</strong>
+                    <span t-esc="o.get_amount_letter()"/>
+                </p>
+            </xpath>
+
+            <xpath expr="/t/t/div/p[2]" position="after">
+                <div class="row">
+                    <div class="col-4">
+                        <span>Le client</span>
+                    </div>
+                    <div class="col-4">
+                        <span></span>
+                    </div>
+                    <div class="col-4">
+                        <span>Le magasinier</span>
+                    </div>
+                </div>
+            </xpath>
+
+        </template>
+    </data>
+</odoo>

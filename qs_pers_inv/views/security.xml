@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="stock.menu_stock_warehouse_mgmt" model="ir.ui.menu">
+            <field name="action" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+            <field name="name">Opérations</field>
+            <field name="parent_id" ref="stock.menu_stock_root"/>
+            <field name="sequence">2</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+        <record id="stock.menu_warehouse_report" model="ir.ui.menu">
+            <field name="action" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
+            <field name="name">Analyse</field>
+            <field name="parent_id" ref="stock.menu_stock_root"/>
+            <field name="sequence">99</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+        <record id="stock_account.menu_valuation" model="ir.ui.menu">
+            <field name="action" ref="stock_account.stock_valuation_layer_action"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+            <field name="name">Valorisation de l'inventaire</field>
+            <field name="parent_id" ref="stock.menu_warehouse_report"/>
+            <field name="sequence">110</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+        <record id="stock_enterprise.stock_dashboard_menuitem" model="ir.ui.menu">
+            <field name="action" ref="stock_enterprise.stock_report_dashboard_action"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+            <field name="name">Analyse d'Entrepôt</field>
+            <field name="parent_id" ref="stock.menu_warehouse_report"/>
+            <field name="sequence">10</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+    </data>
+</odoo>
