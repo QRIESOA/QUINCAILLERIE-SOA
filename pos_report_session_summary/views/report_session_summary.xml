@@ -110,12 +110,12 @@
                                         <th class="text-right">
                                             <strong>journal</strong>
                                         </th>
-                                        <th
+                                        <!--<th
                                                 class="text-right"
                                                 groups="base.group_multi_currency"
                                         >
                                             <strong>Sous total</strong>
-                                        </th>
+                                        </th>-->
                                         <th class="text-right">
                                             <strong>Remise</strong>
                                         </th>
