@@ -64,6 +64,7 @@
             </xpath>
             <xpath expr="//div[@class='clearfix']" position="after">
 
+
             </xpath>
             <xpath expr="//div[@class='clearfix']" position="after">
                 <p>
@@ -84,6 +85,29 @@
                         <span>Le magasinier</span>
                     </div>
                 </div>
+            </xpath>
+
+        </template>
+
+        <template id="report_invoice_document_total_tax" inherit_id="account.document_tax_totals">
+            <xpath expr="//tr[hasclass('o_total')]" position="after">
+
+                <t t-set="remise" t-value="0"/>
+                <t t-foreach="lines" t-as="line">
+
+                    <t t-if="line.product_id.id == 41">
+                        <t t-set="remise" t-value="line.price_subtotal"/>
+                    </t>
+
+                </t>
+                <tr t-if="remise != 0">
+                    <td><strong>Remise % :</strong></td>
+                    <td class="text-right">
+                        <t t-set="remiseenpers" t-value="(-1)*remise/(remise + o.amount_total)"/>
+                        <t t-out="remiseenpers" t-options='{"widget": "float", "precision":2}'/>
+                    </td>
+
+                </tr>
             </xpath>
 
         </template>
