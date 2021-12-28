@@ -162,6 +162,7 @@
                     </table>
 
 
+
                     <p t-field="o.note"/>
                 </div>
             </t>

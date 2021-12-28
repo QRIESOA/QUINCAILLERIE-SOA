@@ -49,12 +49,12 @@
 
                         <div class="row mt32 mb32">
                             <div class="col-auto mw-100 mb-3">
-                                <strong>Starting Balance</strong>:
+                                <strong>Solde initial</strong>:
                                 <br/>
                                 <span t-field="o.cash_register_balance_start"/>
                             </div>
                             <div class="col-auto mw-100 mb-3">
-                                <strong>Ending Balance</strong>:
+                                <strong>Solde final</strong>:
                                 <br/>
                                 <span t-field="o.cash_register_balance_end_real"/>
                             </div>
@@ -66,22 +66,22 @@
                         </div>
                         <div class="row mt32 mb32">
                             <div class="col-auto mw-100 mb-3">
-                                <strong>Responsible</strong>:
+                                <strong>Responsable</strong>:
                                 <br/>
                                 <span t-field="o.user_id"/>
                             </div>
                             <div class="col-auto mw-100 mb-3">
-                                <strong>Point of Sale</strong>:
+                                <strong>Point de vente</strong>:
                                 <br/>
                                 <span t-field="o.config_id"/>
                             </div>
                             <div class="col-auto mw-100 mb-3">
-                                <strong>Opening Date</strong>:
+                                <strong>Date d'ouverture</strong>:
                                 <br/>
                                 <span t-field="o.start_at"/>
                             </div>
                             <div class="col-auto mw-100 mb-3">
-                                <strong>Closing Date</strong>:
+                                <strong>Date de clôture</strong>:
                                 <br/>
                                 <span t-field="o.stop_at"/>
                             </div>
@@ -123,10 +123,10 @@
                                                 class="text-right"
                                                 groups="base.group_multi_currency"
                                         >
-                                            <strong>Sub total</strong>
+                                            <strong>Sous total</strong>
                                         </th>
                                         <th class="text-right">
-                                            <strong>Discount</strong>
+                                            <strong>Remise</strong>
                                         </th>
 
                                         <th class="text-right">
@@ -197,7 +197,7 @@
 
                                                 <t t-foreach="statement.lines" t-as="value">
 
-                                                    <t t-if="value.full_product_name == 'Discount'">
+                                                    <t t-if="value.full_product_name == 'Remise'">
                                                         <t t-set="discount" t-value="discount + value.price_unit"/>
                                                     </t>
                                                 </t>

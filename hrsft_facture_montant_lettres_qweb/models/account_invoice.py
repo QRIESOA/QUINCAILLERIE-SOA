@@ -25,7 +25,6 @@ from odoo import fields, api, models, _
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     @api.depends('amount_total')

@@ -243,7 +243,10 @@
                             </div>
                         </div>
                     </div>
-<!--                    Commentaire stage-->
+                    <p>
+                        <strong>Arrêter la facture à la somme de:</strong>
+                        <span t-esc="o.get_amount_letter()"/>
+                    </p>
 
                     <p t-field="o.note_nda"/>
                 </div>
