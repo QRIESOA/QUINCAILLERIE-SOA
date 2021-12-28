@@ -148,7 +148,7 @@
                                                         t-field="statement.date_order"
                                                 />
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-left" style="width: 15%">
                                                 <span
                                                         t-field="statement.account_move.name"
                                                 />
@@ -156,27 +156,31 @@
                                             <td class="text-left" style="width: 15%">
                                                 <span
                                                         t-field="statement.amount_total"
-                                                        t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
+                                                        t-options='{"widget": "float", "precision":0}'
                                                 />
                                             </td>
 
                                             <td
                                                     class="text-right"
                                             >
-                                                <table class="table">
-                                                    <tr t-foreach="statement.payment_ids" t-as="value">
-                                                        <td>
-                                                            <span
-                                                                    t-field="value.payment_method_id.name"
-                                                            />
-                                                        </td>
-                                                        <td>
-                                                            <span
-                                                                    t-field="value.amount"
-                                                            />
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                                <t>
+                                                    <t t-foreach="statement.payment_ids" t-as="value">
+                                                        <t t-if="value.payment_method_id.name == 'methode_de_payment.name'">
+                                                            <td>
+                                                                <span
+                                                                        t-field="value.payment_method_id.name"
+                                                                />
+                                                            </td>
+                                                            <td>
+                                                                <span
+                                                                        t-field="value.amount"
+                                                                        t-options='{"widget": "float", "precision":0}'
+                                                                />
+                                                            </td>
+                                                        </t>
+
+                                                    </t>
+                                                </t>
                                             </td>
 
                                             <td class="text-right">
@@ -263,7 +267,7 @@
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                   
+
                                             />
                                         </td>
                                         <td class="text-right">

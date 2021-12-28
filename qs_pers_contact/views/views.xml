@@ -13,9 +13,8 @@
                     <field name="RCS"/>
                     <field name="CIF"/>
                 </field>
-                <field name="property_payment_term_id" position="attributes">
-                    <attribute name="default">_default_terms</attribute>
-                </field>
+
+
 
             </field>
         </record>

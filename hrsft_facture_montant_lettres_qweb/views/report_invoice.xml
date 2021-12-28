@@ -62,9 +62,12 @@
                     <span t-if="o.name != '/'" t-field="o.name"/>
                 </h6>
             </xpath>
-            <xpath expr="//div[@class='page']/p[position()=last()]" position="after">
+            <xpath expr="//div[@class='clearfix']" position="after">
+
+            </xpath>
+            <xpath expr="//div[@class='clearfix']" position="after">
                 <p>
-                    <strong>Arrêter la facture à la somme de:</strong>
+                    <strong>Arrêtée la facture à la somme de:</strong>
                     <span t-esc="o.get_amount_letter()"/>
                 </p>
             </xpath>
