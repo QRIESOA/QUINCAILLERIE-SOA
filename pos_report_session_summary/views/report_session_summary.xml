@@ -18,16 +18,7 @@
                                 <th>EFFECTIF</th>
                                 <th>MONTANT</th>
                             </tr>
-                            <!--                            <tr>-->
-                            <!--                                <td>VENTE AU COMPTANT</td>-->
-                            <!--                                <td></td>-->
-                            <!--                                <td></td>-->
-                            <!--                            </tr>-->
-                            <!--                            <tr>-->
-                            <!--                                <td>VENTE A CREDIT</td>-->
-                            <!--                                <td></td>-->
-                            <!--                                <td></td>-->
-                            <!--                            </tr>-->
+
                             <tr>
                                 <td>TOTAL</td>
                                 <td>
@@ -168,11 +159,7 @@
                                                         t-field-options='{"widget": "monetary", "display_currency": "statement.currency_id.name"}'
                                                 />
                                             </td>
-                                            <td class="text-right">
-                                                <span
-                                                        t-field="statement.currency_id.name"
-                                                />
-                                            </td>
+
                                             <td
                                                     class="text-right"
                                             >
@@ -275,9 +262,9 @@
                                             <span t-field="statement.payment_ref"/>
                                         </td>
                                         <td class="text-right">
-                                            <!--<span
-                                                    t-out="Zoly"
-                                            />-->
+                                            <span
+                                                   
+                                            />
                                         </td>
                                         <td class="text-right">
                                             <span
