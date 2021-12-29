@@ -95,7 +95,7 @@
                 <t t-set="remise" t-value="0"/>
                 <t t-foreach="lines" t-as="line">
 
-                    <t t-if="line.product_id.id == 2">
+                    <t t-if="line.product_id.id == 41">
                         <t t-set="remise" t-value="line.price_subtotal"/>
                     </t>
 
@@ -103,7 +103,7 @@
                 <tr t-if="remise != 0">
                     <td><strong>Remise % :</strong></td>
                     <td class="text-right">
-                        <t t-set="remiseenpers" t-value="(-1)*remise/(remise + o.amount_total)"/>
+                        <t t-set="remiseenpers" t-value="(-100)*remise/(remise + o.amount_total)"/>
                         <t t-out="remiseenpers" t-options='{"widget": "float", "precision":2}'/>
                     </td>
 
