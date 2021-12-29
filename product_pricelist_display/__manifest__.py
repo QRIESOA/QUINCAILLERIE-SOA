@@ -24,6 +24,7 @@
 
         ],
         'web.assets_backend': [
+            'product_pricelist_display/static/src/js/basic_model.js',
             'product_pricelist_display/static/src/js/list_renderer.js',
         ],
         'web.assets_frontend': [

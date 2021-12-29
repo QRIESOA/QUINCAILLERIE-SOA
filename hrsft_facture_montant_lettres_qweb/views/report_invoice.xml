@@ -62,27 +62,26 @@
                     <span t-if="o.name != '/'" t-field="o.name"/>
                 </h6>
             </xpath>
-            <xpath expr="//div[@class='clearfix']" position="after">
 
-
-            </xpath>
-            <xpath expr="//div[@class='clearfix']" position="after">
-                <p>
+            <xpath expr="//div[@id='total']" position="replace" >
+                <div class="col-6">
                     <strong>Arrêtée la facture à la somme de:</strong>
                     <span t-esc="o.get_amount_letter()"/>
-                </p>
+                </div>
             </xpath>
 
-            <xpath expr="/t/t/div/p[2]" position="after">
+            <xpath expr="//p[@name='incoterm']" position="before">
                 <div class="row">
                     <div class="col-4">
-                        <span>Le client</span>
+                        <strong><span>Le client</span></strong>
+
                     </div>
                     <div class="col-4">
                         <span></span>
                     </div>
                     <div class="col-4">
-                        <span>Le magasinier</span>
+                        <strong><span>Le magasinier</span></strong>
+
                     </div>
                 </div>
             </xpath>

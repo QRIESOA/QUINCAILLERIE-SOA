@@ -8,14 +8,19 @@ odoo.define('product_pricelist_display.ProductPricelistDisplay', function (requi
         init: function (parent, state, params){
             this._super.apply(this, arguments);
             this.pricelist_nodes = [];
-
         },
-
+        _ensureColumnFields: function(columns, fields){
+            _.each(columns, function(node){
+                if(!fields[node.attrs.name]){
+                    columns.remove(columns.indexOf(node))
+                }
+            })
+        },
         _renderView: function () {
             var self = this;
-            if(this.state.model == 'product.template'){
+            if(this.state.model == 'product.template' ){
                 return this._super.apply(this, arguments).then(function(){
-                    return Promise.all([self._renderPricelistColumns()]);
+                   return Promise.all([self._renderPricelistColumns()]);
                 }).then(function(){
                     const oldPagers = self.pagers;
                     let prom;
@@ -111,29 +116,39 @@ odoo.define('product_pricelist_display.ProductPricelistDisplay', function (requi
             }
 
         },
-        _buildPricelistNode: function(){
-            var self = this;
-            var defs = []
+        _getDisplayedPricelist: function(){
             return this._rpc({
                 model: 'product.template',
                 method: 'get_pricelists'
-            }).then(function (res) {
+            })
+        },
+        _buildPricelistNode: function(){
+            var self = this;
+            var defs = []
+            return this._getDisplayedPricelist().then(function (res) {
                 self.pricelist_nodes = []
+
                 _.each(res, function(pricelist){
-                    var attrs = {modifiers: { readonly: true },name: 'pricelist_'+pricelist.id,options: "{'currency_field': 'cost_currency_id'}",readonly: "1",widget: "monetary"};
-                    var node = {attrs: attrs, children: [], tag: 'field'};
-
-                    self.pricelist_nodes.push(node);
-
-                    var field = {Widget: registry.get('monetary'), fieldDependencies: {}, mode: false, modifiers:{}, name: 'pricelist_'+pricelist.id,
-                            optionnal:"show", options: {'currency_field': 'cost_currency_id'}, readonly:"1", views: {}, widget:"monetary"
-                    };
-                    if(!self.state.fieldsInfo.list[field.name]){
-                        self.state.fieldsInfo.list[field.name] = field;
+                    if(pricelist.display){
+                        var attrs = {modifiers: { readonly: true },name: 'pricelist_'+pricelist.id,options: "{'currency_field': 'cost_currency_id'}",readonly: "1",widget: "monetary"};
+                        var node = {attrs: attrs, children: [], tag: 'field'};
+                        if(self.state.fields[node.attrs.name]){
+                            self.pricelist_nodes.push(node);
+                        }
+                        var field = {Widget: registry.get('monetary'), fieldDependencies: {}, mode: false, modifiers:{}, name: 'pricelist_'+pricelist.id,
+                                optionnal:"show", options: {'currency_field': 'cost_currency_id'}, readonly:"1", views: {}, widget:"monetary"
+                        };
+                        if(!self.state.fieldsInfo.list[field.name]){
+                            self.state.fieldsInfo.list[field.name] = field;
+                        }
                     }
 
+
                 });
-            });
+
+
+
+            })
         },
 
     });
