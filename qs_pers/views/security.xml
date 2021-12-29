@@ -19,5 +19,33 @@
             <field name="sequence">270</field>
             <field name="web_icon">utm,static/description/icon.png</field>
         </record>
+        <!--        Hide menu à facturer-->
+        <record id="sale.menu_product_pricelist_main" model="ir.ui.menu">
+            <field name="action" ref="product.product_pricelist_action2"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_manager')])]"/>
+            <field name="name">Listes de prix</field>
+            <field name="parent_id" ref="sale.product_menu_catalog"/>
+            <field name="sequence">3</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+        <record id="sale.menu_sale_invoicing" model="ir.ui.menu">
+            <field name="action" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_manager')])]"/>
+            <field name="name">À facturer</field>
+            <field name="parent_id" ref="sale.sale_menu_root"/>
+            <field name="sequence">3</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+        <record id="sale.res_partner_menu" model="ir.ui.menu">
+            <field name="action" ref="account.res_partner_action_customer"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_manager')])]"/>
+            <field name="name">Clients</field>
+            <field name="parent_id" ref="sale.sale_order_menu"/>
+            <field name="sequence">4</field>
+            <field name="web_icon" eval="False"/>
+        </record>
     </data>
 </odoo>
