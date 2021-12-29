@@ -54,15 +54,6 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <button id="action_confirm" position="replace">
-                    <button name="action_confirm_qs" id="action_confirm" data-hotkey="v" string="Confirm"
-                            class="btn-primary"
-                            type="object" attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
-                </button>
-                <button name="action_confirm" position="replace">
-                    <button name="action_confirm_qs" data-hotkey="v" string="Confirm" type="object"
-                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
-                </button>
 
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
                        position="attributes">
