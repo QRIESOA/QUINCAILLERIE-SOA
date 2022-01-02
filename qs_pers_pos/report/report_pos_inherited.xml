@@ -5,7 +5,7 @@
             <xpath expr="//div[@name='due_date']" position="replace">
                 <div class="col-auto col-3 mw-100 mb-2"
                      t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'">
-                    <strong>Due Date:</strong>
+                    <strong>Date d'échéance : </strong>
                     <p></p>
                 </div>
             </xpath>
