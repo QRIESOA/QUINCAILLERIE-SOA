@@ -241,6 +241,9 @@ class SaleOrderLineInherited(models.Model):
             msg = _('La quantité en stock est insuffisante, il ne reste que %s') % (free_qty_today)
             if treated:
                 if free_qty_today < treated[-1].product_uom_qty:
+                    res_user = self.env['res.users'].search([('id', '=', self._uid)])
+                    if not res_user.has_group('qs_pers.group_qs_vente_neg'):
+                        raise UserError(msg)
                     print("efa vita print notification test")
 
         remaining = (self - treated)
