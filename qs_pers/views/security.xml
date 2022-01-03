@@ -55,7 +55,7 @@
             <field name ="perm_create" eval="True"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
+            <field name="perm_write" eval="True"/>
         </record>
         <record id="sale_stock.access_sale_order_stock_worker" model="ir.model.access">
             <field name="active" eval="True"/>
