@@ -165,13 +165,16 @@
 
 
     <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+
         <xpath expr="//div[@t-if='line.so_reference']" position="replace">
 
         </xpath>
         <xpath expr="//t[@t-foreach]" position="replace">
             <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+
                 <t t-if="isSimple(line)">
                     <div>
+                        <span><t t-esc="line.default_code"/> | </span>
                         <t t-esc="line.product_name_wrapped[0]"/>
                         <span t-esc="env.pos.format_currency_no_symbol(line.price_display)"
                               class="price_display pos-receipt-right-align"/>
@@ -179,6 +182,7 @@
                     <WrappedProductNameLines line="line"/>
                 </t>
                 <t t-else="">
+                    <span><t t-esc="line.default_code"/></span>
                     <div t-esc="line.product_name_wrapped[0]"/>
                     <WrappedProductNameLines line="line"/>
                     <t t-if="line.display_discount_policy == 'without_discount' and line.price != line.price_lst">
@@ -229,9 +233,12 @@
                         </ul>
                     </div>
                 </t>
+
+                <div>---------------------------------------</div>
             </t>
 
         </xpath>
+
 
 
     </t>

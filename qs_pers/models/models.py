@@ -76,10 +76,12 @@ class qs_pers(models.Model):
             other documents. In this method, the SO are in 'sale' state (not yet 'done').
         """
         self.check_credit_limit()
+        self.update_prices()
         return super(qs_pers, self)._action_confirm()
 
     def action_confirm(self):
         self.check_credit_limit()
+        self.update_prices()
         return super(qs_pers, self).action_confirm()
 
     @api.depends('amount_total')

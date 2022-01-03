@@ -33,8 +33,8 @@
                             <td style="padding-top:3pt;padding-bottom:3pt">Client</td>
                             <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
-                                <span t-field="o.partner_id"
-                                      t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                                <strong><span t-field="o.partner_id"
+                                      t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/></strong>
 
                             </td>
 
@@ -188,14 +188,14 @@
                                     <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
                                     <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                         <tr class="border-black o_subtotal">
-                                            <td><strong>Total HT</strong></td>
+                                            <td>Total HT</td>
 
                                             <td class="text-right">
-                                                <strong><span
+                                                <span
                                                         t-att-class="oe_subtotal_footer_separator"
                                                         t-esc="subtotal['amount']"
                                                         t-options='{"widget": "float", "precision":0}'
-                                                /></strong>
+                                                />
                                             </td>
                                         </tr>
 

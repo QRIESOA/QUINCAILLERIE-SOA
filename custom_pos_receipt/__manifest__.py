@@ -13,6 +13,9 @@
     'images': ['static/description/banner.jpg'],
     'depends': ['base', 'point_of_sale'],
     'assets': {
+        'point_of_sale.assets': [
+            'custom_pos_receipt/static/src/js/pos_model.js',
+        ],
         'web.assets_qweb': [
             "custom_pos_receipt/static/src/xml/pos.xml",
         ],
