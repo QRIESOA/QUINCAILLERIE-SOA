@@ -11,45 +11,7 @@
                 </field>
             </field>
         </record>
-        <record id="stock.menu_action_inventory_tree" model="ir.ui.menu">
-            <field name="action" ref="stock.action_view_inventory_tree"/>
-            <field name="active" eval="True"/>
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_erp_manager')])]"/>
-            <field name="name">Ajustements de stock</field>
-            <field name="parent_id" ref="stock.menu_stock_warehouse_mgmt"/>
-            <field name="sequence">30</field>
-            <field name="web_icon" eval="False"/>
-        </record>
-        <record id="stock.access_stock_picking_user" model="ir.model.access">
-            <field name="active" eval="True"/>
-            <field name="group_id" ref="stock.group_stock_user"/>
-            <field name="model_id" ref="stock.model_stock_picking"/>
-            <field name="name">stock.picking user</field>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
-        </record>
-        <record id="sale_stock.access_stock_picking_salesman" model="ir.model.access">
-            <field name="active" eval="True"/>
-            <field name="group_id" ref="sales_team.group_sale_salesman"/>
-            <field name="model_id" ref="stock.model_stock_picking"/>
-            <field name="name">stock_picking salesman</field>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
-        </record>
-        <record id="stock.access_stock_scrap_user" model="ir.model.access">
-            <field name="active" eval="True"/>
-            <field name="group_id" ref="stock.group_stock_user"/>
-            <field name="model_id" ref="stock.model_stock_scrap"/>
-            <field name="name">stock.scrap.user</field>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_read" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
-        </record>
+
         <record id="view_stock_quant_tree_inventory_editable_inherited" model="ir.ui.view">
             <field name="name">stock.view_stock_quant_tree_inventory_editable.inherited</field>
             <field name="model">stock.quant</field>
@@ -64,6 +26,48 @@
                     <attribute name="groups">base.group_erp_manager</attribute>
                 </xpath>
 
+            </field>
+        </record>
+
+
+        <record id="view_stock_picking_form_inherited" model="ir.ui.view">
+            <field name="name">stock.view_picking_form.inherited</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups"/>
+                </xpath>-->
+                <xpath expr="//form[1]/header[1]/button[@name='button_validate'][1]" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//form[1]/header[1]/button[@name='button_validate'][2]" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_set_quantities_to_reservation']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <!--<xpath expr="//button[@name='412']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>-->
+                <xpath expr="//button[@name='do_unreserve']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_scrap']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_see_move_scrap']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//page[@name='extra']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='note']" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                </xpath>
             </field>
         </record>
 
