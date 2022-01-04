@@ -232,7 +232,7 @@
 
                                     <!--Total amount with all taxes-->
                                     <tr class="border-black o_total">
-                                        <td><strong>Total</strong></td>
+                                        <td><strong>Total TTC</strong></td>
                                         <td class="text-left">
                                             <strong><span t-esc="tax_totals['amount_total']"
                                                           t-options='{"widget": "float", "precision":0}'
@@ -244,7 +244,7 @@
                                         </td>
                                     </tr>
                                     <tr class="border-black o_total">
-                                        <td><strong>Total FMG</strong></td>
+                                        <td><strong>Total TTC FMG</strong></td>
                                         <td class="text-left">
                                             <strong><span t-esc="tax_totals['amount_total']*5"
                                                           t-options='{"widget": "float", "precision":0}'
