@@ -38,6 +38,16 @@
                 <!--<xpath expr="//button[@name='action_confirm']" position="attributes">
                     <attribute name="groups"/>
                 </xpath>-->
+                <field name="is_locked" position="after">
+                    <field name="compute_field_sale" invisible="1"/>
+                </field>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">[('compute_field_sale', '=', True)]</attribute>
+                </xpath>
+
+                <!--<xpath expr="//form" position="attributes">
+                    <attribute name="attrs">{'edit': [('compute_field_sale', '=', True)]}</attribute>
+                </xpath>-->
                 <xpath expr="//form[1]/header[1]/button[@name='button_validate'][1]" position="attributes">
                     <attribute name="groups">stock.group_stock_manager</attribute>
                 </xpath>
@@ -70,6 +80,19 @@
                 </xpath>
             </field>
         </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_picking_type_kanban_inherited" model="ir.ui.view">
+            <field name="name">	stock.stock_picking_type_kanban.inherited</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+            <field name="arch" type="xml">
 
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <!-- Add your fields or attributes here -->
+                </xpath>
+
+            </field>
+        </record>
     </data>
 </odoo>

@@ -58,7 +58,7 @@
                 </field>
             </field>
         </record>
-<!--        Access  picking -->
+        <!--        Access  picking -->
         <record id="sale_stock.access_stock_picking_salesman" model="ir.model.access">
             <field name="active" eval="True"/>
             <field name="group_id" ref="sales_team.group_sale_salesman"/>
@@ -67,7 +67,7 @@
             <field name="perm_create" eval="False"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
+            <field name="perm_write" eval="True"/>
         </record>
         <record id="stock.access_stock_picking_user" model="ir.model.access">
             <field name="active" eval="True"/>
@@ -80,7 +80,7 @@
             <field name="perm_write" eval="False"/>
         </record>
 
-<!--        Access scrap-->
+        <!--        Access scrap-->
         <record id="stock.access_stock_scrap_user" model="ir.model.access">
             <field name="active" eval="True"/>
             <field name="group_id" ref="stock.group_stock_user"/>
@@ -101,6 +101,41 @@
             <field name="perm_read" eval="True"/>
             <field name="perm_unlink" eval="False"/>
             <field name="perm_write" eval="False"/>
+        </record>
+
+        <!--        Storekeeper access-->
+
+        <record id="stock.access_stock_picking_user" model="ir.model.access">
+            <field name="active" eval="True"/>
+            <field name="group_id" ref="qs_pers_inv.group_magasinier"/>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="name">stock.picking user</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>
+
+        <record id="stock.access_stock_scrap_user" model="ir.model.access">
+            <field name="active" eval="True"/>
+            <field name="group_id" ref="qs_pers_inv.group_magasinier"/>
+            <field name="model_id" ref="stock.model_stock_scrap"/>
+            <field name="name">stock.scrap.user</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>
+
+        <record id="stock.stock_picking_type_menu" model="ir.ui.menu">
+            <field name="action" ref="stock.stock_picking_type_action"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id"
+                   eval="[(6, 0, [ref('qs_pers_inv.group_magasinier'), ref('stock.group_stock_manager')])]"/>
+            <field name="name">Vue d'ensemble</field>
+            <field name="parent_id" ref="stock.menu_stock_root"/>
+            <field name="sequence" eval="False"/>
+            <field name="web_icon" eval="False"/>
         </record>
     </data>
 </odoo>

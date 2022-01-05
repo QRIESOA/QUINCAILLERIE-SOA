@@ -20,12 +20,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'stock', 'sale', 'sales_team', 'stock_account', 'stock_enterprise'],
+    'depends': ['base', 'stock', 'sale', 'sales_team', 'stock_account', 'stock_enterprise', 'qs_pers'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
+        'security/groups.xml',
         'views/templates.xml',
         'views/security.xml',
     ],
