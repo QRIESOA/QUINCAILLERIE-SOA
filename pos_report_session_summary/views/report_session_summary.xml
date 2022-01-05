@@ -286,10 +286,14 @@
 
                                     <t t-foreach="statement.payment_ids" t-as="value">
 
-                                        <t t-if="value.payment_method_id.name == methode_de_payment.name">
-                                            <t t-set="credit" t-value="True"/>
+                                        <t t-foreach="statement.lines" t-as="value">
 
+                                            <t t-if="value.full_product_name == 'Remise'">
+                                                <t t-set="credit" t-value="True"/>
+                                            </t>
                                         </t>
+
+
                                     </t>
                                     <t t-if="credit">
                                         <td>
