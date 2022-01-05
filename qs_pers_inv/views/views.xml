@@ -30,46 +30,7 @@
         </record>
 
 
-        <record id="view_stock_picking_form_inherited" model="ir.ui.view">
-            <field name="name">stock.view_picking_form.inherited</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-                <!--<xpath expr="//button[@name='action_confirm']" position="attributes">
-                    <attribute name="groups"/>
-                </xpath>-->
-                <xpath expr="//form[1]/header[1]/button[@name='button_validate'][1]" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//form[1]/header[1]/button[@name='button_validate'][2]" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//button[@name='action_set_quantities_to_reservation']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <!--<xpath expr="//button[@name='412']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>-->
-                <xpath expr="//button[@name='do_unreserve']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//button[@name='button_scrap']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//button[@name='action_see_move_scrap']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//page[@name='extra']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='note']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
-            </field>
-        </record>
+       
 
     </data>
 </odoo>
