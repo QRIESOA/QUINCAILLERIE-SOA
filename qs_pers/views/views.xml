@@ -94,9 +94,7 @@
                 </field>
 
 
-                <xpath expr="//button[@name='payment_action_capture']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
+                
                 <xpath expr="//form[1]/header[1]/button[@name='action_quotation_send'][4]" position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </xpath>
@@ -109,9 +107,7 @@
                 <xpath expr="//form[1]/header[1]/button[@name='action_quotation_send'][1]" position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </xpath>
-                <xpath expr="//button[@name='action_view_delivery']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
-                </xpath>
+                
                 <!--<xpath expr="//form[1]/header[1]/button[@name='290'][2]" position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager,stock.group_stock_manager</attribute>
                 </xpath>-->
