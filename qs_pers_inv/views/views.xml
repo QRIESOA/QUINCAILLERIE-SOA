@@ -41,47 +41,47 @@
                 <field name="is_locked" position="after">
                     <field name="compute_field_sale" invisible="1"/>
                 </field>
-                <xpath expr="//form" position="attributes">
+                <!--<xpath expr="//form" position="attributes">
                     <attribute name="edit">[('compute_field_sale', '=', True)]</attribute>
-                </xpath>
+                </xpath>-->
 
                 <!--<xpath expr="//form" position="attributes">
                     <attribute name="attrs">{'edit': [('compute_field_sale', '=', True)]}</attribute>
                 </xpath>-->
                 <xpath expr="//form[1]/header[1]/button[@name='button_validate'][1]" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//form[1]/header[1]/button[@name='button_validate'][2]" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_set_quantities_to_reservation']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <!--<xpath expr="//button[@name='412']" position="attributes">
                     <attribute name="groups">stock.group_stock_manager</attribute>
                 </xpath>-->
                 <xpath expr="//button[@name='do_unreserve']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//button[@name='button_scrap']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_see_move_scrap']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//page[@name='extra']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='note']" position="attributes">
-                    <attribute name="groups">stock.group_stock_manager</attribute>
+                    <attribute name="groups">stock.group_stock_manager,qs_pers_inv.group_magasinier</attribute>
                 </xpath>
             </field>
         </record>
         <!-- Inherit Form View to Modify it -->
-        <record id="stock_picking_type_kanban_inherited" model="ir.ui.view">
+        <!--<record id="stock_picking_type_kanban_inherited" model="ir.ui.view">
             <field name="name">	stock.stock_picking_type_kanban.inherited</field>
             <field name="model">stock.picking.type</field>
             <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
@@ -89,10 +89,10 @@
 
                 <xpath expr="//kanban" position="attributes">
                     <attribute name="groups">stock.group_stock_manager</attribute>
-                    <!-- Add your fields or attributes here -->
+                    &lt;!&ndash; Add your fields or attributes here &ndash;&gt;
                 </xpath>
 
             </field>
-        </record>
+        </record>-->
     </data>
 </odoo>

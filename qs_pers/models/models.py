@@ -41,6 +41,8 @@ class qs_pers(models.Model):
     _inherit = 'sale.order'
     note_nda = fields.Text(string="Note sur NDA", index=1)
 
+    show_pricelist = fields.Char(string="Liste de prix associé", related='pricelist_id.name')
+
     compute_field_sale = fields.Boolean(string="check field", compute='get_user_sale')
 
     @api.depends('compute_field_sale', 'user_id')

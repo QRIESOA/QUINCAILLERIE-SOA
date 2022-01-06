@@ -11,7 +11,7 @@
     """,
 
     'author': "Valisoa RAMILIJAONA",
-    'website': "http://www.valisoaramilijaona.mg",
+    'website': "http://www.valisoaramilijaona.ml",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment', 'thermal_invoice'],
+    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment', 'thermal_invoice', 'stock'],
 
     # always loaded
     'data': [
@@ -38,7 +38,6 @@
     # only loaded in demonstration mode
     'qweb': [],
     'demo': [],
-    'images': ['images/main_screenshot.png'],
     'installable': True,
     'auto_install': False,
     'application': True,
