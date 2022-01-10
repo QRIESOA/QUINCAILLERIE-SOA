@@ -244,13 +244,13 @@
                                         </td>
                                     </tr>
                                     <tr class="border-black o_total">
-                                        <td><strong>Total TTC FMG</strong></td>
+                                        <td>Total TTC FMG</td>
                                         <td class="text-left">
-                                            <strong><span t-esc="tax_totals['amount_total']*5"
+                                            <span t-esc="tax_totals['amount_total']*5"
                                                           t-options='{"widget": "float", "precision":0}'
 
                                             />
-                                                <span>FMG</span></strong>
+                                                <span>FMG</span>
 
 
                                         </td>
