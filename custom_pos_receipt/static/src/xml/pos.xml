@@ -140,9 +140,14 @@
 
         <xpath expr="//div[@class='pos-receipt-contact']" position="inside">
             <t t-if='receipt.client'>
-                <div>Client:
-                    <t t-esc='receipt.client.name'/>
-                </div>
+                <div><br/></div>
+
+                <strong>
+                    <div>Client:
+                        <t t-esc='receipt.client.name'/>
+                    </div>
+                </strong>
+
             </t>
 
         </xpath>
@@ -155,6 +160,7 @@
                     <t t-set="nda" t-value="line.so_reference"/>
                 </t>
             </t>
+            <div><br/></div>
             <span class="pos-receipt-left-padding">NDA n°:
                 <span t-esc='nda'/>
             </span>
