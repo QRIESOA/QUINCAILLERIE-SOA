@@ -5,7 +5,7 @@ from odoo import models, fields, api
 
 class StockPickingInherited(models.Model):
     _inherit = 'stock.picking'
-    ticket_number = fields.Char(string="numero recçu", related="pos_order_id.pos_reference", store="True")
+    ticket_number = fields.Char(string="Numéro ticket de caisse", related="pos_order_id.pos_reference", store="True")
 
 
 class StockQuantInherited(models.Model):
