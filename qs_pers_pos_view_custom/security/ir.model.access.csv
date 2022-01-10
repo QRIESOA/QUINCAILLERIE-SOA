@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_./qs-addons/qs_pers_pos_view_custom_./qs-addons/qs_pers_pos_view_custom,./qs-addons/qs_pers_pos_view_custom../qs-addons/qs_pers_pos_view_custom,model_./qs-addons/qs_pers_pos_view_custom_./qs-addons/qs_pers_pos_view_custom,base.group_user,1,1,1,1

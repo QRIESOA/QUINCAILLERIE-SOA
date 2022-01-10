@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="point_of_sale.menu_point_rep" model="ir.ui.menu">
+            <field name="action" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('qs_pers_pos_view_custom.group_boss')])]"/>
+            <field name="name">Analyse</field>
+            <field name="parent_id" ref="point_of_sale.menu_point_root"/>
+            <field name="sequence">90</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+
+        <record id="point_of_sale.menu_pos_dashboard" model="ir.ui.menu">
+            <field name="action" ref="point_of_sale.action_pos_config_kanban"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('qs_pers_pos_view_custom.group_boss')])]"/>
+            <field name="name">Tableau de bord</field>
+            <field name="parent_id" ref="point_of_sale.menu_point_root"/>
+            <field name="sequence">1</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+
+        <record id="point_of_sale.menu_pos_session_all" model="ir.ui.menu">
+            <field name="action" ref="point_of_sale.action_pos_session"/>
+            <field name="active" eval="True"/>
+            <field name="groups_id" eval="[(6, 0, [ref('qs_pers_pos_view_custom.group_boss')])]"/>
+            <field name="name">Sessions</field>
+            <field name="parent_id" ref="point_of_sale.menu_point_of_sale"/>
+            <field name="sequence">2</field>
+            <field name="web_icon" eval="False"/>
+        </record>
+
+        <!--<record id="point_of_sale.access_pos_config_user" model="ir.model.access">
+            <field name="active" eval="True"/>
+            <field name="group_id" ref="qs_pers_pos_view_custom.group_boss"/>
+            <field name="model_id" ref="point_of_sale.model_pos_config"/>
+            <field name="name">pos.config.boss</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>-->
+
+        <!--<record id="point_of_sale.access_pos_config_user" model="ir.model.access">
+            <field name="active" eval="True"/>
+            <field name="group_id" ref="point_of_sale.group_pos_user"/>
+            <field name="model_id" ref="point_of_sale.model_pos_order"/>
+            <field name="name">pos.order sefoudine</field>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>-->
+
+    </data>
+</odoo>
