@@ -59,6 +59,10 @@
                        position="attributes">
                     <attribute name="readonly">1</attribute>
                 </xpath>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='tax_id']"
+                       position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
                 <field name="payment_term_id" position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </field>
