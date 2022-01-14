@@ -269,3 +269,4 @@ class SaleOrderLineInherited(models.Model):
         else:
             print("ato izy false eh")
             self.compute_field_sale = False
+
