@@ -143,7 +143,7 @@ class ResPartner(models.Model):
 
 class SaleOrderLineInherited(models.Model):
     _inherit = 'sale.order.line'
-    tax_id_name = fields.Char(string="TAXES", related='tax_id.name')
+    tax_id_name = fields.Char(string="Taxes", related='tax_id.name')
     qty_delivered_method = fields.Selection(selection_add=[('stock_move', 'Stock Moves')])
     route_id = fields.Many2one('stock.location.route', string='Route', domain=[('sale_selectable', '=', True)],
                                ondelete='restrict', check_company=True)
