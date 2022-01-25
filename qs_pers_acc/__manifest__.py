@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/security.xml',
+        'views/account_move.xml',
 
     ],
     # only loaded in demonstration mode
