@@ -38,6 +38,7 @@
                                                     and [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
                                                     or [('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
                                                "/>
+                                <field name="price_unit_qs" widget="monetary"/>
                                 <field name="pv_det" widget="monetary"/>
                                 <field name="pv_det_marge" widget="percentage"/>
                                 <field name="pv_gros" widget="monetary"/>
