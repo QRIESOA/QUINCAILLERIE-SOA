@@ -44,7 +44,7 @@ class qs_pers_acc(models.Model):
 
 class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
-    pv_det = fields.Float(string='PV DET', compute='_get_pv_det', readonly=0, store=True, index=True)
+    pv_det = fields.Float(string='PV DET', compute='_get_pv_det', readonly=0, index=True)
     pv_det_marge = fields.Float(string='% PV DET', compute='_get_marge_pv_det')
 
     @api.depends('product_id')
