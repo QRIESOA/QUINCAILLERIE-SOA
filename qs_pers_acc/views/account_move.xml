@@ -11,11 +11,12 @@
                 <xpath expr="//notebook" position="inside">
                     <page id="marge_tab"
                           string="Analyse des marges"
-                          attrs="{'invisible': [('move_type', '=', 'entry')]}">
+                          attrs="{'invisible': [('move_type', '=', 'entry')]}" groups="base.group_erp_manager">
                         <field name="for_price_list_ids"
                                widget="section_and_note_one2many"
                                mode="tree,kanban"
-                               context="{'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}">
+                               context="{'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}"
+                        >
 
 
                             <tree editable="bottom" string="Journal Items"
@@ -39,6 +40,7 @@
                                                     or [('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
                                                "/>
                                 <field name="price_unit_qs" widget="monetary"/>
+                                <field name="transport" widget="monetary"/>
                                 <field name="pv_det" widget="monetary"/>
                                 <field name="pv_det_marge" widget="percentage"/>
                                 <field name="pv_gros" widget="monetary"/>

@@ -28,10 +28,10 @@ class qs_pers_acc(models.Model):
 
 class AccountMoveLineInherited(models.Model):
     _inherit = 'account.move.line'
-    price_unit_qs = fields.Float(string="P.A", compute='_get_price_unii_qs')
+    price_unit_qs = fields.Float(string="P.A", compute='_get_price_unit_qs')
 
     @api.depends('price_unit')
-    def _get_price_unii_qs(self):
+    def _get_price_unit_qs(self):
         for record in self:
             if record.price_unit:
                 record.price_unit_qs = record.price_unit
@@ -76,9 +76,9 @@ class AccountMoveLineInherited(models.Model):
     @api.depends('pv_det')
     def _get_marge_pv_det(self):
         for record in self:
-            if record.price_transport != 0 and record.pv_det != 0:
-                denom = float(record.price_transport)
-                num = (record.pv_det - record.price_transport)
+            if record.price_unit_qs != 0 and record.pv_det != 0:
+                denom = float(record.price_unit_qs)
+                num = (record.pv_det - record.price_unit_qs)
                 record.pv_det_marge = (num / denom)
             else:
                 record.pv_det_marge = 0
@@ -104,9 +104,9 @@ class AccountMoveLineInherited(models.Model):
     @api.depends('pv_gros')
     def _get_marge_pv_gros(self):
         for record in self:
-            if record.price_transport != 0 and record.pv_gros != 0:
-                denom = float(record.price_transport)
-                num = (record.pv_gros - record.price_transport)
+            if record.price_unit_qs != 0 and record.pv_gros != 0:
+                denom = float(record.price_unit_qs)
+                num = (record.pv_gros - record.price_unit_qs)
                 record.pv_gros_marge = (num / denom)
             else:
                 record.pv_gros_marge = 0
@@ -132,9 +132,9 @@ class AccountMoveLineInherited(models.Model):
     @api.depends('pv_cr1')
     def _get_marge_pv_cr1(self):
         for record in self:
-            if record.price_transport != 0 and record.pv_cr1 != 0:
-                denom = float(record.price_transport)
-                num = (record.pv_cr1 - record.price_transport)
+            if record.price_unit_qs != 0 and record.pv_cr1 != 0:
+                denom = float(record.price_unit_qs)
+                num = (record.pv_cr1 - record.price_unit_qs)
                 record.pv_cr1_marge = (num / denom)
             else:
                 record.pv_cr1_marge = 0
@@ -160,9 +160,9 @@ class AccountMoveLineInherited(models.Model):
     @api.depends('pv_cr2')
     def _get_marge_pv_cr2(self):
         for record in self:
-            if record.price_transport != 0 and record.pv_cr2 != 0:
-                denom = float(record.price_transport)
-                num = (record.pv_cr2 - record.price_transport)
+            if record.price_unit_qs != 0 and record.pv_cr2 != 0:
+                denom = float(record.price_unit_qs)
+                num = (record.pv_cr2 - record.price_unit_qs)
                 record.pv_cr2_marge = (num / denom)
             else:
                 record.pv_cr2_marge = 0
@@ -189,9 +189,9 @@ class AccountMoveLineInherited(models.Model):
     @api.depends('pv_cr3')
     def _get_marge_pv_cr3(self):
         for record in self:
-            if record.price_transport != 0 and record.pv_cr3 != 0:
-                denom = float(record.price_transport)
-                num = (record.pv_cr3 - record.price_transport)
+            if record.price_unit_qs != 0 and record.pv_cr3 != 0:
+                denom = float(record.price_unit_qs)
+                num = (record.pv_cr3 - record.price_unit_qs)
                 record.pv_cr3_marge = (num / denom)
             else:
                 record.pv_cr3_marge = 0
@@ -217,9 +217,9 @@ class AccountMoveLineInherited(models.Model):
     @api.depends('pv_cr4')
     def _get_marge_pv_cr4(self):
         for record in self:
-            if record.price_transport != 0 and record.pv_cr4 != 0:
-                denom = float(record.price_transport)
-                num = (record.pv_cr4 - record.price_transport)
+            if record.price_unit_qs != 0 and record.pv_cr4 != 0:
+                denom = float(record.price_unit_qs)
+                num = (record.pv_cr4 - record.price_unit_qs)
                 record.pv_cr4_marge = (num / denom)
             else:
                 record.pv_cr4_marge = 0
