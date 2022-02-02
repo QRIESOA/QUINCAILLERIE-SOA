@@ -29,7 +29,7 @@
         'views/templates.xml',
         'views/security.xml',
         'views/account_move.xml',
-
+        'security/res_groups_category.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

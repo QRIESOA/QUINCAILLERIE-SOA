@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_category_qs" model="ir.module.category">
+            <field name="name">Groupes QS</field>
+            <field name="sequence">150</field>
+        </record>
+
+        <record id="team_erp_manager" model="res.groups">
+            <field name="name">Equipe ERP Manageur</field>
+            <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+    </data>
+</odoo>

@@ -11,7 +11,7 @@
                 <xpath expr="//notebook" position="inside">
                     <page id="marge_tab"
                           string="Analyse des marges"
-                          attrs="{'invisible': [('move_type', '=', 'entry')]}" groups="base.group_erp_manager">
+                          attrs="{'invisible': [('move_type', '=', 'entry')]}" groups="qs_pers_acc.team_erp_manager">
                         <field name="for_price_list_ids"
                                widget="section_and_note_one2many"
                                mode="tree,kanban"
