@@ -8,6 +8,7 @@
 
                 <xpath expr="//field[@name='origin']" position="before">
                     <field name="ticket_number"/>
+                    <field name="ref_number"/>
                 </xpath>
 
             </field>
