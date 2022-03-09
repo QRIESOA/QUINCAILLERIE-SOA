@@ -60,13 +60,20 @@
                 </xpath>
 
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
-                       position="attributes">
-                    <attribute name="readonly">1</attribute>
+                       position="replace">
+                    <field
+                            name="price_unit"
+                            readonly="True"
+                            decoration-danger="price_unit &lt; 1"
+                            decoration-success="price_unit &gt; 1"
+                    />
+
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
                        position="after">
                     <field name="tax_id_name"/>
                 </xpath>
+
                 <!--<xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='tax_id']"
                        position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
