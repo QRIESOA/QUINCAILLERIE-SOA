@@ -66,9 +66,11 @@
                             readonly="True"
                             decoration-danger="price_unit &lt; 1"
                             decoration-success="price_unit &gt; 1"
+                            force_save="True"
                     />
 
                 </xpath>
+
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
                        position="after">
                     <field name="tax_id_name"/>
