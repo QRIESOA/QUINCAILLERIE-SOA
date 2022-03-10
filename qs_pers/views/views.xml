@@ -66,6 +66,7 @@
                             readonly="True"
                             decoration-danger="price_unit &lt; 1"
                             decoration-success="price_unit &gt; 1"
+                            force_save="True"
                     />
 
                 </xpath>

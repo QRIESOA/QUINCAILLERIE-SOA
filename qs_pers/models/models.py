@@ -240,7 +240,11 @@ class SaleOrderLineInherited(models.Model):
                 qty_processed_per_product[line.product_id.id] += product_qty
             treated |= lines
 
-            print(self.env.user.name)
+            if treated:
+                msg_price_unit = "Le prix unitaire de cet article n'est pas conforme, veuillez appeler votre responsable pour changer le prix."
+                if treated[-1].price_unit == 0:
+                    raise UserError(msg_price_unit)
+                    print("efa vita print notification test")
 
             msg = _('La quantité en stock est insuffisante, il ne reste que %s') % (free_qty_today)
             if treated:
@@ -269,5 +273,3 @@ class SaleOrderLineInherited(models.Model):
         else:
             print("ato izy false eh")
             self.compute_field_sale = False
-
-
