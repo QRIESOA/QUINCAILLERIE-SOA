@@ -65,6 +65,7 @@
                             force_save="True"
                     />
 
+
                 </xpath>
 
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"

@@ -39,6 +39,58 @@ CURRENCY_DISPLAY_PATTERN = re.compile(r'(\w+)\s*(?:\((.*)\))?')
 
 class qs_pers(models.Model):
     _inherit = 'sale.order'
+
+    def has_duplicates(values):
+        if len(values) != len(set(values)):
+            raise ValidationError(_('Les articles en double dans la ligne de commande ne sont pas autorisés'))
+
+    @api.constrains('order_line')
+    def check_duplicate_article(self):
+        for record in self:
+            products_in_lines = record.mapped('order_line.product_id')
+            for product in products_in_lines:
+                lines_count = len(record.order_line.filtered(lambda line: line.product_id == product))
+                if lines_count > 1:
+                    raise ValidationError(_('Les articles en double dans la ligne de commande ne sont pas autorisés'))
+
+            # if len(products_in_lines) != len(set(products_in_lines)):
+            #     print("true")
+            #     print(len(products_in_lines))
+            #     print(len(set(self.order_line.product_id)))
+            #     raise ValidationError(_('Les articles en double dans la ligne de commande ne sont pas autorisés'))
+            # else:
+            #     print(len(products_in_lines))
+            #     print(len(set(products_in_lines)))
+            #     raise models.ValidationError(
+            #         _('Les articles en double dans la ligne de commande ne sont pas autorisés'))
+
+        return True
+
+    # def write(self, values):
+    #     for order in self:
+    #         products_in_lines = order.mapped('order_line.product_id')
+    #         if len(products_in_lines) != len(set(products_in_lines)):
+    #             print("true")
+    #
+    #             print(len(products_in_lines))
+    #             print(len(set(self.order_line.product_id)))
+    #             raise ValidationError(_('Les articles en double dans la ligne de commande ne sont pas autorisés'))
+    #         else:
+    #             print(len(products_in_lines))
+    #             print(len(set(products_in_lines)))
+    #             raise ValidationError(_('Les articles en double dans la ligne de commande ne sont pas autorisés'))
+    #     return super(qs_pers, self).write(values)
+    #
+    # @api.constrains('order_line')
+    # def _check_duplicate_product(self):
+    #     for rec in self:
+    #         exist_product_list = []
+    #         for line in rec.order_line:
+    #             print(line.product_id)
+    #             if line.product_id in exist_product_list:
+    #                 raise ValidationError(_('Product should be one per line.'))
+    #                 exist_product_list.append(line.product_id.id)
+
     note_nda = fields.Text(string="Note sur NDA", index=1)
 
     show_pricelist = fields.Char(string="Liste de prix associé", related='pricelist_id.name')
@@ -50,10 +102,10 @@ class qs_pers(models.Model):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('sales_team.group_sale_salesman') and not res_user.has_group(
                 'sales_team.group_sale_salesman_all_leads'):
-            print("ato izy true")
+
             self.compute_field_sale = True
         else:
-            print("ato izy false eh")
+
             self.compute_field_sale = False
 
     mobil_name_sale = fields.Char(
@@ -143,6 +195,7 @@ class ResPartner(models.Model):
 
 class SaleOrderLineInherited(models.Model):
     _inherit = 'sale.order.line'
+
     tax_id_name = fields.Char(string="Taxes", related='tax_id.name')
     qty_delivered_method = fields.Selection(selection_add=[('stock_move', 'Stock Moves')])
     route_id = fields.Many2one('stock.location.route', string='Route', domain=[('sale_selectable', '=', True)],
