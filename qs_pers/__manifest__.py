@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/security.xml',
+        'views/product_template_view.xml',
         'security/security.xml',
         'report/report_with_price.xml',
         'report/sale_report_inherit.xml',
