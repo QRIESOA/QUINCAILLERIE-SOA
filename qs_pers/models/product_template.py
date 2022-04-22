@@ -7,4 +7,7 @@ class ModelName(models.Model):
 
     available_in_pos = fields.Boolean(string='Available in POS',
                                       help='Check if you want this product to appear in the Point of Sale.',
-                                      default=True)
+                                      default=False)
+    repere = fields.Char(
+        string='Repère',
+        required=False)
