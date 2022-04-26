@@ -30,6 +30,7 @@
         'views/templates.xml',
         'views/security.xml',
         'views/stock_move_line_view.xml',
+        'views/stock_valuation_view.xml'
     ],
     # only loaded in demonstration mode
 
