@@ -7,7 +7,11 @@ class ModelName(models.Model):
 
     source_location = fields.Char(
         string='De',
-        related="stock_move_id.location_id.display_name")
+        related="stock_move_id.location_id.display_name", store=True)
     destination_location = fields.Char(
         string='Vers',
-        related="stock_move_id.location_dest_id.display_name")
+        related="stock_move_id.location_dest_id.display_name", store=True)
+    reference = fields.Char(
+        string='Référence',
+        related="stock_move_id.reference", store=True)
+
