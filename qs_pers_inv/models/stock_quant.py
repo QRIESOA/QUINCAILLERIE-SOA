@@ -7,5 +7,5 @@ class ModelName(models.Model):
         string='Réf interne',
         related='product_id.default_code', store=True)
     article_nom = fields.Char(
-        string="Nom d'article",
+        string="Nom de l'article",
         related='product_id.name', store=True)
