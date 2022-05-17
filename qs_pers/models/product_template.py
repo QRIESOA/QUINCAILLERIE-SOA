@@ -15,6 +15,9 @@ class ModelName(models.Model):
     detail_price = fields.Monetary(
         string='PV DET(MGA)',
         compute='_get_pv_det')
+    ttc_logic = fields.Boolean(
+        string='Logique TTC',
+        required=False, default=False)
 
     def _get_pv_det(self):
         for record in self:
