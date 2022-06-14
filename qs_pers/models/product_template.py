@@ -16,7 +16,7 @@ class ModelName(models.Model):
         string='PV DET(MGA)',
         compute='_get_pv_det')
     ttc_logic = fields.Boolean(
-        string='Logique TTC',
+        string='Logique HT',
         required=False, default=False)
 
     def _get_pv_det(self):

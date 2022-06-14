@@ -180,8 +180,17 @@ class ResCurrencyInherited(models.Model):
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    credit_limit = fields.Monetary("Limite de credit", index=True)
+    credit_limit = fields.Monetary("Limite de credit", index=True, tracking=True)
     compute_field = fields.Boolean(string="check field", compute='get_user')
+
+    @api.onchange("credit_limit")
+    def check_total_due_value(self):
+        if self.credit_limit > 0:
+            if self.credit_limit < self.total_due:
+                raise UserError("La limite de crédit doit être supérieure aux factures impayées actuelles.")
+
+
+
 
     @api.depends('compute_field', 'user_id')
     def get_user(self):
