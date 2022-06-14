@@ -118,10 +118,11 @@ class qs_pers(models.Model):
         readonly=True)
 
     credit_sale_limit = fields.Monetary("limite de credit sales", related="partner_id.credit_limit")
+    total_due_sale = fields.Monetary("limite de credit sales", related="partner_id.total_due")
 
     def check_credit_limit(self):
         if self.credit_sale_limit > 0:
-            if self.credit_sale_limit < self.partner_id.total_due + self.amount_total:
+            if self.credit_sale_limit < self.total_due_sale + self.amount_total:
                 raise UserError("Ce client doit payer son credit")
 
     def _action_confirm(self):
