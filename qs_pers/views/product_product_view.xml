@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_product_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product_product_tree_view.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lst_price']" position="replace">
+                    <field name="detail_price_product"/>
+                </xpath>
+                <xpath expr="//field[@name='price']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

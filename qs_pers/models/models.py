@@ -118,10 +118,11 @@ class qs_pers(models.Model):
         readonly=True)
 
     credit_sale_limit = fields.Monetary("limite de credit sales", related="partner_id.credit_limit")
+    total_due_sale = fields.Monetary("limite de credit sales", related="partner_id.total_due")
 
     def check_credit_limit(self):
         if self.credit_sale_limit > 0:
-            if self.credit_sale_limit < self.partner_id.total_due + self.amount_total:
+            if self.credit_sale_limit < self.total_due_sale + self.amount_total:
                 raise UserError("Ce client doit payer son credit")
 
     def _action_confirm(self):
@@ -180,8 +181,17 @@ class ResCurrencyInherited(models.Model):
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    credit_limit = fields.Monetary("Limite de credit", index=True)
+    credit_limit = fields.Monetary("Limite de credit", index=True, tracking=True)
     compute_field = fields.Boolean(string="check field", compute='get_user')
+
+    @api.onchange("credit_limit")
+    def check_total_due_value(self):
+        if self.credit_limit > 0:
+            if self.credit_limit < self.total_due:
+                raise UserError("La limite de crédit doit être supérieure aux factures impayées actuelles.")
+
+
+
 
     @api.depends('compute_field', 'user_id')
     def get_user(self):

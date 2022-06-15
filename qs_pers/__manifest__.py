@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment', 'thermal_invoice', 'stock'],
+    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment', 'thermal_invoice', 'stock', 'sale_margin'],
 
     # always loaded
     'data': [
@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/security.xml',
+        'views/product_product_view.xml',
         'views/product_template_view.xml',
         'security/security.xml',
         'report/report_with_price.xml',
