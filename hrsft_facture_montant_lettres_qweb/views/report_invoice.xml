@@ -10,13 +10,33 @@
             <xpath expr="//div[@class='page']" position="attributes">
                 <attribute name="style">font-size:9pt;</attribute>
             </xpath>
-            <xpath expr="//address" position="attributes">
-                <attribute name="t-options-fields">['name', 'phone', 'mobile']</attribute>
-                <attribute name="style">font-size:9pt;</attribute>
+            <xpath expr="//t[@t-set='address']" position="replace">
+                <t t-set="address">
+                    <div t-if="o.partner_id.name" class="mt16" style="font-size:9pt;">
+                        <span t-field="o.partner_id.name"/>
+                    </div>
+                    <div t-if="o.partner_id.phone" class="mt16" style="font-size:9pt;">
+                        <span t-field="o.partner_id.phone"/>
+                    </div>
+                    <div t-if="o.partner_id.mobile" class="mt16" style="font-size:9pt;">
+                        <span t-field="o.partner_id.mobile"/>
+                    </div>
+                    <div t-if="o.partner_id.vat" class="mt16" style="font-size:9pt;">
+                        NIF: <span t-field="o.partner_id.vat"/>
+                    </div>
+                    <div t-if="o.partner_id.STAT" class="mt16" style="font-size:9pt;">
+                        STAT : <span t-field="o.partner_id.STAT"/>
+                    </div>
+                    <div t-if="o.partner_id.RCS" class="mt16" style="font-size:9pt;">
+                        RCS : <span t-field="o.partner_id.RCS"/>
+                    </div>
+
+                </t>
+
             </xpath>
+
             <xpath expr="//p[@name='payment_communication']" position="replace">
                 <span>
-
                 </span>
             </xpath>
             <xpath expr="//p[@name='payment_term']" position="replace">
@@ -69,7 +89,7 @@
                         <strong>Arrêté à la somme de : </strong>
                         <span t-esc="o.get_amount_letter()"/>
                     </div>
-                    <div class="col-6" >
+                    <div class="col-6">
                         <table class="table table-sm" style="page-break-inside: avoid;">
 
                             <!--Tax totals-->
