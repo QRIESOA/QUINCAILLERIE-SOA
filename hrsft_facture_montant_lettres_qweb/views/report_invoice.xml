@@ -15,6 +15,12 @@
                     <div t-if="o.partner_id.name" class="mt16" style="font-size:9pt;">
                         <span t-field="o.partner_id.name"/>
                     </div>
+                    <div t-if="o.partner_id.street" class="mt16" style="font-size:9pt;">
+                        <span t-field="o.partner_id.street"/>
+                    </div>
+                    <div t-if="o.partner_id.city" class="mt16" style="font-size:9pt;">
+                        <span t-field="o.partner_id.city"/>
+                    </div>
                     <div t-if="o.partner_id.phone" class="mt16" style="font-size:9pt;">
                         <span t-field="o.partner_id.phone"/>
                     </div>
