@@ -39,11 +39,11 @@
                                                     and [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
                                                     or [('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]
                                                "/>
-                                <field name="price_unit_qs" widget="monetary"/>
-                                <field name="transport" widget="monetary"/>
-                                <field name="pv_det" widget="monetary"/>
-                                <field name="pv_det_marge" widget="percentage"/>
-                                <field name="pv_gros" widget="monetary"/>
+                                <field name="price_unit_qsoa" widget="monetary"/>
+                                <!--<field name="transport" widget="monetary"/>-->
+                                <field name="pv_det_qsoa" widget="monetary"/>
+                                <field name="pv_det_qsoa_marge" widget="percentage"/>
+                                <!--<field name="pv_gros" widget="monetary"/>
                                 <field name="pv_gros_marge" widget="percentage"/>
                                 <field name="pv_cr1" widget="monetary"/>
                                 <field name="pv_cr1_marge" widget="percentage"/>
@@ -52,7 +52,7 @@
                                 <field name="pv_cr3" widget="monetary"/>
                                 <field name="pv_cr3_marge" widget="percentage"/>
                                 <field name="pv_cr4" widget="monetary"/>
-                                <field name="pv_cr4_marge" widget="percentage"/>
+                                <field name="pv_cr4_marge" widget="percentage"/>-->
 
                                 <field name="name" widget="section_and_note_text"
                                        attrs="{'required': [('parent.move_type', 'not in', ('in_invoice', 'in_refund','in_receipt'))]}"
