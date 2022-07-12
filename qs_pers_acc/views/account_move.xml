@@ -9,8 +9,8 @@
                      <field name="arch" type="xml">
                             <xpath expr="//notebook" position="inside">
                                    <page id="marge_tab" string="Analyse des marges" groups="qs_pers_acc.team_erp_manager">
-                                          <field name="product_pricelist_ids" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_move_type': context.get('default_move_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id or company_currency_id}">
-                                                 <tree editable="False" force_save="1" string="Journal Items">
+                                          <field name="product_product_ids" widget="section_and_note_one2many" mode="tree,kanban" force_save="1">
+                                                 <tree editable="False" string="Journal Items" force_save="1">
                                                         <field name="display_name" string="Articles" />
                                                         <field name="tmpl_price" string="Prix d'achat" widget="monetary" />
                                                         <field name="transport" string="Transport" widget="monetary" />

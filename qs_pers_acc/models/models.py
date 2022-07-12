@@ -9,21 +9,15 @@ class qs_pers_acc(models.Model):
     )
 
     email_partner = fields.Char("Email", related="partner_id.email", readonly=True)
-    product_pricelist_ids = fields.Many2many(
+    product_product_ids = fields.Many2many(
         "product.product",
-        "move_id",
-        string="Pricelist products",
-        compute="_compute_pricelists_products",
+        string="Products",
+        compute="_compute_product_product_ids",
     )
 
-    @api.onchange("invoice_line_ids", "invoice_line_ids.product_id")
-    def _compute_pricelists_products(self):
+    def _compute_product_product_ids(self):
         for rec in self:
-            ids = []
-            for line in rec.invoice_line_ids:
-                if line.product_id:
-                    ids.append(line.product_id.id)
-            rec.product_pricelist_ids = ids
+            rec.sudo().write({"product_product_ids": False})
 
 
 class ProductTemplateInherit(models.Model):
@@ -38,7 +32,7 @@ class ProductProductInherit(models.Model):
     _inherit = "product.product"
 
     transport = fields.Float(
-        string="Transport", related="product_tmpl_id.transport", default=0, store=True
+        string="Transport", related="product_tmpl_id.transport", default=0
     )
     tmpl_price = fields.Float(
         string="Prix d'achat",
