@@ -1,2 +1,2 @@
-# id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-# access_qs_pers_inv_qs_pers_inv,qs_pers_inv.qs_pers_inv,model_qs_pers_inv_qs_pers_inv,base.group_user,1,1,1,1
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_item_marge,qs_pers_inv.item_marge,model_product_item_marge,,1,1,1,1

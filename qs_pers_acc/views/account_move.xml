@@ -9,9 +9,10 @@
                      <field name="arch" type="xml">
                             <xpath expr="//notebook" position="inside">
                                    <page id="marge_tab" string="Analyse des marges" groups="qs_pers_acc.team_erp_manager">
-                                          <field name="product_product_ids" widget="section_and_note_one2many" mode="tree,kanban" force_save="1">
-                                                 <tree editable="False" string="Journal Items" force_save="1">
-                                                        <field name="display_name" string="Articles" />
+                                          <button string="Calcul de marge" class="oe_highlight" name="compute_product_product_ids" type="object" />
+                                          <field name="product_marge_ids" widget="section_and_note_one2many" mode="tree" readonly="1" force_save="1">
+                                                 <tree string="Journal Items" editable="False">
+                                                        <field name="product_id" string="Articles" />
                                                         <field name="tmpl_price" string="Prix d'achat" widget="monetary" />
                                                         <field name="transport" string="Transport" widget="monetary" />
                                                         <field name="pc_det" widget="monetary" string="PV DET" />

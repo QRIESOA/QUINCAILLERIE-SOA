@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from locale import currency
 from odoo import models, fields, api
 
 
@@ -9,15 +10,22 @@ class qs_pers_acc(models.Model):
     )
 
     email_partner = fields.Char("Email", related="partner_id.email", readonly=True)
-    product_product_ids = fields.Many2many(
-        "product.product",
-        string="Products",
-        compute="_compute_product_product_ids",
+
+    product_marge_ids = fields.One2many(
+        "product.item.marge",
+        "move_id",
     )
 
-    def _compute_product_product_ids(self):
+    @api.onchange("invoice_line_ids")
+    def compute_product_product_ids(self):
         for rec in self:
-            rec.sudo().write({"product_product_ids": False})
+            rec.product_marge_ids = [(5, 0, 0)]
+            marge_ids = []
+            if rec.invoice_line_ids:
+                print(rec.invoice_line_ids)
+                for line in rec.invoice_line_ids:
+                    marge_ids.append((0, 0, {"product_id": line.product_id.id}))
+            rec.product_marge_ids = marge_ids
 
 
 class ProductTemplateInherit(models.Model):
@@ -166,3 +174,70 @@ class ProductProductInherit(models.Model):
                     record.pc_cr4_marge = (
                         record.pc_cr4 - record.tmpl_price
                     ) / record.tmpl_price
+
+
+class ItemMarge(models.Model):
+    _name = "product.item.marge"
+
+    product_id = fields.Many2one("product.product")
+    move_id = fields.Many2one("account.move")
+
+    transport = fields.Float(
+        string="Transport", related="product_id.product_tmpl_id.transport", default=0
+    )
+    tmpl_price = fields.Float(
+        string="Prix d'achat",
+        related="product_id.product_tmpl_id.standard_price",
+    )
+    pc_det = fields.Float(
+        string="PV DET",
+        related="product_id.pc_det",
+    )
+    pc_det_marge = fields.Float(
+        string="%PV DET",
+        related="product_id.pc_det_marge",
+    )
+    pc_gros = fields.Float(
+        string="PV GROS",
+        related="product_id.pc_gros",
+    )
+    pc_gros_marge = fields.Float(
+        string="%PV GROS",
+        related="product_id.pc_gros_marge",
+    )
+    pc_cr1 = fields.Float(
+        string="PV CR1",
+        related="product_id.pc_cr1",
+    )
+    pc_cr1_marge = fields.Float(
+        string="%PV CR1",
+        related="product_id.pc_cr1_marge",
+    )
+    pc_cr2 = fields.Float(
+        string="PV CR2",
+        related="product_id.pc_cr2",
+    )
+    pc_cr2_marge = fields.Float(
+        string="%PV CR2",
+        related="product_id.pc_cr2_marge",
+    )
+    pc_cr3 = fields.Float(
+        string="PV CR3",
+        related="product_id.pc_cr3",
+    )
+    pc_cr3_marge = fields.Float(
+        string="%PV CR3",
+        related="product_id.pc_cr3_marge",
+    )
+    pc_cr4 = fields.Float(
+        string="PV CR4",
+        related="product_id.pc_cr4",
+    )
+    pc_cr4_marge = fields.Float(
+        string="%PV CR4",
+        related="product_id.pc_cr4_marge",
+    )
+    currency_id = fields.Many2one(
+        "res.currency",
+        related="product_id.currency_id",
+    )
