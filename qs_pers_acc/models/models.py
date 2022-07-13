@@ -16,7 +16,6 @@ class qs_pers_acc(models.Model):
         "move_id",
     )
 
-    @api.onchange("invoice_line_ids")
     def compute_product_product_ids(self):
         for rec in self:
             rec.product_marge_ids = [(5, 0, 0)]
