@@ -4,34 +4,33 @@
         <record id="view_order_form_inherited" model="ir.ui.view">
             <field name="name">sale.order.inherited</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding" />
             <field name="arch" type="xml">
                 <field name="company_id" position="replace">
-                    <field name="mobil_name_sale"/>
-                    <field name="email_sale"/>
+                    <field name="mobil_name_sale" />
+                    <field name="email_sale" />
                 </field>
             </field>
         </record>
         <record id="view_sale_tree_inherited" model="ir.ui.view">
             <field name="name">sale.view_order_tree.inherited</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="inherit_id" ref="sale.view_order_tree" />
             <field name="arch" type="xml">
                 <field name="company_id" position="replace">
-                    <field name="mobil_name_sale"/>
-                    <field name="email_sale"/>
+                    <field name="mobil_name_sale" />
+                    <field name="email_sale" />
                 </field>
             </field>
         </record>
         <record id="view_partner_form_inherited" model="ir.ui.view">
             <field name="name">base.view_partner_form.inherited</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <field name="vat" position="before">
-                    <field name="compute_field" invisible="1"/>
-                    <field name="credit_limit" attrs="{'readonly': [('compute_field', '=', True)]}"
-                           groups="sales_team.group_sale_manager"/>
+                    <field name="compute_field" invisible="1" />
+                    <field name="credit_limit" attrs="{'readonly': [('compute_field', '=', True)]}" groups="sales_team.group_sale_manager" />
                 </field>
                 <field name="property_payment_term_id" position="attributes">
                     <attribute name="attrs">{'readonly': [('compute_field', '=', True)]}</attribute>
@@ -45,32 +44,23 @@
         <record id="sale_view_form_inherited" model="ir.ui.view">
             <field name="name">sale.view_order_form.inherited</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <xpath expr="//form" position="attributes">
                     <attribute name="duplicate">0</attribute>
                 </xpath>
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='tax_id']"
-                       position="attributes">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='tax_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
 
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
-                       position="replace">
-                    <field
-                            name="price_unit"
-                            readonly="True"
-                            decoration-danger="price_unit &lt; 1"
-                            decoration-success="price_unit &gt; 1"
-                            force_save="True"
-                    />
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="replace">
+                    <field name="price_unit" readonly="True" decoration-danger="price_unit &lt; 1" decoration-success="price_unit &gt; 1" force_save="True" />
 
 
                 </xpath>
 
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
-                       position="after">
-                    <field name="tax_id_name"/>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
+                    <field name="tax_id_name" />
                 </xpath>
 
                 <field name="payment_term_id" position="attributes">
@@ -81,13 +71,16 @@
                 </button>
 
                 <field name="pricelist_id" position="after">
-                    <field name="compute_field_sale" invisible="1"/>
+                    <field name="compute_field_sale" invisible="1" />
                 </field>
                 <field name="pricelist_id" position="attributes">
                     <attribute name="attrs">{'invisible': [('compute_field_sale', '=', True)]}</attribute>
                 </field>
                 <field name="pricelist_id" position="after">
-                    <field name="show_pricelist"/>
+                    <field name="show_pricelist" />
+                </field>
+                <field name="partner_id" position="attributes">
+                    <attribute name="options">{'no_open':True}</attribute>
                 </field>
 
                 <xpath expr="//page[@name='other_information']" position="attributes">
@@ -100,7 +93,7 @@
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
                 </xpath>
                 <field name="note" position="after">
-                    <field name="note_nda"/>
+                    <field name="note_nda" />
                 </field>
                 <field name="note" position="attributes">
                     <attribute name="invisible">1</attribute>

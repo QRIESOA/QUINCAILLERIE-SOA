@@ -1,46 +1,50 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "qs_pers",
-
-    'summary': """
+    "name": "qs_pers",
+    "summary": """
         Short (1 phrase/line) summary of the module's purpose, used as
         subtitle on modules listing or apps.openerp.com""",
-
-    'description': """
+    "description": """
         Long description of module's purpose
     """,
-
-    'author': "Valisoa RAMILIJAONA",
-    'website': "http://www.valisoaramilijaona.ml",
-
+    "author": "Valisoa RAMILIJAONA",
+    "website": "http://www.valisoaramilijaona.ml",
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
-
+    "category": "Uncategorized",
+    "version": "0.1",
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'sale_stock', 'stock_account', 'payment', 'thermal_invoice', 'stock', 'sale_margin'],
-
+    "depends": [
+        "base",
+        "sale",
+        "sale_stock",
+        "stock_account",
+        "payment",
+        "thermal_invoice",
+        "stock",
+        "sale_margin",
+    ],
     # always loaded
-    'data': [
-        'data/paper_format.xml',
-        'views/views.xml',
-        'views/templates.xml',
-        'views/security.xml',
-        'views/product_product_view.xml',
-        'views/product_template_view.xml',
-        'security/security.xml',
-        'report/report_with_price.xml',
-        'report/sale_report_inherit.xml',
-        'report/sale_report.xml',
-        'report/A7_paperformat.xml',
-        'report/small_external_layout.xml'
+    "data": [
+        "data/paper_format.xml",
+        "views/views.xml",
+        "views/templates.xml",
+        "views/security.xml",
+        "views/product_product_view.xml",
+        "views/contact_partner.xml",
+        "views/product_template_view.xml",
+        "security/security.xml",
+        "report/report_with_price.xml",
+        "report/sale_report_inherit.xml",
+        "report/sale_report.xml",
+        "report/A7_paperformat.xml",
+        "report/small_external_layout.xml",
     ],
     # only loaded in demonstration mode
-    'qweb': [],
-    'demo': [],
-    'installable': True,
-    'auto_install': False,
-    'application': True,
+    "qweb": [],
+    "demo": [],
+    "installable": True,
+    "auto_install": False,
+    "application": True,
 }
