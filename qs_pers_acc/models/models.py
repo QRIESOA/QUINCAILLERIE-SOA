@@ -24,6 +24,7 @@ class qs_pers_acc(models.Model):
                 print(rec.invoice_line_ids)
                 for line in rec.invoice_line_ids:
                     marge_ids.append((0, 0, {"product_id": line.product_id.id}))
+
             rec.product_marge_ids = marge_ids
 
 
@@ -84,7 +85,11 @@ class ProductProductInherit(models.Model):
         string="%PV CR4", compute="_compute_pc_cr4_marge", default=0, store=True
     )
 
-    @api.depends("product_tmpl_id", "product_tmpl_id.pricelist_ex_ids")
+    @api.depends(
+        "product_tmpl_id",
+        "product_tmpl_id.pricelist_ex_ids",
+        "product_tmpl_id.pricelist_ex_ids.fixed_price",
+    )
     def _compute_pricelists(self):
         for record in self:
             ids = record.product_tmpl_id.pricelist_ex_ids.pricelist_id.mapped("id")
