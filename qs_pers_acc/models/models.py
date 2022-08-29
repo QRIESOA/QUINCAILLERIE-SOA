@@ -21,8 +21,9 @@ class qs_pers_acc(models.Model):
             rec.product_marge_ids = [(5, 0, 0)]
             marge_ids = []
             if rec.invoice_line_ids:
-                print(rec.invoice_line_ids)
                 for line in rec.invoice_line_ids:
+                    for variant in line.product_id.product_variant_ids:
+                        variant._compute_pricelists()
                     marge_ids.append((0, 0, {"product_id": line.product_id.id}))
 
             rec.product_marge_ids = marge_ids
