@@ -27,6 +27,7 @@
     ],
     # always loaded
     "data": [
+        "security/security.xml",
         "data/paper_format.xml",
         "views/views.xml",
         "views/templates.xml",
@@ -34,7 +35,6 @@
         "views/product_product_view.xml",
         "views/contact_partner.xml",
         "views/product_template_view.xml",
-        "security/security.xml",
         "report/report_with_price.xml",
         "report/sale_report_inherit.xml",
         "report/sale_report.xml",
