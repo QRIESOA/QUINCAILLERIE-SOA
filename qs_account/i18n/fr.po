@@ -1,0 +1,195 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* qs_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20221103\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-21 08:21+0000\n"
+"PO-Revision-Date: 2022-12-21 08:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "2nd Verification"
+msgstr "2ème Vérification"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "<small>Page <span class=\"page\"/></small>"
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid ""
+"<span style=\"margin-right: 45%\">\n"
+"                                NET PAYABLE\n"
+"                            </span>"
+msgstr ""
+"<span style=\"margin-right: 45%\">\n"
+"                                Net A PAYER\n"
+"                            </span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid ""
+"<span style=\"margin-right: 45%\">\n"
+"                                TOTAL HT\n"
+"                            </span>"
+msgstr ""
+"<span style=\"margin-right: 45%\">\n"
+"                                TOTAL HT\n"
+"                            </span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid ""
+"<span style=\"margin-right: 45%\">\n"
+"                                TOTAL TVA\n"
+"                            </span>"
+msgstr ""
+"<span style=\"margin-right: 45%\">\n"
+"                                TOTAL TVA\n"
+"                            </span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span style=\"text-decoration: underline\">Cash</span>"
+msgstr "<span style=\"text-decoration: underline\">Caisse</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span style=\"text-decoration: underline\">The controller</span>"
+msgstr "<span style=\"text-decoration: underline\">Le contrôlleur</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>Amount TTC</span>"
+msgstr "<span>Montant TTC</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>Code</span>"
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>Designation</span>"
+msgstr "<span>Désignation</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>Discount</span>"
+msgstr "<span>Remise</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>P.U. HT</span>"
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>P.U. TTC</span>"
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>Qty</span>"
+msgstr "<span>Qté</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "<span>Taxes</span>"
+msgstr "<span>Tâxes</span>"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "Cashier :"
+msgstr "Caissier :"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid ""
+"Comptes Bancaires Mahajanga<br/> B.N.I.CL N°\n"
+"                            18372.379.6.010.1.00<br/> B.M.O.I Mahajanga N° 00030 01 5017 00112R<br/>\n"
+"                            B.F.V. Mahajanga N° 21010.01196.9.52<br/>"
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "Date :"
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "Delivered"
+msgstr "Délivré"
+
+#. module: qs_account
+#: model:ir.model.fields,field_description:qs_account.field_account_bank_statement_line__delivery_time
+#: model:ir.model.fields,field_description:qs_account.field_account_move__delivery_time
+#: model:ir.model.fields,field_description:qs_account.field_account_payment__delivery_time
+msgid "Delivery Time"
+msgstr "Heure de livraison"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "Good try"
+msgstr "Bien essayé"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "Hour:"
+msgstr "Heure:"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "Invoice N° :"
+msgstr "Facture N°:"
+
+#. module: qs_account
+#: model:ir.model,name:qs_account.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: qs_account
+#: model:ir.model,name:qs_account.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: qs_account
+#: model:ir.model.fields,field_description:qs_account.field_account_move_line__subtotal_ttc
+#: model:ir.model.fields,field_description:qs_account.field_account_move_line__taxed_price_unit
+msgid "Price Tax Incl."
+msgstr ""
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "Set the sum at"
+msgstr "Arrêtée la somme à "
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "Storekeeper:"
+msgstr "Magasinier:"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "THE GOODS SOLD ARE NOT RETURNED OR EXCHANGED. THANK YOU!"
+msgstr "LES MARCHANDISES VENDUES NE SONT NI REPRISES NI ECHANGEES. MERCI!"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "Vendor :"
+msgstr "Vendeur :"
+
+#. module: qs_account
+#: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
+msgid "Well checked"
+msgstr "Bien vérifié"
