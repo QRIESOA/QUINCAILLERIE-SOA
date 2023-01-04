@@ -27,7 +27,7 @@
                 <!--<hr size="20" width="100%" color="black"/>-->
                 <tr>
                     <th ><b>MONTANT TTC</b></th>
-                    <th colspan="2"><b t-esc="o.amount_total"
+                    <th colspan="2" class="text-right"><b t-esc="o.amount_total"
                                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></th>
                 </tr>
                 <tr>
