@@ -25,22 +25,22 @@
             </xpath>
             <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
                 <!--<hr size="20" width="100%" color="black"/>-->
-                <tr>
+                <!-- <tr>
                     <th ><b>MONTANT TTC</b></th>
                     <th colspan="2" class="text-right"><b t-esc="o.amount_total"
                                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></th>
-                </tr>
+                </tr> -->
                 <tr>
                     <th style="border: 1px solid black;"><b>MONTANT HT</b></th>
                     <th style="border: 1px solid black;"><b>TVA 20%</b></th>
-                    <th style="border: 1px solid black;"><b>MONTANT TTC</b></th>
+                    <th style="border: 1px solid black;" class="text-right"><b>MONTANT TTC</b></th>
                 </tr>
                 <tr>
                     <td style="border: 1px solid black;" t-esc="o.amount_untaxed"
                         t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
                     <td style="border: 1px solid black;" t-esc="o.amount_tax"
                         t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
-                    <td style="border: 1px solid black;" t-esc="o.amount_total"
+                    <td style="border: 1px solid black;" t-esc="o.amount_total" class="text-right"
                         t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
                 </tr>
             </xpath>
