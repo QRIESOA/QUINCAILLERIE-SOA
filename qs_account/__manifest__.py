@@ -18,7 +18,7 @@
         # security
 
         # views
-        'views/account_move_views.xml',
+        
         # wizard
 
         # report
