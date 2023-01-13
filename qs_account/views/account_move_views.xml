@@ -5,12 +5,32 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@id='header_right_group']" position="inside">
+            <!-- <xpath expr="//group[@id='header_right_group']" position="inside">
                 <label for="delivery_time"/>
                 <div name="delivery_time_div" class="d-flex">
                     <field name="delivery_time" widget="float_time" />
                 </div>
-            </xpath>
+            </xpath> -->
+            <div name="journal_div" position="after">
+                <label for="is_charge"/>
+                <div name="is_charge_div" class="d-flex">
+                    <field name="is_charge" />
+                </div>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter_inherit" model="ir.ui.view">
+        <field name="name">view.account.invoice.filter.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <filter name="to_check" position="after">
+                <filter name="is_charge" string="Is Charge" domain="[('is_charge', '=', True)]"/>
+            </filter>
+            <filter name="salesperson" position="after">
+                <filter name="group_is_charge" context="{'group_by': 'is_charge'}"/>
+            </filter>
         </field>
     </record>
 </odoo>
