@@ -12,6 +12,7 @@ This module contains all the common features of Sales Management and eCommerce.
     """,
     'depends': ['sale'],
     'data': [
+        'report/sale_report_templates.xml'
     ],
     'demo': [
         'data/product_product_demo.xml',
