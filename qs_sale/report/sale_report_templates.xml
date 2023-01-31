@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-    <template id="qs_report_sale_order_document">
+    <template id="qs_report_saleorder_document">
         <t t-call="web.external_layout">
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
