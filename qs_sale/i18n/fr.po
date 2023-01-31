@@ -1,0 +1,134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* qs_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20221103\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-31 10:58+0000\n"
+"PO-Revision-Date: 2023-01-31 10:58+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<b>MONTANT HT</b>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<b>MONTANT TTC</b>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<b>TVA 20%</b>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<span>Pro-Forma Invoice # </span>"
+msgstr "<span>Facture Pro-Forma # </span>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<span>TOTAL TTC</span>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong class=\"font-size-3\">Your Reference:</strong>"
+msgstr "<strong class=\"font-size-3\">Votre référence:</strong>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr "<strong class=\"mr16\">Total HT</strong>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Arrêté à la somme de : </strong>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Expiration:</strong>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Fiscal Position Remark:</strong>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>Date de commande:</strong>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Quotation Date:</strong>"
+msgstr "<strong>Date du devis :</strong>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Salesperson:</strong>"
+msgstr "<strong>Vendeur :</strong>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Shipping Address:</strong>"
+msgstr "<strong>Adresse de livraison:</strong>"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "<strong>Signature</strong>"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "Description"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid ""
+"Invoicing\n"
+"                            Address:"
+msgstr ""
+"Adresse de\n"
+"                            facturation:"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid ""
+"Invoicing\n"
+"                            and Shipping Address:"
+msgstr ""
+"Adresse\n"
+"                            de facturation et d'expédition:"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "Order #"
+msgstr "Commande n°"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "PU TTC"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "Quantity"
+msgstr "Qté"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+msgid "Quotation #"
+msgstr "Devis n°"
