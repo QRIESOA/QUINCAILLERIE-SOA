@@ -8,7 +8,7 @@
     "author": "Nexources",
     "website": "https://www.nexources.com/",
     "summary": "Track every user operation",
-    
+
     "depends": [
         'account',
     ],
@@ -18,11 +18,9 @@
         # security
 
         # views
-<<<<<<< HEAD
+
         'views/account_move_views.xml',
-=======
-        
->>>>>>> Production
+
         # wizard
 
         # report
