@@ -6,8 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e-20221103\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2023-01-13 11:55+0000\n"
 "PO-Revision-Date: 2023-01-13 11:55+0000\n"
+=======
+"POT-Creation-Date: 2022-12-21 08:21+0000\n"
+"PO-Revision-Date: 2022-12-21 08:21+0000\n"
+>>>>>>> Production
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -122,12 +127,18 @@ msgid ""
 msgstr ""
 
 #. module: qs_account
+<<<<<<< HEAD
 #: model:ir.model.fields,field_description:qs_account.field_account_bank_statement_line__is_charge
 #: model:ir.model.fields,field_description:qs_account.field_account_move__is_charge
 #: model:ir.model.fields,field_description:qs_account.field_account_payment__is_charge
 #: model_terms:ir.ui.view,arch_db:qs_account.view_account_invoice_filter_inherit
 msgid "Is Charge"
 msgstr "Est une charge"
+=======
+#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
+msgid "Date :"
+msgstr ""
+>>>>>>> Production
 
 #. module: qs_account
 #: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document

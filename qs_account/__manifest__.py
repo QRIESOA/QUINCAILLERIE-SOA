@@ -18,7 +18,11 @@
         # security
 
         # views
+<<<<<<< HEAD
         'views/account_move_views.xml',
+=======
+        
+>>>>>>> Production
         # wizard
 
         # report
