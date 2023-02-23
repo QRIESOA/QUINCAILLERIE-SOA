@@ -38,19 +38,19 @@
                             </tr>
                         </table>
                     </div>
-                    <table style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:9pt">
-                        <colgroup>
+                    <table style="border-bottom:1pt dashed black;margin-top:5pt;padding:5pt;font-size:16pt">
+                        <!--<colgroup>
                             <col width='24%'/>
                             <col width='1%'/>
                             <col width='49%'/>
                             <col width='1%'/>
                             <col width='25%'/>
-                        </colgroup>
+                        </colgroup>-->
                         <tr t-if="o.partner_id">
-                            <td style="padding-top:3pt;padding-bottom:3pt">Customer</td>
+                            <td style="padding-top:3pt;padding-bottom:3pt;">valiosa</td>
                             <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
-                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
-                                <span t-field="o.partner_id"
+                            <td style="text-align:left;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt;word-wrap: break-word !important;width:10px !important;">
+                                <span style="text-align:left;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt;word-wrap: break-word !important;width:10px !important;" t-field="o.partner_id"
                                       t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                                 ,
                                 <t t-if="o.partner_id.street"><span t-esc="o.partner_id.street"/>,
@@ -65,53 +65,47 @@
                         </tr>
                         <tr>
                             <td style="vertical-align:bottom;">
-                                Invoice No
+                                Facture N°
                             </td>
                             <td style="vertical-align:bottom;padding-left:3pt">:</td>
-                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
+                            <td style="text-align:left;vertical-align:bottom;">
                                 <t t-esc="o.name"/>
                             </td>
                         </tr>
                         <tr>
-                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt">Invoice Date</td>
+                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt">Date</td>
                             <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
-                            <td style="vertical-align:bottom;text-align:right;padding-top:5pt;padding-bottom:3pt;padding-right:3pt">
+                            <td style="vertical-align:bottom;text-align:left;padding-top:5pt;padding-bottom:3pt;padding-right:3pt">
                                 <t t-esc="o.invoice_date"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt">Due Date</td>
-                            <td style="vertical-align:bottom;padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
-                            <td style="vertical-align:bottom;text-align:right;padding-top:5pt;padding-bottom:3pt;padding-right:3pt">
-                                <t t-esc="o.invoice_date_due"/>
-                            </td>
-                        </tr>
+
                     </table>
-                    <table style="margin-top:5pt;padding:5pt;border-bottom:1pt dashed black;font-size:9pt">
+                    <table style="margin-top:5pt;padding:5pt;border-bottom:1pt dashed black;font-size:16pt">
                         <colgroup>
-                            <col width='28%'/>
-                            <col width='30%'/>
-                            <col width='38%'/>
+                            <col width='50%'/>
+                            <col width='10%'/>
+                            <col width='40%'/>
                         </colgroup>
                         <tr>
                             <th style="border-bottom:1pt dashed black;vertical-align:bottom; margin-bottom:5pt;padding-bottom:3pt;">
-                                <br/>ITEM NAME
+                                <br/>Article
                             </th>
 
                             <th style="border-bottom:1pt dashed black;vertical-align:bottom;text-align:right;margin-bottom:5pt;padding-bottom:3pt;">
-                                <br/>QTY
+                                <br/>Qtt
                             </th>
 
-                            <th style="border-bottom:1pt dashed black;vertical-align:bottom;text-align:right;margin-bottom:5pt;padding-bottom:3pt;">
-                                <br/>AMOUNT
+                            <th style="border-bottom:1pt dashed black;vertical-align:bottom;text-align:center;margin-bottom:5pt;padding-bottom:3pt;">
+                                <br/>Total
                             </th>
                         </tr>
                         <tr t-foreach="o.invoice_line_ids" t-as="orderline" style="margin-top:5pt">
 
-                            <td style="padding-bottom:3pt;padding-top:2pt;vertical-align:top">
+                            <td style="text-align:left;vertical-align:bottom;margin-right:15pt;padding-top:3pt;padding-bottom:3pt;word-wrap: break-word;">
                                 <t t-esc="orderline.name"/>
                                 <t t-if="orderline.discount">
-                                    <span>with a</span>
+                                    <span>avec un</span>
                                     <t t-esc="orderline.discount"/>
                                     <span>%</span>
                                     <span>&amp;nbsp;</span>
@@ -122,13 +116,13 @@
                                 class="pos-right-align">
                                 <t t-esc="orderline.quantity"/>
                             </td>
-                            <td style="text-align:right;padding-bottom:3pt;padding-top:2pt;vertical-align:top">
+                            <td style="text-align:left;padding-bottom:3pt;padding-top:2pt;vertical-align:top">
                                 <span t-esc="orderline.price_subtotal"
                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                         </tr>
                     </table>
-                    <table style="border-bottom:1pt dashed black;font-size:9pt" class='receipt-total'>
+                    <table style="border-bottom:1pt dashed black;font-size:16pt" class='receipt-total'>
                         <colgroup>
                             <col width='24%'/>
                             <col width='1%'/>
@@ -137,13 +131,13 @@
                             <col width='18%'/>
                         </colgroup>
                         <tr>
-                            <td style="padding-bottom:5pt;padding-top:5pt">Subtotal</td>
+                            <td style="padding-bottom:5pt;padding-top:5pt">Sous total</td>
                             <td>
                                 <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
                             </td>
                             <td style="padding-bottom:5pt;padding-top:5pt">:</td>
                             <td class="text-right o_price_total"
-                                style="text-align:right;padding-bottom:5pt;padding-top:5pt;padding-right:6pt">
+                                style="text-align:left;padding-bottom:5pt;padding-top:5pt;padding-right:6pt">
                                 <span t-esc="o.amount_untaxed"
                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
