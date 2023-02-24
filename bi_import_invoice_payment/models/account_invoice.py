@@ -8,10 +8,11 @@ import xlrd
 import io
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
 from datetime import date, datetime
-from odoo.exceptions import Warning , UserError, ValidationError
+from odoo.exceptions import Warning, UserError, ValidationError
 from odoo import models, fields, exceptions, api, _
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 try:
@@ -31,7 +32,6 @@ try:
 except ImportError:
     _logger.debug('Cannot `import base64`.')
 
-
 TYPE2JOURNAL = {
     'out_invoice': 'sale',
     'in_invoice': 'purchase',
@@ -39,59 +39,78 @@ TYPE2JOURNAL = {
     'in_refund': 'purchase',
 }
 
+
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     custom_seq = fields.Boolean('Custom Sequence')
     system_seq = fields.Boolean('System Sequence')
     invoice_name = fields.Char('Invoice Name')
+    payment_journal = fields.Char(compute='_compute_payment_journal', string="Journal de paiement")
+
+    def _compute_payment_journal(self):
+        for rec in self:
+            rec.payment_journal = False
+            json_values = rec._get_reconciled_info_JSON_values()
+            if json_values:
+                rec.payment_journal = ', '.join(val.get('journal_name', '') for val in json_values)
 
 
 class gen_inv(models.TransientModel):
     _name = "gen.invoice"
 
     file = fields.Binary('File')
-    account_opt = fields.Selection([('default', 'Use Account From Configuration product/Property'), ('custom', 'Use Account From Excel/CSV')], string='Account Option', required=True, default='default')
-    type = fields.Selection([('in', 'Customer'), ('out', 'Supplier'),('cus_credit_note','Customer Credit Note'),('ven_credit_note','Vendor Credit Note')], string='Type', required=True, default='in')
-    sequence_opt = fields.Selection([('custom', 'Use Excel/CSV Sequence Number'), ('system', 'Use System Default Sequence Number')], string='Sequence Option',default='custom')
-    import_option = fields.Selection([('csv', 'CSV File'),('xls', 'XLS File')],string='Select',default='csv')
-    sample_option = fields.Selection([('csv', 'CSV'),('xls', 'XLS')],string='Sample Type',default='csv')
+    account_opt = fields.Selection(
+        [('default', 'Use Account From Configuration product/Property'), ('custom', 'Use Account From Excel/CSV')],
+        string='Account Option', required=True, default='default')
+    type = fields.Selection([('in', 'Customer'), ('out', 'Supplier'), ('cus_credit_note', 'Customer Credit Note'),
+                             ('ven_credit_note', 'Vendor Credit Note')], string='Type', required=True, default='in')
+    sequence_opt = fields.Selection(
+        [('custom', 'Use Excel/CSV Sequence Number'), ('system', 'Use System Default Sequence Number')],
+        string='Sequence Option', default='custom')
+    import_option = fields.Selection([('csv', 'CSV File'), ('xls', 'XLS File')], string='Select', default='csv')
+    sample_option = fields.Selection([('csv', 'CSV'), ('xls', 'XLS')], string='Sample Type', default='csv')
     down_samp_file = fields.Boolean(string='Download Sample Files')
     stage = fields.Selection(
         [('draft', 'Import Draft Invoice'), ('confirm', 'Validate Invoice Automatically With Import')],
         string="Invoice Stage Option", default='draft')
-    import_prod_option = fields.Selection([('name', 'Name'),('code', 'Code'),('barcode', 'Barcode')],string='Import Product By ',default='name')        
+    import_prod_option = fields.Selection([('name', 'Name'), ('code', 'Code'), ('barcode', 'Barcode')],
+                                          string='Import Product By ', default='name')
 
     def make_invoice(self, values):
         invoice_obj = self.env['account.move']
         dict_invoice_type = {'in': 'out_invoice', 'out': 'in_invoice',
-                                 'cus_credit_note': 'out_refund',
-                                 'ven_credit_note': 'in_refund'}
-        type=''
+                             'cus_credit_note': 'out_refund',
+                             'ven_credit_note': 'in_refund'}
+        type = ''
         if self.type in dict_invoice_type:
-            type =dict_invoice_type.get(self.type)
+            type = dict_invoice_type.get(self.type)
         if self.sequence_opt == "custom":
             invoice_search = invoice_obj.search([
                 ('name', '=', values.get('invoice')),
                 ('move_type', '=', type),
-                ('custom_seq','=',True)
+                ('custom_seq', '=', True)
             ])
         else:
             invoice_search = invoice_obj.search([
                 ('invoice_name', '=', values.get('invoice')),
                 ('move_type', '=', type),
-                ('system_seq','=',True)
+                ('system_seq', '=', True)
             ])
-                
+
         if invoice_search:
             if invoice_search.partner_id.name != values.get('customer'):
-                raise ValidationError(_('Customer name is different for "%s" .\n Please define same.') % values.get('invoice'))
-            if  invoice_search.currency_id.name != values.get('currency'):
-                raise ValidationError(_('Currency is different for "%s" .\n Please define same.') % values.get('invoice'))
-            if  invoice_search.invoice_user_id.name != values.get('salesperson'):
-                raise ValidationError(_('User(Salesperson) is different for "%s" .\n Please define same.') % values.get('invoice'))
-            if  invoice_search.team_id.name != values.get('sales team'):
-                raise ValidationError(_('User(Salesteam) is different for "%s" .\n Please define same.') % values.get('invoice'))
+                raise ValidationError(
+                    _('Customer name is different for "%s" .\n Please define same.') % values.get('invoice'))
+            if invoice_search.currency_id.name != values.get('currency'):
+                raise ValidationError(
+                    _('Currency is different for "%s" .\n Please define same.') % values.get('invoice'))
+            if invoice_search.invoice_user_id.name != values.get('salesperson'):
+                raise ValidationError(
+                    _('User(Salesperson) is different for "%s" .\n Please define same.') % values.get('invoice'))
+            if invoice_search.team_id.name != values.get('sales team'):
+                raise ValidationError(
+                    _('User(Salesteam) is different for "%s" .\n Please define same.') % values.get('invoice'))
 
             if invoice_search.state == 'draft':
                 self.make_invoice_line(values, invoice_search)
@@ -104,7 +123,7 @@ class gen_inv(models.TransientModel):
             salesperson_id = self.find_sales_person(values.get('salesperson'))
             team_id = self.find_team(values.get('sales team'))
             journal_id = self._find_journal(values.get('journal_id'))
-            payment_term_id =self.find_payment_team(values.get('pay_term_id'))
+            payment_term_id = self.find_payment_team(values.get('pay_term_id'))
             if values.get('date') == '':
                 raise ValidationError(_('Please assign a date'))
             else:
@@ -125,7 +144,7 @@ class gen_inv(models.TransientModel):
                         raise UserError(_('Please define Customer account.'))
                     account_id = account_id.split(",")[1]
                     account_id = self.env['account.account'].browse(account_id)
-                    
+
             elif self.type == "out" or self.type == "ven_credit_note":
                 if self.type == "out":
                     type_inv = "in_invoice"
@@ -141,7 +160,7 @@ class gen_inv(models.TransientModel):
                         raise UserError(_('Please define Vendor account.'))
                     account_id = account_id.split(",")[1]
                     account_id = self.env['account.account'].browse(account_id)
-                
+
             if self._context.get('default_journal_id', False):
                 journal = self.env['account.journal'].browse(self._context.get('default_journal_id'))
             inv_type = journal_type
@@ -152,31 +171,31 @@ class gen_inv(models.TransientModel):
                 ('company_id', '=', company_id),
             ]
             journal = self.env['account.journal'].search(domain, limit=1)
-            
-            name = values.get('invoice') 
 
-            ref = values.get('customer_ref') 
+            name = values.get('invoice')
+
+            ref = values.get('customer_ref')
 
             inv_id = invoice_obj.create({
-                'partner_id' : partner_id.id,
-                'currency_id' : currency_id.id,
-                'invoice_user_id':salesperson_id.id,
-                'name':name,
+                'partner_id': partner_id.id,
+                'currency_id': currency_id.id,
+                'invoice_user_id': salesperson_id.id,
+                'name': name,
                 'custom_seq': True if values.get('seq_opt') == 'custom' else False,
                 'system_seq': True if values.get('seq_opt') == 'system' else False,
-                'move_type' : type_inv,
-                'invoice_date':inv_date,
-                'journal_id' : journal_id,
-                'invoice_name' : values.get('invoice'),
-                'team_id':team_id.id,
+                'move_type': type_inv,
+                'invoice_date': inv_date,
+                'journal_id': journal_id,
+                'invoice_name': values.get('invoice'),
+                'team_id': team_id.id,
                 'ref': ref,
-                'invoice_payment_term_id':payment_term_id
-               
+                'invoice_payment_term_id': payment_term_id
+
             })
 
             self.make_invoice_line(values, inv_id)
             if values.get('seq_opt') == 'system':
-                inv_id.update({'name':'/'})   
+                inv_id.update({'name': '/'})
             return inv_id
 
     def make_invoice_line(self, values, inv_id):
@@ -185,15 +204,15 @@ class gen_inv(models.TransientModel):
         bool = False
         product_obj = self.env['product.product']
         if self.import_prod_option == 'barcode':
-          product_search = product_obj.search([('barcode',  '=',values['product'])])
-          if not product_search:
-              product_obj.create({
-                  'name': values['product'],
-                  'barcode':values['product']
-              })
-              product_search = product_obj.search([('barcode', '=', values['product'])])
+            product_search = product_obj.search([('barcode', '=', values['product'])])
+            if not product_search:
+                product_obj.create({
+                    'name': values['product'],
+                    'barcode': values['product']
+                })
+                product_search = product_obj.search([('barcode', '=', values['product'])])
         elif self.import_prod_option == 'code':
-            product_search = product_obj.search([('default_code', '=',values['product'])])
+            product_search = product_obj.search([('default_code', '=', values['product'])])
             if not product_search:
                 product_obj.create({
                     'name': values['product'],
@@ -201,7 +220,7 @@ class gen_inv(models.TransientModel):
                 })
                 product_search = product_obj.search([('default_code', '=', values['product'])])
         elif self.import_prod_option == 'name':
-            product_search = product_obj.search([('name', '=',values['product'])])
+            product_search = product_obj.search([('name', '=', values['product'])])
             if not product_search:
                 product_obj.create({
                     'name': values['product'],
@@ -222,7 +241,8 @@ class gen_inv(models.TransientModel):
                         account = product_id.categ_id.property_account_income_categ_id
                         bool = True
                     else:
-                        account_search = self.env['ir.property'].sudo().search([('name', '=', 'property_account_income_categ_id')],limit=1)
+                        account_search = self.env['ir.property'].sudo().search(
+                            [('name', '=', 'property_account_income_categ_id')], limit=1)
                         if account_search:
                             account = account_search.value_reference
                             if account:
@@ -243,7 +263,8 @@ class gen_inv(models.TransientModel):
                         account = product_id.categ_id.property_account_expense_categ_id
                         bool = True
                     else:
-                        account_search = self.env['ir.property'].sudo().search([('name', '=', 'property_account_expense_categ_id')],limit=1)
+                        account_search = self.env['ir.property'].sudo().search(
+                            [('name', '=', 'property_account_expense_categ_id')], limit=1)
                         if account_search:
                             account = account_search.value_reference
                             if account:
@@ -259,13 +280,14 @@ class gen_inv(models.TransientModel):
             account_id = self.env['account.account'].search([('name', '=', values.get('account_id'))])
             if product_id != 0 and not account_id:
                 if values.get('account') == '':
-                    raise ValidationError(_(' You can not left blank account field if you select Excel/CSV Account Option'))
+                    raise ValidationError(
+                        _(' You can not left blank account field if you select Excel/CSV Account Option'))
                 else:
                     if self.import_option == 'csv':
-                        account_id = self.env['account.account'].search([('code','=',values.get('account'))])
+                        account_id = self.env['account.account'].search([('code', '=', values.get('account'))])
                     else:
                         acc = values.get('account').split('.')
-                        account_id = self.env['account.account'].search([('code','=',acc[0])])
+                        account_id = self.env['account.account'].search([('code', '=', acc[0])])
                     if account_id:
                         account = account_id
                         bool = True
@@ -280,9 +302,10 @@ class gen_inv(models.TransientModel):
                     bool = True
 
         if values.get('analytic_acc_id'):
-            analytic_acc_id = self.env['account.analytic.account'].search([('name','=',values.get('analytic_acc_id'))])
+            analytic_acc_id = self.env['account.analytic.account'].search(
+                [('name', '=', values.get('analytic_acc_id'))])
             if analytic_acc_id:
-                vals.update({'analytic_account_id':analytic_acc_id})
+                vals.update({'analytic_account_id': analytic_acc_id})
 
         if values.get('price'):
             lst_price = values.get('price')
@@ -291,58 +314,57 @@ class gen_inv(models.TransientModel):
 
         if product_id != 0:
             product_uom = product_id.uom_id.id
-            vals.update({'product_uom_id' : product_uom})
+            vals.update({'product_uom_id': product_uom})
             product_id = product_id.id
 
         vals.update({
-            'product_id' : product_id,
-            'quantity' : values.get('quantity'),
-            'price_unit' :lst_price,
-            'discount':values.get('discount'),
-            'name' : values.get('description'),
+            'product_id': product_id,
+            'quantity': values.get('quantity'),
+            'price_unit': lst_price,
+            'discount': values.get('discount'),
+            'name': values.get('description'),
         })
         if bool == True:
-            vals.update({'account_id' : account.id,})
+            vals.update({'account_id': account.id, })
 
-        inv_id.write({'invoice_line_ids' :([(0,0,vals)]) })       
-        
+        inv_id.write({'invoice_line_ids': ([(0, 0, vals)])})
+
         return inv_id
 
-    def get_tax_value(self, values, inv_id,vals):
+    def get_tax_value(self, values, inv_id, vals):
         tax_ids = []
-        tax_type =''
+        tax_type = ''
         if inv_id.move_type == 'out_invoice' or inv_id.move_type == 'out_refund':
-            tax_type ='sale'
+            tax_type = 'sale'
         else:
-            tax_type ='purchase'
+            tax_type = 'purchase'
 
         if values.get('tax'):
-            if ';' in  values.get('tax'):
+            if ';' in values.get('tax'):
                 tax_names = values.get('tax').split(';')
                 for name in tax_names:
-                    tax= self.env['account.tax'].search([('name', 'in', name),('type_tax_use','=',tax_type)])
+                    tax = self.env['account.tax'].search([('name', 'in', name), ('type_tax_use', '=', tax_type)])
                     if not tax:
                         raise ValidationError(_('"%s" Tax not in your system') % name)
                     tax_ids.append(tax.id)
 
-            elif ',' in  values.get('tax'):
+            elif ',' in values.get('tax'):
                 tax_names = values.get('tax').split(',')
                 for name in tax_names:
-                    tax= self.env['account.tax'].search([('name', 'in', name),('type_tax_use','=',tax_type)])
+                    tax = self.env['account.tax'].search([('name', 'in', name), ('type_tax_use', '=', tax_type)])
                     if not tax:
                         raise ValidationError(_('"%s" Tax not in your system') % name)
                     tax_ids.append(tax.id)
             else:
                 tax_names = values.get('tax').split(',')
-                tax= self.env['account.tax'].search([('name', 'in', tax_names),('type_tax_use','=',tax_type)])
+                tax = self.env['account.tax'].search([('name', 'in', tax_names), ('type_tax_use', '=', tax_type)])
                 if not tax:
                     raise ValidationError(_('"%s" Tax not in your system') % tax_names)
                 tax_ids.append(tax.id)
 
         if tax_ids:
-            vals.update({'tax_ids':([(6,0,tax_ids)])})
+            vals.update({'tax_ids': ([(6, 0, tax_ids)])})
 
-    
     def find_currency(self, name):
         currency_obj = self.env['res.currency']
         currency_search = currency_obj.search([('name', '=', name)])
@@ -351,7 +373,6 @@ class gen_inv(models.TransientModel):
         else:
             raise ValidationError(_(' "%s" Currency are not available.') % name)
 
-    
     def find_sales_person(self, name):
         sals_person_obj = self.env['res.users']
         partner_search = sals_person_obj.search([('name', '=', name)])
@@ -367,34 +388,29 @@ class gen_inv(models.TransientModel):
             return partner_search[0]
         else:
             partner_id = partner_obj.create({
-                'name' : name})
+                'name': name})
             return partner_id
 
     def find_team(self, name):
-        team_obj_search = self.env['crm.team'].search([('name', '=',name)])
+        team_obj_search = self.env['crm.team'].search([('name', '=', name)])
         if team_obj_search:
             return team_obj_search
         else:
             raise ValidationError(_('Sales Team "%s" is Not Available') % name)
 
-    
     def find_payment_team(self, name):
-        payment_obj_search = self.env['account.payment.term'].search([('name', '=',name)])
+        payment_obj_search = self.env['account.payment.term'].search([('name', '=', name)])
         if payment_obj_search:
             return payment_obj_search
         else:
             raise ValidationError(_('Payment Term "%s" is Not Available') % name)
-    
 
-    def _find_journal(self,name):
-        journal_search =self.env['account.journal'].search([('name','=',name)])
+    def _find_journal(self, name):
+        journal_search = self.env['account.journal'].search([('name', '=', name)])
         if not journal_search:
             raise ValidationError(_("%s Journal Not Found") % name)
         return journal_search.id
 
-
-
-    
     def find_partner(self, name):
         partner_obj = self.env['res.partner']
         partner_search = partner_obj.search([('name', '=', name)])
@@ -402,10 +418,9 @@ class gen_inv(models.TransientModel):
             return partner_search[0]
         else:
             partner_id = partner_obj.create({
-                'name' : name})
+                'name': name})
             return partner_id
 
-    
     def find_invoice_date(self, date):
         DATETIME_FORMAT = "%Y-%m-%d"
         try:
@@ -414,15 +429,18 @@ class gen_inv(models.TransientModel):
             raise ValidationError(_('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
         return i_date
 
-    
     def import_csv(self):
         """Load Inventory data from the CSV file."""
         if self.import_option == 'csv':
             if self.account_opt == 'default':
-                keys = ['invoice', 'customer', 'currency', 'product', 'quantity', 'uom', 'description', 'price','discount','salesperson','tax','date','sales team','journal_id','customer_ref','pay_term_id']
+                keys = ['invoice', 'customer', 'currency', 'product', 'quantity', 'uom', 'description', 'price',
+                        'discount', 'salesperson', 'tax', 'date', 'sales team', 'journal_id', 'customer_ref',
+                        'pay_term_id']
             else:
-                keys = ['invoice', 'customer', 'currency', 'product','account', 'quantity', 'uom', 'description', 'price','discount','salesperson','tax','date','sales team','journal_id','customer_ref','pay_term_id']
-            
+                keys = ['invoice', 'customer', 'currency', 'product', 'account', 'quantity', 'uom', 'description',
+                        'price', 'discount', 'salesperson', 'tax', 'date', 'sales team', 'journal_id', 'customer_ref',
+                        'pay_term_id']
+
             try:
                 csv_data = base64.b64decode(self.file)
                 data_file = io.StringIO(csv_data.decode("utf-8"))
@@ -433,7 +451,7 @@ class gen_inv(models.TransientModel):
             except Exception:
                 raise exceptions.ValidationError(_("Please select an CSV/XLS file or You have selected invalid file"))
             values = {}
-            invoice_ids=[]
+            invoice_ids = []
             for i in range(len(file_reader)):
                 field = list(map(str, file_reader[i]))
                 if self.account_opt == 'default':
@@ -452,12 +470,13 @@ class gen_inv(models.TransientModel):
                     if i == 0:
                         continue
                     else:
-                        values.update({'move_type':self.type,'option':self.import_option,'seq_opt':self.sequence_opt})
+                        values.update(
+                            {'move_type': self.type, 'option': self.import_option, 'seq_opt': self.sequence_opt})
                         res = self.make_invoice(values)
                         invoice_ids.append(res)
 
             if self.stage == 'confirm':
-                for res in invoice_ids: 
+                for res in invoice_ids:
                     if res.state in ['draft']:
                         res.action_post()
 
@@ -465,11 +484,11 @@ class gen_inv(models.TransientModel):
 
         else:
             try:
-                fp = tempfile.NamedTemporaryFile(delete= False,suffix=".xlsx")
+                fp = tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx")
                 fp.write(binascii.a2b_base64(self.file))
                 fp.seek(0)
                 values = {}
-                invoice_ids=[]
+                invoice_ids = []
                 workbook = xlrd.open_workbook(fp.name)
                 sheet = workbook.sheet_by_index(0)
             except Exception:
@@ -478,9 +497,11 @@ class gen_inv(models.TransientModel):
             for row_no in range(sheet.nrows):
                 val = {}
                 if row_no <= 0:
-                    fields = map(lambda row:row.value.encode('utf-8'), sheet.row(row_no))
+                    fields = map(lambda row: row.value.encode('utf-8'), sheet.row(row_no))
                 else:
-                    line = list(map(lambda row:isinstance(row.value, bytes) and row.value.encode('utf-8') or str(row.value), sheet.row(row_no)))
+                    line = list(
+                        map(lambda row: isinstance(row.value, bytes) and row.value.encode('utf-8') or str(row.value),
+                            sheet.row(row_no)))
                     if self.account_opt == 'default':
                         if len(line) == 16:
                             if line[11] == '':
@@ -489,30 +510,32 @@ class gen_inv(models.TransientModel):
                                 if line[11]:
                                     if line[11].split('/'):
                                         if len(line[11].split('/')) > 1:
-                                            raise ValidationError(_('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
+                                            raise ValidationError(
+                                                _('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
                                         if len(line[11]) > 8 or len(line[11]) < 5:
-                                            raise ValidationError(_('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
+                                            raise ValidationError(
+                                                _('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
                                 a1 = int(float(line[11]))
                                 a1_as_datetime = datetime(*xlrd.xldate_as_tuple(a1, workbook.datemode))
                                 date_string = a1_as_datetime.date().strftime('%Y-%m-%d')
-                            values.update( {'invoice':line[0],
-                                            'customer': line[1],
-                                            'currency': line[2],
-                                            'product': line[3].split('.')[0],
-                                            'quantity': line[4],
-                                            'uom': line[5],
-                                            'description': line[6],
-                                            'price': line[7],
-                                            'discount':line[8],
-                                            'salesperson': line[9],
-                                            'tax': line[10],
-                                            'date': date_string,
-                                            'seq_opt':self.sequence_opt,
-                                            'sales team': line[13],
-                                            'journal_id':line[14],
-                                            'customer_ref':line[15],
-                                            'pay_term_id': line[16]
-                                            })
+                            values.update({'invoice': line[0],
+                                           'customer': line[1],
+                                           'currency': line[2],
+                                           'product': line[3].split('.')[0],
+                                           'quantity': line[4],
+                                           'uom': line[5],
+                                           'description': line[6],
+                                           'price': line[7],
+                                           'discount': line[8],
+                                           'salesperson': line[9],
+                                           'tax': line[10],
+                                           'date': date_string,
+                                           'seq_opt': self.sequence_opt,
+                                           'sales team': line[13],
+                                           'journal_id': line[14],
+                                           'customer_ref': line[15],
+                                           'pay_term_id': line[16]
+                                           })
                         elif len(line) > 16:
                             raise ValidationError(_('Your File has extra column please refer sample file'))
                         else:
@@ -525,32 +548,34 @@ class gen_inv(models.TransientModel):
                                 if line[12]:
                                     if line[12].split('/'):
                                         if len(line[12].split('/')) > 1:
-                                            raise ValidationError(_('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
+                                            raise ValidationError(
+                                                _('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
                                         if len(line[12]) > 8 or len(line[12]) < 5:
-                                            raise ValidationError(_('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
-                                
+                                            raise ValidationError(
+                                                _('Wrong Date Format. Date Should be in format YYYY-MM-DD.'))
+
                                 a1 = int(float(line[12]))
                                 a1_as_datetime = datetime(*xlrd.xldate_as_tuple(a1, workbook.datemode))
                                 date_string = a1_as_datetime.date().strftime('%Y-%m-%d')
-                            values.update( {'invoice':line[0],
-                                            'customer': line[1],
-                                            'currency': line[2],
-                                            'product': line[3].split('.')[0],
-                                            'account': line[4],
-                                            'quantity': line[5],
-                                            'uom': line[6],
-                                            'description': line[7],
-                                            'price': line[8],
-                                            'discount':line[9],
-                                            'salesperson': line[10],
-                                            'tax': line[11],
-                                            'date': date_string,
-                                            'seq_opt':self.sequence_opt,
-                                            'sales team': line[14],
-                                            'journal_id': line[15],
-                                            'customer_ref':line[16],
-                                            'pay_term_id':line[17]
-                                            })
+                            values.update({'invoice': line[0],
+                                           'customer': line[1],
+                                           'currency': line[2],
+                                           'product': line[3].split('.')[0],
+                                           'account': line[4],
+                                           'quantity': line[5],
+                                           'uom': line[6],
+                                           'description': line[7],
+                                           'price': line[8],
+                                           'discount': line[9],
+                                           'salesperson': line[10],
+                                           'tax': line[11],
+                                           'date': date_string,
+                                           'seq_opt': self.sequence_opt,
+                                           'sales team': line[14],
+                                           'journal_id': line[15],
+                                           'customer_ref': line[16],
+                                           'pay_term_id': line[17]
+                                           })
                         elif len(line) > 17:
                             raise ValidationError(_('Your File has extra column please refer sample file'))
                         else:
@@ -559,18 +584,16 @@ class gen_inv(models.TransientModel):
                     invoice_ids.append(res)
 
             if self.stage == 'confirm':
-                for res in invoice_ids: 
+                for res in invoice_ids:
                     if res.state in ['draft']:
                         res.action_post()
 
             return res
 
-
     def download_auto(self):
-        
-        return {
-             'type' : 'ir.actions.act_url',
-             'url': '/web/binary/download_document?model=gen.invoice&id=%s'%(self.id),
-             'target': 'new',
-             }
 
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/binary/download_document?model=gen.invoice&id=%s' % (self.id),
+            'target': 'new',
+        }

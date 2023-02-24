@@ -18,6 +18,7 @@
         'security/ir.model.access.csv',
         'security/security_group.xml',
         "data/attachment_sample.xml",
+        'views/account_move_views.xml',
         'views/invoice_with_payment.xml',
         'views/customer_payment.xml'
     ],

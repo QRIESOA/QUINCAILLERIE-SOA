@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="s2pc_account_move_tree_view_inherit" model="ir.ui.view">
+            <field name="name">s2pc.account.move.view.tree.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="activity_ids" position="after">
+                    <field name="payment_journal"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
