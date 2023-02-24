@@ -1,0 +1,7 @@
+INVOICE ID,PARTNER,CURRENCY,PRODUCT,ACCOUNT,QUANTITY,UOM,DESCRIPTION ,PRICE,DISCOUNT,SALESPERSON,TAX,DATE,Sales Team,Journal,Cust.Ref,Payment Term
+BI/AMD-A408,Azure Interior,USD,Drawer,200110,10,Units,Box-Shaped Drawer,1850,10,Mitchell Admin,GST 5%,2022-05-03,Sales,Tax Invoices,Test1,Immediate Payment
+BI/AMD-A408,Azure Interior,USD,Four Person Desk,200110,68,Units,Four Person Desk for Office,24058,18,Mitchell Admin,,2022-05-03,Sales,Tax Invoices,test2,End of Following Month
+BI/AMD-A408,Azure Interior,USD,Individual Workplace,200110,52,Units,Individual Workplace,8000,6,Mitchell Admin,GST 5%,2022-05-03,Sales,Tax Invoices,test3,End of Following Month
+INVOICE/R04,Deco Addict,EUR,Large Desk,200110,114,Units,Large Desk,6450,15,Mitchell Admin,GST 5%,2022-05-03,Pre-Sales,Tax Invoices,test4,End of Following Month
+INVOICE/R04,Deco Addict,EUR,Office Chair,200110,235,Units,Office Chair,16000,12,Mitchell Admin,,2022-05-03,Pre-Sales,Tax Invoices,test5,End of Following Month
+PAY/02M236,Lumber Inc,USD,Storage Box,200110,55,Units,Storage Box,3254,16,Marc Demo,GST 5%,2022-05-03,Pre-Sales,Tax Invoices,test6,End of Following Month
