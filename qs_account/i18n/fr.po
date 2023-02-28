@@ -122,9 +122,12 @@ msgid ""
 msgstr ""
 
 #. module: qs_account
-#: model_terms:ir.ui.view,arch_db:qs_account.external_layout_account
-msgid "Date :"
-msgstr ""
+#: model:ir.model.fields,field_description:qs_account.field_account_bank_statement_line__is_charge
+#: model:ir.model.fields,field_description:qs_account.field_account_move__is_charge
+#: model:ir.model.fields,field_description:qs_account.field_account_payment__is_charge
+#: model_terms:ir.ui.view,arch_db:qs_account.view_account_invoice_filter_inherit
+msgid "Is Charge"
+msgstr "Est une charge"
 
 #. module: qs_account
 #: model_terms:ir.ui.view,arch_db:qs_account.invoice_standard_document
