@@ -10,7 +10,7 @@
     "summary": "Track every user operation",
 
     "depends": [
-        'account', "account_followup",
+        'account', "account_followup", "qs_pers_acc",
     ],
     "data": [
         # data
