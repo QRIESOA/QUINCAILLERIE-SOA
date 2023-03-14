@@ -16,7 +16,7 @@
         # data
 
         # security
-
+        'security/account_security.xml',
         # views
 
         'views/account_move_views.xml',
@@ -26,7 +26,14 @@
         # report
         'report/report_invoice.xml'
     ],
+    
     'installable': True,
     'auto_install': False,
     'application': False,
+
+    "assets": {
+        "web.assets_backend": [
+            "qs_account/static/src/js/form_no_edit.js"
+        ]
+    }
 }

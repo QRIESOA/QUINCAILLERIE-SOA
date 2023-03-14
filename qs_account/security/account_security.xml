@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="qs_account.group_account_user_spec" model="res.groups">
+        <field name="name">Accountant SPEC</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+
+</odoo>
