@@ -12,10 +12,10 @@ odoo.define('qs_account.form_no_edit', function (require) {
                     args: [],
                 }).then(result => {
                     if (result == true){
-                        this.$buttons.find('.o_form_button_edit').hide()
+                        this.$buttons.find('.o_form_button_edit').show()
                     }
                     else {
-                        this.$buttons.find('.o_form_button_edit').show()
+                        this.$buttons.find('.o_form_button_edit').hide()
                     }
                 }
                     

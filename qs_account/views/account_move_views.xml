@@ -21,10 +21,10 @@
                 <field name="is_spec" invisible="1"/>
             </xpath>
             <button name="action_reverse" position="attributes">
-                <attribute name="attrs">{'invisible': [('is_spec', '=', True)]}</attribute>
+                <attribute name="attrs">{'invisible': [('is_spec', '=', False)]}</attribute>
             </button>
             <button name="button_draft" position="attributes">
-                <attribute name="attrs">{'invisible': [('is_spec', '=', True)]}</attribute>
+                <attribute name="attrs">{'invisible': [('is_spec', '=', False)]}</attribute>
             </button>
         </field>
     </record>
@@ -52,7 +52,7 @@
                 <field name="is_spec" invisible="1"/>
             </field>
             <button name="action_draft" position="attributes">
-                <attribute name="attrs">{'invisible': [('is_spec', '=', True)]}</attribute>
+                <attribute name="attrs">{'invisible': [('is_spec', '=', False)]}</attribute>
             </button>
         </field>
     </record>

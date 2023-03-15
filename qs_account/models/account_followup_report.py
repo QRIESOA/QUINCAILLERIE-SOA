@@ -13,30 +13,9 @@ class AccountFollowupReport(models.AbstractModel):
     _inherit = "account.followup.report"
 
 
-    # def _get_columns_name(self, options):
-    #     """
-    #     Override
-    #     Return the name of the columns of the follow-ups report
-    #     """
-    #     headers = [{},
-    #                {'name': _('Date'), 'class': 'date', 'style': 'text-align:center; white-space:nowrap;'},
-    #                {'name': _('Due Date'), 'class': 'date', 'style': 'text-align:center; white-space:nowrap;'},
-    #                {'name': _('Source Document'), 'style': 'text-align:center; white-space:nowrap;'},
-    #                {'name': _('Communication'), 'style': 'text-align:right; white-space:nowrap;'},
-    #                {'name': _('Expected Date'), 'class': 'date', 'style': 'white-space:nowrap;'},
-    #                {'name': _('Excluded'), 'class': 'date', 'style': 'white-space:nowrap;'},
-    #                {'name': _('Total Due'), 'class': 'number o_price_total', 'style': 'text-align:right; white-space:nowrap;'}
-    #               ]
-    #     if self.env.context.get('print_mode'):
-    #         headers = headers[:5] + headers[7:]  # Remove the 'Expected Date' and 'Excluded' columns
-    #     else:
-    #         headers = headers[:6] + headers[7:]
-    #     return headers
-
-
     def _get_columns_name(self, options):
         res = super(AccountFollowupReport, self)._get_columns_name(options)
-        if self.env.user.has_group('qs_account.group_account_user_spec'):
+        if not self.env.user.has_group('qs_account.group_account_user_spec'):
             res = res[:6] + res[7:]
         return res
     
@@ -115,7 +94,7 @@ class AccountFollowupReport(models.AbstractModel):
                 'style': 'border-top-style: double',
                 'unfoldable': False,
                 'level': 3,
-                'columns': [{'name': v} for v in [''] * (3 if self.env.context.get('print_mode') else (4 if self.env.user.has_group('qs_account.group_account_user_spec') else 5)) + [total >= 0 and _('Total Due') or '', total_due]],
+                'columns': [{'name': v} for v in [''] * (3 if self.env.context.get('print_mode') else (4 if not elf.env.user.has_group('qs_account.group_account_user_spec') else 5)) + [total >= 0 and _('Total Due') or '', total_due]],
             })
             if total_issued > 0:
                 total_issued = formatLang(self.env, total_issued, currency_obj=currency)
@@ -126,7 +105,7 @@ class AccountFollowupReport(models.AbstractModel):
                     'class': 'total',
                     'unfoldable': False,
                     'level': 3,
-                    'columns': [{'name': v} for v in [''] * (3 if self.env.context.get('print_mode') else (4 if self.env.user.has_group('qs_account.group_account_user_spec') else 5)) + [_('Total Overdue'), total_issued]],
+                    'columns': [{'name': v} for v in [''] * (3 if self.env.context.get('print_mode') else (4 if not self.env.user.has_group('qs_account.group_account_user_spec') else 5)) + [_('Total Overdue'), total_issued]],
                 })
             # Add an empty line after the total to make a space between two currencies
             line_num += 1
