@@ -94,7 +94,7 @@ class AccountFollowupReport(models.AbstractModel):
                 'style': 'border-top-style: double',
                 'unfoldable': False,
                 'level': 3,
-                'columns': [{'name': v} for v in [''] * (3 if self.env.context.get('print_mode') else (4 if not elf.env.user.has_group('qs_account.group_account_user_spec') else 5)) + [total >= 0 and _('Total Due') or '', total_due]],
+                'columns': [{'name': v} for v in [''] * (3 if self.env.context.get('print_mode') else (4 if not self.env.user.has_group('qs_account.group_account_user_spec') else 5)) + [total >= 0 and _('Total Due') or '', total_due]],
             })
             if total_issued > 0:
                 total_issued = formatLang(self.env, total_issued, currency_obj=currency)
