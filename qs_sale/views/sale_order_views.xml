@@ -8,12 +8,12 @@
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
                     <field name="note_client"/>
-                    <field name="can_create" invisible="1"/>
+                    <!-- <field name="can_create" invisible="0"/> -->
                 </field>
-                <field name="partner_id" position="attributes">
-                    <attribute name="options">{'no_create': [('can_create', '!=', True)]}
+                <!-- <field name="partner_id" position="attributes">
+                    <attribute name="options">{'no_create': [('can_create', '=', False)]}
                     </attribute>
-                </field>
+                </field> -->
             </field>
         </record>
     </data>
