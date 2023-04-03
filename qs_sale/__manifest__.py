@@ -10,14 +10,14 @@
     'description': """
 This module contains all the common features of Sales Management and eCommerce.
     """,
-    'depends': ['sale_stock','thermal_invoice'],
+    'depends': ['sale_stock','thermal_invoice', 'qs_pers_acc'],
     'data': [
         # 'report/sale_report_templates.xml'
         'report/sale_report.xml',
         'report/report_stockpicking_operations.xml',
         'report/report_deliveryslip.xml',
         'report/report_invoice.xml',
-        # 'security/base_groups.xml',
+        'security/base_groups.xml',
         'data/partner_data.xml',
         'views/sale_order_views.xml',
         'views/stock_picking_views.xml',

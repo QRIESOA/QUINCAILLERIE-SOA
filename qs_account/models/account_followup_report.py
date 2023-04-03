@@ -74,7 +74,8 @@ class AccountFollowupReport(models.AbstractModel):
                 if self.env.context.get('print_mode'):
                     columns = columns[:4] + columns[6:]
                 else:
-                    columns = columns[:5] + columns[6:]
+                    if not self.env.user.has_group('qs_account.group_account_user_spec'):
+                        columns = columns[:5] + columns[6:]
                 lines.append({
                     'id': aml.id,
                     'account_move': aml.move_id,

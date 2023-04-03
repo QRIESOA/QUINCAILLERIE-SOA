@@ -8,12 +8,14 @@
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
                     <field name="note_client"/>
+                    <field name="can_change_list" invisible="1"/>
                     <!-- <field name="can_create" invisible="0"/> -->
                 </field>
-                <!-- <field name="partner_id" position="attributes">
-                    <attribute name="options">{'no_create': [('can_create', '=', False)]}
+                <field name="pricelist_id" position="attributes">
+                    <attribute name="attrs">
+                        {'readonly': [('can_change_list', '=', True)]}
                     </attribute>
-                </field> -->
+                </field>
             </field>
         </record>
     </data>
