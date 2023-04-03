@@ -13,7 +13,7 @@
                 </field>
                 <field name="pricelist_id" position="attributes">
                     <attribute name="attrs">
-                        {'readonly': [('can_change_list', '=', True)]}
+                        {'readonly': [('can_change_list', '=', False)]}
                     </attribute>
                 </field>
             </field>
