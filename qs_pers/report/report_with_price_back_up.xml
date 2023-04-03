@@ -35,10 +35,10 @@
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
                                 <strong><span t-field="o.partner_id"
                                       t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/></strong>
-
                             </td>
 
                         </tr>
+                        
                         <tr t-if="o.partner_id">
                             <td style="padding-top:3pt;padding-bottom:3pt">Telephone</td>
                             <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>

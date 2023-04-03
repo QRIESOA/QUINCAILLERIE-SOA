@@ -24,6 +24,7 @@
         "thermal_invoice",
         "stock",
         "sale_margin",
+        "qs_sale",
     ],
     # always loaded
     "data": [

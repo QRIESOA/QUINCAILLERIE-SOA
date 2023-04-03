@@ -47,7 +47,7 @@
                             <col width='25%'/>
                         </colgroup>-->
                         <tr t-if="o.partner_id">
-                            <td style="padding-top:3pt;padding-bottom:3pt;">valiosa</td>
+                            <td style="padding-top:3pt;padding-bottom:3pt;">Client</td>
                             <td style="padding-top:3pt;padding-bottom:3pt;padding-left:3pt">:</td>
                             <td style="text-align:left;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt;word-wrap: break-word !important;width:10px !important;">
                                 <span style="text-align:left;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt;word-wrap: break-word !important;width:10px !important;" t-field="o.partner_id"
