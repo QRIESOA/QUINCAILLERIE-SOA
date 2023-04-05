@@ -31,7 +31,7 @@ class AccountFollowupReport(models.AbstractModel):
         partner = partner.with_context(allowed_company_ids=[self.env.company.id], uid=self.env.user.id)
         aml_recs = partner.unreconciled_aml_ids.sorted().filtered(lambda aml: not aml.currency_id.is_zero(aml.amount_residual_currency))
         for aml in aml_recs:
-            if today < aml.date_maturity:
+            if today <= aml.date_maturity:
                 aml.blocked = True
             else:
                 aml.blocked = False
@@ -65,50 +65,51 @@ class AccountFollowupReport(models.AbstractModel):
             total = 0
             total_issued = 0
             for aml in aml_recs:
-                amount = aml.amount_residual_currency if aml.currency_id else aml.amount_residual
-                date_due = format_date(self.env, aml.date_maturity or aml.move_id.invoice_date or aml.date, lang_code=lang_code)
-                total += not aml.blocked and amount or 0
-                is_overdue = today > aml.date_maturity if aml.date_maturity else today > aml.date
-                is_payment = aml.payment_id
-                if is_overdue or is_payment:
-                    total_issued += not aml.blocked and amount or 0
-                if is_overdue:
-                    date_due = {'name': date_due, 'class': 'color-red date', 'style': 'white-space:nowrap;text-align:center;color: red;'}
-                if is_payment:
-                    date_due = ''
-                move_line_name = self._format_aml_name(aml.name, aml.move_id.ref)
-                if self.env.context.get('print_mode'):
-                    move_line_name = {'name': move_line_name, 'style': 'text-align:right; white-space:normal;'}
-                amount = formatLang(self.env, amount, currency_obj=currency)
-                line_num += 1
-                expected_pay_date = format_date(self.env, aml.expected_pay_date, lang_code=lang_code) if aml.expected_pay_date else ''
-                invoice_origin = aml.move_id.invoice_origin or ''
-                if len(invoice_origin) > 43:
-                    invoice_origin = invoice_origin[:40] + '...'
-                columns = [
-                    format_date(self.env, aml.move_id.invoice_date or aml.date, lang_code=lang_code),
-                    date_due,
-                    invoice_origin,
-                    move_line_name,
-                    (expected_pay_date and expected_pay_date + ' ') + (aml.internal_note or ''),
-                    {'name': '', 'blocked': aml.blocked},
-                    amount,
-                ]
-                if self.env.context.get('print_mode'):
-                    columns = columns[:4] + columns[6:]
-                else:
-                    if not self.env.user.has_group('qs_account.group_account_user_spec'):
-                        columns = columns[:5] + columns[6:]
-                lines.append({
-                    'id': aml.id,
-                    'account_move': aml.move_id,
-                    'name': aml.move_id.name,
-                    'caret_options': 'followup',
-                    'move_id': aml.move_id.id,
-                    'type': is_payment and 'payment' or 'unreconciled_aml',
-                    'unfoldable': False,
-                    'columns': [type(v) == dict and v or {'name': v} for v in columns],
-                })
+                if not aml.blocked:
+                    amount = aml.amount_residual_currency if aml.currency_id else aml.amount_residual
+                    date_due = format_date(self.env, aml.date_maturity or aml.move_id.invoice_date or aml.date, lang_code=lang_code)
+                    total += not aml.blocked and amount or 0
+                    is_overdue = today > aml.date_maturity if aml.date_maturity else today > aml.date
+                    is_payment = aml.payment_id
+                    if is_overdue or is_payment:
+                        total_issued += not aml.blocked and amount or 0
+                    if is_overdue:
+                        date_due = {'name': date_due, 'class': 'color-red date', 'style': 'white-space:nowrap;text-align:center;color: red;'}
+                    if is_payment:
+                        date_due = ''
+                    move_line_name = self._format_aml_name(aml.name, aml.move_id.ref)
+                    if self.env.context.get('print_mode'):
+                        move_line_name = {'name': move_line_name, 'style': 'text-align:right; white-space:normal;'}
+                    amount = formatLang(self.env, amount, currency_obj=currency)
+                    line_num += 1
+                    expected_pay_date = format_date(self.env, aml.expected_pay_date, lang_code=lang_code) if aml.expected_pay_date else ''
+                    invoice_origin = aml.move_id.invoice_origin or ''
+                    if len(invoice_origin) > 43:
+                        invoice_origin = invoice_origin[:40] + '...'
+                    columns = [
+                        format_date(self.env, aml.move_id.invoice_date or aml.date, lang_code=lang_code),
+                        date_due,
+                        invoice_origin,
+                        move_line_name,
+                        (expected_pay_date and expected_pay_date + ' ') + (aml.internal_note or ''),
+                        {'name': '', 'blocked': aml.blocked},
+                        amount,
+                    ]
+                    if self.env.context.get('print_mode'):
+                        columns = columns[:4] + columns[6:]
+                    else:
+                        if not self.env.user.has_group('qs_account.group_account_user_spec'):
+                            columns = columns[:5] + columns[6:]
+                    lines.append({
+                        'id': aml.id,
+                        'account_move': aml.move_id,
+                        'name': aml.move_id.name,
+                        'caret_options': 'followup',
+                        'move_id': aml.move_id.id,
+                        'type': is_payment and 'payment' or 'unreconciled_aml',
+                        'unfoldable': False,
+                        'columns': [type(v) == dict and v or {'name': v} for v in columns],
+                    })
             total_due = formatLang(self.env, total, currency_obj=currency)
             line_num += 1
             lines.append({
