@@ -13,6 +13,29 @@ class AccountFollowupReport(models.AbstractModel):
     _inherit = "account.followup.report"
 
 
+    @api.model
+    def get_all(self, records):
+        res_ids = records['ids'] if 'ids' in records else records.ids  # records come from either JS or server.action
+        partner = self.env['res.partner'].browse(res_ids)
+        partner = partner.with_context(allowed_company_ids=[self.env.company.id], uid=self.env.user.id)
+        aml_recs = partner.unreconciled_aml_ids.sorted().filtered(lambda aml: not aml.currency_id.is_zero(aml.amount_residual_currency))
+        for aml in aml_recs:
+            aml.blocked = False
+
+
+    @api.model
+    def get_late(self, records):
+        today = fields.Date.today()
+        res_ids = records['ids'] if 'ids' in records else records.ids  # records come from either JS or server.action
+        partner = self.env['res.partner'].browse(res_ids)
+        partner = partner.with_context(allowed_company_ids=[self.env.company.id], uid=self.env.user.id)
+        aml_recs = partner.unreconciled_aml_ids.sorted().filtered(lambda aml: not aml.currency_id.is_zero(aml.amount_residual_currency))
+        for aml in aml_recs:
+            if today < aml.date_maturity:
+                aml.blocked = True
+            else:
+                aml.blocked = False
+
     def _get_columns_name(self, options):
         res = super(AccountFollowupReport, self)._get_columns_name(options)
         if not self.env.user.has_group('qs_account.group_account_user_spec'):

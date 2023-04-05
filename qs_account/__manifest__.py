@@ -33,7 +33,14 @@
 
     "assets": {
         "web.assets_backend": [
-            "qs_account/static/src/js/form_no_edit.js"
+            "qs_account/static/src/js/form_no_edit.js",
+            "qs_account/static/src/js/followup_form_controller.js",
+            
+        ],
+        "web.assets_qweb": [
+            "qs_account/static/src/xml/**/*",
         ]
     }
+    
+
 }
