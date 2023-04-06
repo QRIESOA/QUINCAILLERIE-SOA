@@ -10,7 +10,7 @@
     'description': """
 This module contains all the common features of Sales Management and eCommerce.
     """,
-    'depends': ['sale_stock','thermal_invoice', 'qs_pers_acc'],
+    'depends': ['sale_stock','thermal_invoice', 'qs_pers_acc', 'custom_pos_receipt', 'pos_sale'],
     'data': [
         # 'report/sale_report_templates.xml'
         'report/sale_report.xml',
@@ -29,6 +29,13 @@ This module contains all the common features of Sales Management and eCommerce.
     'installable': True,
     'auto_install': False,
     'assets': {
+        'point_of_sale.assets': [
+            'qs_sale/static/src/js/SaleOrderFetcher.js',
+            'qs_sale/static/src/js/models.js',
+        ],
+        'web.assets_qweb': [
+            'qs_sale/static/src/xml/pos.xml',
+        ],
     },
     'license': 'LGPL-3',
 }
