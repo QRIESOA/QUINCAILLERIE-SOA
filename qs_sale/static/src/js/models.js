@@ -1,16 +1,11 @@
 odoo.define('qs_sale.models', function (require) {
     "use strict";
 
-var models = require('pos_sale.models');
+var models = require('point_of_sale.models');
 
+    var super_order_line_model = models.Orderline.prototype;
     models.Orderline = models.Orderline.extend({
-        export_as_JSON: function () {
-            const json = super_order_line_model.export_as_JSON.apply(this, arguments);
-            json.sale_order_origin_id = this.sale_order_origin_id;
-            json.sale_order_line_id = this.sale_order_line_id;
-            json.down_payment_details = this.down_payment_details && JSON.stringify(this.down_payment_details);
-            return json;
-        },
+        
         get_sale_order: function(){
             if(this.sale_order_origin_id) {
                 let value = {
@@ -23,6 +18,17 @@ var models = require('pos_sale.models');
             }
             return false;
         },
+
+        export_for_printing: function() {
+            var json = super_order_line_model.export_for_printing.apply(this,arguments);
+            json.down_payment_details =  this.down_payment_details;
+            if (this.sale_order_origin_id) {
+                json.so_reference = this.sale_order_origin_id.name;
+                json.note_client = this.sale_order_origin_id.note_client;
+            }
+            return json;
+          },
+
     });
 
-})
+});
