@@ -24,7 +24,7 @@ var models = require('point_of_sale.models');
             json.down_payment_details =  this.down_payment_details;
             if (this.sale_order_origin_id) {
                 json.so_reference = this.sale_order_origin_id.name;
-                json.note_client = this.sale_order_origin_id.note_client;
+                json.note_client = this.sale_order_origin_id.note_client || this.order.note_client;
             }
             return json;
           },

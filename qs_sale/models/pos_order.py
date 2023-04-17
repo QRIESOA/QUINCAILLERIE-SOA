@@ -22,6 +22,19 @@ _logger = logging.getLogger(__name__)
 class PosOrder(models.Model):
     _inherit = "pos.order"
 
+    note_client = fields.Char(string="Note", compute="_compute_note_client", store=True)
+    
+    
+    @api.depends('lines')
+    def _compute_note_client(self):
+        for rec in self:
+            list_note_client = []
+            if rec.lines and rec.lines.mapped('sale_order_origin_id'):
+                list_note_client = list(set(rec.lines.mapped('sale_order_origin_id').filtered(lambda so: so.note_client != "" and so.note_client != False).mapped('note_client')))
+            if list_note_client:
+                rec.note_client = ', '.join(list_note_client)
+            else:
+                rec.note_client = ''
 
     def _prepare_invoice_vals(self):
         res = super(PosOrder, self)._prepare_invoice_vals()
@@ -30,3 +43,16 @@ class PosOrder(models.Model):
             note_client = ', '.join(list_note_client)
             res['note_client'] = note_client
         return res
+    
+    @api.model
+    def _order_fields(self, ui_order):
+        fields = super(PosOrder, self)._order_fields(ui_order)
+        fields['note_client'] = ui_order.get('note_client', False)
+        return fields
+    
+    def _export_for_ui(self, order):
+        result = super(PosOrder, self)._export_for_ui(order)
+        result.update({
+            'note_client': order.note_client,
+        })
+        return result

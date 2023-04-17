@@ -32,6 +32,7 @@ This module contains all the common features of Sales Management and eCommerce.
         'point_of_sale.assets': [
             'qs_sale/static/src/js/SaleOrderFetcher.js',
             'qs_sale/static/src/js/models.js',
+            'qs_sale/static/src/js/TicketScreen.js',
         ],
         'web.assets_qweb': [
             'qs_sale/static/src/xml/pos.xml',
