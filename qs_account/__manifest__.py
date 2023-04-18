@@ -10,13 +10,13 @@
     "summary": "Track every user operation",
 
     "depends": [
-        'account',
+        'account', "account_followup", "qs_pers_acc",
     ],
     "data": [
         # data
 
         # security
-
+        'security/account_security.xml',
         # views
 
         'views/account_move_views.xml',
@@ -26,7 +26,21 @@
         # report
         'report/report_invoice.xml'
     ],
+    
     'installable': True,
     'auto_install': False,
     'application': False,
+
+    "assets": {
+        "web.assets_backend": [
+            "qs_account/static/src/js/form_no_edit.js",
+            "qs_account/static/src/js/followup_form_controller.js",
+            
+        ],
+        "web.assets_qweb": [
+            "qs_account/static/src/xml/**/*",
+        ]
+    }
+    
+
 }

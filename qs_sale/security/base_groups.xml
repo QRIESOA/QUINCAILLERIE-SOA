@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="res.groups" id="group_partner_change_list_so">
+        <field name="name">Note Achat: Liste de prix</field>
+        <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+
+    <!-- <record id="account_move_rule_group_readonly" model="ir.rule">
+        <field name="name">Create and remove rule</field>
+        <field name="model_id" ref="model_res_partner"/> -->
+        <!-- <field name="domain_force">[(ref('base.group_partner_manager'), 'in', user.groups_id.ids)]</field> -->
+        <!-- <field name="domain_force">[('user.has_group('base.group_partner_manager')', '=', True)]</field> -->
+        <!-- <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record> -->
+    
+</odoo>

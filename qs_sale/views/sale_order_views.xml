@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_view_form_inherited" model="ir.ui.view">
+            <field name="name">sale.view_order_form.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="note_client"/>
+                    <field name="can_change_list" invisible="1"/>
+                    <!-- <field name="can_create" invisible="0"/> -->
+                </field>
+                <field name="pricelist_id" position="attributes">
+                    <attribute name="attrs">
+                        {'readonly': [('can_change_list', '=', False)]}
+                    </attribute>
+                </field>
+                <button name="update_prices" position="attributes">
+                    <attribute name="groups">
+                        qs_sale.group_partner_change_list_so
+                    </attribute>
+                </button>
+            </field>
+        </record>
+
+        <record id="view_quotation_tree_qs_inherit" model="ir.ui.view">
+            <field name="name">sale.order.tree.qs</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="note_client" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pos_view_form_inherited" model="ir.ui.view">
+            <field name="name">pos.view_order_form.inherited</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="note_client" readonly="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

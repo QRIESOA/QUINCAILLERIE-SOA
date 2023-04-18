@@ -35,9 +35,19 @@
                             <td style="text-align:right;vertical-align:bottom;padding-right:5pt;padding-top:3pt;padding-bottom:3pt">
                                 <strong><span t-field="o.partner_id"
                                       t-options='{"text": "contact", "fields": ["address", "name"], "no_marker": True}'/></strong>
-
+                                <!-- <div t-if="o.note_client">
+                                    <br/>
+                                    <strong><span t-field="o.note_client"/></strong>
+                                </div> -->
                             </td>
 
+                        </tr>
+                        <tr t-if="o.note_client">
+                            <td style="padding-top:3pt;padding-bottom:3pt">Note</td>
+                            <td style="vertical-align:bottom;padding-left:3pt">:</td>
+                            <td style="text-align:right;vertical-align:bottom;padding-right:5pt">
+                                <t t-esc="o.note_client"/>
+                            </td>
                         </tr>
                         <tr t-if="o.partner_id">
                             <td style="padding-top:3pt;padding-bottom:3pt">Telephone</td>

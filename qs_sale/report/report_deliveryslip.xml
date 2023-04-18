@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_delivery_document_qs_inherit" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@t-field='partner.commercial_partner_id']" position="after">
+            <t t-if="o.note_client">
+                <strong><span t-esc="o.note_client"/></strong>
+            </t>
+        </xpath>
+    </template>
+</odoo>

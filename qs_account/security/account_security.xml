@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="qs_account.group_account_user_spec" model="res.groups">
+        <field name="name">Modification facturation</field>
+        <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="CustomerStatements.buttons">
+        <t t-jquery=".o_account_followup_reconcile" t-operation="after">
+            <button type="button" class="btn btn-secondary o_account_followup_get_all">
+                ALL
+            </button>
+            <button type="button" class="btn btn-secondary o_account_followup_get_late">
+                Late payment
+            </button>
+        </t>
+    </t>
+
+</templates>

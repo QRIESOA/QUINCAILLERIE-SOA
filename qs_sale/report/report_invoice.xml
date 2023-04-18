@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document_qs_inherit_thermal" inherit_id="thermal_invoice.report_invoice_document">
+            <xpath expr="//span[@t-field='o.partner_id']" position="after">
+                <t t-if="o.note_client"><span t-esc="o.note_client"/>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="report_invoice_document_qs" inherit_id="account.report_invoice_document">
+            <!-- <xpath expr="//address[@t-field='o.partner_id']" position="after"> -->
+            <xpath expr="//div[@t-if='o.partner_id.vat']" position="before">
+            <!-- <xpath expr="//t[@t-set='address']//address[@t-field='o.partner_id']" position="after"> -->
+                <t t-if="o.note_client"><span t-esc="o.note_client"/>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>
