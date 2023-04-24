@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <record model="res.groups" id="group_partner_fusion">
+        <field name="name">Fusion contacts</field>
+        <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="base.action_partner_merge" model="ir.actions.act_window">
+        <field name="groups_id" eval="[(4, ref('qs_pers_contact.group_partner_fusion'))]"/>
+    </record>
+
+</odoo>
