@@ -22,7 +22,10 @@ odoo.define('qs_account.form_no_edit', function (require) {
                 )
                 
             } else {
-                this.$buttons.find('.o_form_button_edit').show()
+                if (this.$buttons) {
+                    this.$buttons.find('.o_form_button_edit').show()
+                }
+                
             }
         }
     })
