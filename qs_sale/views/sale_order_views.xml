@@ -15,6 +15,9 @@
                     <attribute name="attrs">
                         {'readonly': [('can_change_list', '=', False)]}
                     </attribute>
+                    <attribute name="force_save">
+                        1
+                    </attribute>
                 </field>
                 <button name="update_prices" position="attributes">
                     <attribute name="groups">
