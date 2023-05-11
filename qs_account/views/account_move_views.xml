@@ -56,4 +56,22 @@
             </button>
         </field>
     </record>
+
+    <record id="view_order_form_inherited" model="ir.ui.view">
+        <field name="name">account.move.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+        <field name="arch" type="xml">
+
+            <field name="state" position="before">
+                <!--<field name="journal_paie_name" />
+                <field name="payment_paie_date" />
+                <field name="communication" />-->
+                <field name="about_payment" string="À propos du paiement"/>
+                <field name="payment_paie_date" string="Date du paiement" widget="date"/>
+            </field>
+
+        </field>
+    </record>
+
 </odoo>

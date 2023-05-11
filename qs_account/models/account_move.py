@@ -8,6 +8,23 @@ class AccountMove(models.Model):
     # delivery_time = fields.Float(string='Delivery Time')
     is_charge = fields.Boolean()
     is_spec = fields.Boolean(string="is_spec", compute="_compute_is_spec")
+    # journal_paie_name = fields.Char(string="payment journal", compute='journal_name_compute', store=True)
+    payment_paie_date = fields.Date(compute='journal_name_compute', store=True, string="payment date")
+    # communication = fields.Char(compute='journal_name_compute', store=True)
+    about_payment = fields.Char(compute='_compute_about_payment')
+
+    @api.depends('payment_id')
+    def journal_name_compute(self):
+        this_self_date = self.payment_id.date
+        return self.env["account.move"].search([('name', '=', self.ref)]).write({"payment_paie_date": this_self_date})
+
+
+    def _compute_about_payment(self):
+        for rec in self:
+            rec.about_payment = False
+            json_values = rec._get_reconciled_info_JSON_values()
+            if json_values:
+                rec.about_payment = ', '.join(val.get('ref', '') for val in json_values)
 
     @api.depends()
     def _compute_is_spec(self):
