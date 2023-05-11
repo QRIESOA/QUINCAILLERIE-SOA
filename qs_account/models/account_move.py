@@ -15,8 +15,9 @@ class AccountMove(models.Model):
 
     @api.depends('payment_id')
     def journal_name_compute(self):
-        this_self_date = self.payment_id.date
-        return self.env["account.move"].search([('name', '=', self.ref)]).write({"payment_paie_date": this_self_date})
+        for rec in self:
+            invoice_to_w = self.env["account.move"].search([('name', '=', rec.ref)])
+            invoice_to_w.write({"payment_paie_date": rec.payment_id.date})
 
 
     def _compute_about_payment(self):
