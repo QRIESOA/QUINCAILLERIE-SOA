@@ -184,6 +184,7 @@ class ResPartner(models.Model):
     credit_limit = fields.Monetary("Limite de credit", index=True, tracking=True)
     compute_field = fields.Boolean(string="check field", compute='get_user')
     compute_field_credit_l = fields.Boolean(string="check field 1", compute='get_user_connect')
+    compute_field_lst_price = fields.Boolean(string="check field 1", compute='get_user_connect_grc_lst')
 
     @api.depends("compute_field_credit_l","user_id")
     def get_user_connect(self):
@@ -192,6 +193,14 @@ class ResPartner(models.Model):
             self.compute_field_credit_l = True
         else:
             self.compute_field_credit_l = False
+
+    @api.depends("compute_field_lst_price","user_id")
+    def get_user_connect_grc_lst(self):
+        # res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if self.env.user.has_group('qs_pers.group_partner_lst_price'):
+            self.compute_field_lst_price = True
+        else:
+            self.compute_field_lst_price = False
 
     @api.onchange("credit_limit")
     def check_total_due_value(self):

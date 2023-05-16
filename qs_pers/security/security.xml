@@ -18,6 +18,12 @@
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
+        <record model="res.groups" id="group_partner_lst_price">
+            <field name="name">Liste de prix contact</field>
+            <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
         <record id="access_limit_credit_readonly_users" model="ir.model.access">
             <field name="name">Accee Limite de crédit</field>
             <field name="model_id" ref="qs_pers.model_res_partner"/>
