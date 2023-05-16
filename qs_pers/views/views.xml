@@ -32,14 +32,14 @@
                     <field name="compute_field" invisible="1"/>
                     <field name="compute_field_credit_l" invisible="1"/>
                     <field name="compute_field_lst_price" invisible="1"/>
-                    <field name="credit_limit" attrs="{'invisible':[('compute_field_credit_l', '=', True)], 'readonly': [('compute_field', '=', True)]}"
+                    <field name="credit_limit" attrs="{'invisible':[('compute_field_credit_l', '=', False)], 'readonly': [('compute_field', '=', True)]}"
                            groups="sales_team.group_sale_manager"/>
                 </field>
                 <field name="property_payment_term_id" position="attributes">
                     <attribute name="attrs">{'readonly': [('compute_field', '=', True)]}</attribute>
                 </field>
                 <field name="property_product_pricelist" position="attributes">
-                    <attribute name="attrs">{'readonly': [('compute_field_lst_price', '=', True)]}</attribute>
+                    <attribute name="attrs">{'readonly': [('compute_field_lst_price', '=', False)]}</attribute>
                 </field>
                 <field name="property_product_pricelist" position="attributes">
                     <attribute name="groups">sales_team.group_sale_manager</attribute>
