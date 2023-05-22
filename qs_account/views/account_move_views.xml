@@ -67,8 +67,10 @@
                 <!--<field name="journal_paie_name" />
                 <field name="payment_paie_date" />
                 <field name="communication" />-->
-                <field name="about_payment" string="À propos du paiement"/>
-                <field name="payment_paie_date" string="Date du paiement" widget="date"/>
+                <field name="journal_id" />
+                <field name="payment_paie_date" string="Date de paiement" widget="date"/>
+                <field name="about_payment" string="Mémo"/>
+
             </field>
 
         </field>
