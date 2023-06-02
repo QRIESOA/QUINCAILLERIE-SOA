@@ -11,5 +11,29 @@
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="category_id" ref="base.module_category_sales"/>
         </record>
+
+        <record model="res.groups" id="group_partner_credit_limit">
+            <field name="name">Limite de crédit</field>
+            <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_partner_lst_price">
+            <field name="name">Liste de prix contact</field>
+            <field name="category_id" ref="qs_pers_acc.module_category_qs"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="access_limit_credit_readonly_users" model="ir.model.access">
+            <field name="name">Accee Limite de crédit</field>
+            <field name="model_id" ref="qs_pers.model_res_partner"/>
+            <field name="group_id" ref="qs_pers.group_partner_credit_limit"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+
     </data>
 </odoo>
