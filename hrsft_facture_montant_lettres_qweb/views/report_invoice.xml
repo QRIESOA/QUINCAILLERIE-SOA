@@ -79,14 +79,14 @@
             </field>-->
             <xpath expr="//div[@class='page']/h2" position="replace">
                 <h6>
-                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">BON DE LIVRAISON/FACTURE </span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">BON DE LIVRAISON/FACTURE </span><br></br>
                     <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Facture brouillon</span>
                     <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Facture annulée</span>
                     <span t-if="o.move_type == 'out_refund'">Credit Note</span>
                     <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
                     <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
                     <!--<span t-if="o.name != '/'" t-field="o.name"/>-->
-                    <p t-if="o.name != '/'" style="margin-bottom: -20px;"><span>N° <t t-esc="o.name"></t></span></p><!--<t t-esc="o.secure_sequence_number"></t><t t-esc="o.sequence_number"></t>-->
+                    <span t-if="o.name != '/'" style="margin-bottom: -20px;">N° <t t-esc="o.name"></t></span><!--<t t-esc="o.secure_sequence_number"></t><t t-esc="o.sequence_number"></t>-->
                 </h6>
             </xpath>
 
