@@ -131,9 +131,7 @@ class ProductProductInherit(models.Model):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_det_marge = (
-                        record.pc_det - (record.tmpl_price - record.transport)
-                    ) / (record.tmpl_price - record.transport)
+                    record.pc_det_marge = ((record.pc_det - record.transport) / record.tmpl_price) - 1
 
     @api.depends("tmpl_price", "pc_gros")
     def _compute_pc_gros_marge(self):
