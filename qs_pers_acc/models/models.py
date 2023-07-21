@@ -131,55 +131,38 @@ class ProductProductInherit(models.Model):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_det_marge = (
-                        record.pc_det - record.tmpl_price
-                    ) / record.tmpl_price
+                    record.pc_det_marge = ((record.pc_det - record.transport) / record.tmpl_price) - 1
 
     @api.depends("tmpl_price", "pc_gros")
     def _compute_pc_gros_marge(self):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_gros_marge = (
-                        record.pc_gros - record.tmpl_price
-                    ) / record.tmpl_price
-
+                    record.pc_gros_marge = ((record.pc_gros - record.transport) / record.tmpl_price) - 1
     @api.depends("tmpl_price", "pc_cr1")
     def _compute_pc_cr1_marge(self):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_cr1_marge = (
-                        record.pc_cr1 - record.tmpl_price
-                    ) / record.tmpl_price
-
+                    record.pc_cr1_marge = ((record.pc_cr1 - record.transport) / record.tmpl_price) - 1
     @api.depends("tmpl_price", "pc_cr2")
     def _compute_pc_cr2_marge(self):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_cr2_marge = (
-                        record.pc_cr2 - record.tmpl_price
-                    ) / record.tmpl_price
-
+                    record.pc_cr2_marge = ((record.pc_cr2 - record.transport) / record.tmpl_price) - 1
     @api.depends("tmpl_price", "pc_cr3")
     def _compute_pc_cr3_marge(self):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_cr3_marge = (
-                        record.pc_cr3 - record.tmpl_price
-                    ) / record.tmpl_price
-
+                    record.pc_cr3_marge = ((record.pc_cr3 - record.transport) / record.tmpl_price) - 1
     @api.depends("tmpl_price", "pc_cr4")
     def _compute_pc_cr4_marge(self):
         for record in self:
             if record.tmpl_price:
                 if record.tmpl_price > 0:
-                    record.pc_cr4_marge = (
-                        record.pc_cr4 - record.tmpl_price
-                    ) / record.tmpl_price
-
+                    record.pc_cr4_marge = ((record.pc_cr4 - record.transport) / record.tmpl_price) - 1
 
 class ItemMarge(models.Model):
     _name = "product.item.marge"
