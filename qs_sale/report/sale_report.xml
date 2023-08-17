@@ -7,6 +7,36 @@
                 <strong><span t-esc="doc.note_client"/></strong>
             </t>
         </xpath>
+        <xpath expr="//th[@name='th_priceunit']" position="replace">
+            <th name="th_priceunit" class="text-right">PU TTC</th>
+        </xpath>
+        <xpath expr="//th[@name='th_subtotal']" position="replace">
+            <th name="th_subtotal" class="text-right">
+                <span >Total TTC</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+
+        </xpath>
+        <xpath expr="//td[@name='td_taxes']" position="replace">
+
+        </xpath>
+        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
+            <t t-set="o" t-value="doc.with_context(lang=lang)" />
+            <tr>
+                <th style="border: 1px solid black;"><b>MONTANT HT</b></th>
+                <th style="border: 1px solid black;"><b>TVA 20%</b></th>
+                <th style="border: 1px solid black;" class="text-right"><b>MONTANT TTC</b></th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;" t-esc="o.amount_untaxed"
+                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
+                <td style="border: 1px solid black;" t-esc="o.amount_tax"
+                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
+                <td style="border: 1px solid black;" t-esc="o.amount_total" class="text-right"
+                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
+            </tr>
+        </xpath>
     </template>
 
 </odoo>
