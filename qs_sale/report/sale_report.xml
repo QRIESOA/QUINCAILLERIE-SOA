@@ -15,6 +15,12 @@
                 <span >Total TTC</span>
             </th>
         </xpath>
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+
+        </xpath>
+        <xpath expr="//td[@name='td_taxes']" position="replace">
+
+        </xpath>
         <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
             <t t-set="o" t-value="doc.with_context(lang=lang)" />
             <tr>
