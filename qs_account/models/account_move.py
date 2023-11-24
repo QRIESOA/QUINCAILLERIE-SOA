@@ -42,7 +42,11 @@ class AccountMove(models.Model):
             rec.about_payment = False
             json_values = rec._get_reconciled_info_JSON_values()
             if json_values:
-                rec.about_payment = ', '.join(val.get('ref', '') for val in json_values)
+                # rec.about_payment = ', '.join(val.get('ref', '') for val in json_values)
+                if rec._get_reconciled_info_JSON_values()[0]['payment_id']:
+                    rec.about_payment = self.env['account.payment'].search([('id', '=', rec._get_reconciled_info_JSON_values()[0]['account_payment_id'])]).ref
+
+
 
 
     @api.depends()
