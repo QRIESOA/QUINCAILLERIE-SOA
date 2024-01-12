@@ -12,7 +12,7 @@
             </xpath>
             <xpath expr="//t[@t-set='address']" position="replace">
                 <t t-set="address">
-                    <div t-if="o.partner_id.name" class="mt16" style="font-size:9pt;">
+                    <!-- <div t-if="o.partner_id.name" class="mt16" style="font-size:9pt;">
                         <span t-field="o.partner_id.name"/>
                     </div>
                     <div t-if="o.partner_id.street" class="mt16" style="font-size:9pt;">
@@ -35,8 +35,32 @@
                     </div>
                     <div t-if="o.partner_id.RCS" class="mt16" style="font-size:9pt;">
                         RCS : <span t-field="o.partner_id.RCS"/>
-                    </div>
+                    </div> -->
 
+                    <div t-if="o.partner_id.name" style="font-size:9pt;">
+                        <span t-field="o.partner_id.name"/>
+                    </div>
+                    <div t-if="o.partner_id.street" style="font-size:9pt;">
+                        <span t-field="o.partner_id.street"/>
+                    </div>
+                    <div t-if="o.partner_id.city" style="font-size:9pt;">
+                        <span t-field="o.partner_id.city"/>
+                    </div>
+                    <div t-if="o.partner_id.phone" style="font-size:9pt;">
+                        <span t-field="o.partner_id.phone"/>
+                    </div>
+                    <div t-if="o.partner_id.mobile" style="font-size:9pt;">
+                        <span t-field="o.partner_id.mobile"/>
+                    </div>
+                    <div t-if="o.partner_id.vat" style="font-size:9pt;">
+                        NIF: <span t-field="o.partner_id.vat"/>
+                    </div>
+                    <div t-if="o.partner_id.STAT" style="font-size:9pt;">
+                        STAT : <span t-field="o.partner_id.STAT"/>
+                    </div>
+                    <div t-if="o.partner_id.RCS" style="font-size:9pt;">
+                        RCS : <span t-field="o.partner_id.RCS"/>
+                    </div>
                 </t>
 
             </xpath>
