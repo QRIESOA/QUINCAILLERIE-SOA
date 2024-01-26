@@ -13,9 +13,9 @@
     'depends': ['base','product'],
     'data': [
         'report/product_template.xml',
-        'report/product_list_price.xml',
-        'reports/book_rent_report.xml',
-        'reports/book_rent_templates.xml',
+        'report/book_rent_report.xml',
+        'report/book_rent_templates.xml',
+        'views/product_template.xml'
     ],
     'installable': True,
     'auto_install': False,
