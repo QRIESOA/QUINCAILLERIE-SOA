@@ -40,9 +40,6 @@
         <xpath expr="//h2" position="after">
             <strong><span style="color:red;">NB : </span></strong><strong>Proforma valable pour </strong><strong t-field="doc.price_validity_hours"/>
         </xpath>
-        <xpath expr="//p[@t-if='not is_html_empty(doc.payment_term_id.note)']" position="before">
-            <strong>Nos prix sont susceptibles de modification après 3 jours.</strong>
-        </xpath>
     </template>
 
 </odoo>
