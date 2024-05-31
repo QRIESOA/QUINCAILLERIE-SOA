@@ -19,6 +19,9 @@
                         1
                     </attribute>
                 </field>
+                <field name="payment_term_id" position="after">
+                    <field name="price_validity_hours" string="Validité des prix" />
+                </field>
                 <button name="update_prices" position="attributes">
                     <attribute name="groups">
                         qs_sale.group_partner_change_list_so

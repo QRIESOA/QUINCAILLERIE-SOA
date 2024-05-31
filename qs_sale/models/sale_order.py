@@ -12,6 +12,8 @@ class SaleOrder(models.Model):
     partner_id = fields.Many2one("res.partner", default=lambda self: self.env.ref("qs_sale.client_comptant").id)
     note_client = fields.Char(string="Note")
     can_change_list = fields.Boolean(string='Can create partner', default=lambda self: self.env.user.has_group("qs_sale.group_partner_change_list_so"), compute="_compute_can_create")
+    price_validity_hours = fields.Char(default="24h")
+
 
     # @api.depends()
     def _compute_can_create(self):
