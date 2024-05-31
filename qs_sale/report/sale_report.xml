@@ -37,6 +37,9 @@
                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'></td>
             </tr>
         </xpath>
+        <xpath expr="//h2" position="after">
+            <strong><span style="color:red;">NB : </span></strong><strong>Proforma valable pour </strong><strong t-field="doc.price_validity_hours"/>
+        </xpath>
     </template>
 
 </odoo>
