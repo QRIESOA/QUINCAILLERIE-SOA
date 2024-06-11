@@ -35,6 +35,7 @@ This module contains all the common features of Sales Management and eCommerce.
         "views/sale_order_views.xml",
         "views/stock_picking_views.xml",
         "views/account_move_views.xml",
+        "views/res_config_views.xml",
     ],
     "demo": [],
     "installable": True,

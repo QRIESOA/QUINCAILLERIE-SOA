@@ -39,7 +39,7 @@ class SaleReport(models.AbstractModel):
         mail_values = {
             "subject": _("Sales Daily Report"),
             "body_html": _("Please find attached the daily sales report."),
-            "email_to": "test@yopmail.com",
+            "email_to": self.env["ir.config_parameter"].sudo().get_param('qs_sale.email_daily_report'),
             "attachment_ids": [
                 (
                     0,
