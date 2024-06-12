@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0+e-20221103\n"
+"Project-Id-Version: Odoo Server 15.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-31 10:58+0000\n"
-"PO-Revision-Date: 2023-01-31 10:58+0000\n"
+"POT-Creation-Date: 2024-06-12 08:51+0000\n"
+"PO-Revision-Date: 2024-06-12 08:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,119 +16,217 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+#: model:ir.actions.report,print_report_name:qs_sale.report_sale_scheduler
+msgid "'Sale report'"
+msgstr "'Rapport journalier'"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_saleorder_qs_inherit
 msgid "<b>MONTANT HT</b>"
 msgstr ""
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_saleorder_qs_inherit
 msgid "<b>MONTANT TTC</b>"
 msgstr ""
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_saleorder_qs_inherit
 msgid "<b>TVA 20%</b>"
 msgstr ""
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<span>Pro-Forma Invoice # </span>"
-msgstr "<span>Facture Pro-Forma # </span>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<span>TOTAL TTC</span>"
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_saleorder_qs_inherit
+msgid "<span>Total TTC</span>"
 msgstr ""
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong class=\"font-size-3\">Your Reference:</strong>"
-msgstr "<strong class=\"font-size-3\">Votre référence:</strong>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong class=\"mr16\">Subtotal</strong>"
-msgstr "<strong class=\"mr16\">Total HT</strong>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Arrêté à la somme de : </strong>"
-msgstr ""
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Expiration:</strong>"
-msgstr ""
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Fiscal Position Remark:</strong>"
-msgstr ""
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Order Date:</strong>"
-msgstr "<strong>Date de commande:</strong>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Quotation Date:</strong>"
-msgstr "<strong>Date du devis :</strong>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Salesperson:</strong>"
-msgstr "<strong>Vendeur :</strong>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Shipping Address:</strong>"
-msgstr "<strong>Adresse de livraison:</strong>"
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "<strong>Signature</strong>"
-msgstr ""
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "Description"
-msgstr ""
-
-#. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_saleorder_qs_inherit
 msgid ""
-"Invoicing\n"
-"                            Address:"
+"<strong><span style=\"color:red;\">NB : </span></strong><strong>Proforma "
+"valable pour </strong>"
 msgstr ""
-"Adresse de\n"
-"                            facturation:"
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid ""
-"Invoicing\n"
-"                            and Shipping Address:"
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
+msgid "<strong>Total</strong>"
 msgstr ""
-"Adresse\n"
-"                            de facturation et d'expédition:"
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "Order #"
-msgstr "Commande n°"
+#: model:ir.model.fields,field_description:qs_sale.field_sale_order__can_change_list
+msgid "Can create partner"
+msgstr "Peut créer un partenaire"
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
+#. openerp-web
+#: code:addons/qs_sale/static/src/js/TicketScreen.js:0
+#, python-format
+msgid "Cardholder Name"
+msgstr "Nom du titulaire"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de config"
+
+#. module: qs_sale
+#: model:ir.model.fields,field_description:qs_sale.field_sale_report__purchase_price
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
+msgid "Cost"
+msgstr "Coût"
+
+#. module: qs_sale
+#. openerp-web
+#: code:addons/qs_sale/static/src/js/TicketScreen.js:0
+#: model:ir.model.fields,field_description:qs_sale.field_sale_order__partner_id
+#, python-format
+msgid "Customer"
+msgstr "Client"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
+msgid "Daily report"
+msgstr "Rapport journalier"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.inherit_res_config_settings_view_form
+msgid "Daily sale report"
+msgstr "Rapport journalier"
+
+#. module: qs_sale
+#. openerp-web
+#: code:addons/qs_sale/static/src/js/TicketScreen.js:0
+#, python-format
+msgid "Date"
+msgstr ""
+
+#. module: qs_sale
+#: model:ir.model.fields,field_description:qs_sale.field_res_config_settings__email_daily_report
+msgid "Email to daily report"
+msgstr "Email pour rapport quotidien"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.inherit_res_config_settings_view_form
+msgid "Email to send the daily report"
+msgstr ""
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
+msgid "Margin"
+msgstr "Marge"
+
+#. module: qs_sale
+#. openerp-web
+#: code:addons/qs_sale/static/src/js/TicketScreen.js:0
+#: model:ir.model.fields,field_description:qs_sale.field_account_bank_statement_line__note_client
+#: model:ir.model.fields,field_description:qs_sale.field_account_move__note_client
+#: model:ir.model.fields,field_description:qs_sale.field_account_payment__note_client
+#: model:ir.model.fields,field_description:qs_sale.field_pos_order__note_client
+#: model:ir.model.fields,field_description:qs_sale.field_sale_order__note_client
+#: model:ir.model.fields,field_description:qs_sale.field_stock_picking__note_client
+#, python-format
+msgid "Note"
+msgstr ""
+
+#. module: qs_sale
+#: model:res.groups,name:qs_sale.group_partner_change_list_so
+msgid "Note Achat: Liste de prix"
+msgstr ""
+
+#. module: qs_sale
+#. openerp-web
+#: code:addons/qs_sale/static/src/xml/pos.xml:0
+#, python-format
+msgid "Note:"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_saleorder_qs_inherit
 msgid "PU TTC"
 msgstr ""
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "Quantity"
-msgstr "Qté"
+#: code:addons/qs_sale/report/sale_report_scheduler.py:0
+#, python-format
+msgid "Please find attached the daily sales report."
+msgstr "Veuillez trouver ci-joint le rapport quotidien des ventes."
 
 #. module: qs_sale
-#: model_terms:ir.ui.view,arch_db:qs_sale.qs_report_saleorder_document
-msgid "Quotation #"
-msgstr "Devis n°"
+#: model:ir.model,name:qs_sale.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Commandes du point de vente"
+
+#. module: qs_sale
+#: model:ir.model.fields,field_description:qs_sale.field_sale_order__price_validity_hours
+msgid "Price Validity Hours"
+msgstr "Heures de validité du prix"
+
+#. module: qs_sale
+#. openerp-web
+#: code:addons/qs_sale/static/src/js/TicketScreen.js:0
+#, python-format
+msgid "Receipt Number"
+msgstr "Numéro de reçu"
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_sale_report_scheduler
+msgid "Sale Report Scheduler"
+msgstr "Planificateur de rapports de vente"
+
+#. module: qs_sale
+#: model:ir.actions.report,name:qs_sale.report_sale_scheduler
+msgid "Sale report scheduler"
+msgstr "Planificateur de rapports de vente"
+
+#. module: qs_sale
+#: model:ir.actions.server,name:qs_sale.ir_cron_sale_report_scheduler_ir_actions_server
+#: model:ir.cron,cron_name:qs_sale.ir_cron_sale_report_scheduler
+#: model:ir.cron,name:qs_sale.ir_cron_sale_report_scheduler
+msgid "Sale; Sending daily sale report"
+msgstr "Vente; Envoi du rapport de vente quotidien"
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_sale_advance_payment_inv
+msgid "Sales Advance Payment Invoice"
+msgstr "Facture de paiement d'avance"
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: qs_sale
+#: code:addons/qs_sale/report/sale_report_scheduler.py:0
+#, python-format
+msgid "Sales Daily Report"
+msgstr "Rapport quotidien des ventes"
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: qs_sale
+#: model:ir.model,name:qs_sale.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
+msgid "Turnover"
+msgstr ""
+
+#. module: qs_sale
+#: model_terms:ir.ui.view,arch_db:qs_sale.sale_view_form_inherited
+msgid "Validité des prix"
+msgstr "C.A"
