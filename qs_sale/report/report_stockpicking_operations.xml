@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="report_picking_inherit_qs" inherit_id="stock.report_picking">
-            <xpath expr="//div[@t-field='o.partner_id.commercial_partner_id']" position="after">
+            <xpath expr="//div[@t-field='o.partner_id']" position="after">
                 <t t-if="o.note_client">
                     <strong><span t-esc="o.note_client"/></strong>
                 </t>
