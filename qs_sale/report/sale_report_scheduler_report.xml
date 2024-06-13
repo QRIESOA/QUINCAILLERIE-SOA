@@ -25,13 +25,13 @@
                                         <t t-out="val.get('categ_id')[-1].split('/')[-1]" />
                                     </td>
                                     <td>
-                                        <t t-out="val.get('price_total')" t-options="{'widget':'float'}"/>
+                                        <t t-out="val.get('price_total')" t-options="{'widget':'float', 'precision':2}"/>
                                     </td>
                                     <td>
-                                        <t t-out="val.get('purchase_price')" t-options="{'widget':'float'}"/>
+                                        <t t-out="val.get('purchase_price')" t-options="{'widget':'float', 'precision':2}"/>
                                     </td>
                                     <td>
-                                        <t t-out="val.get('margin')" t-options="{'widget':'float'}"/>
+                                        <t t-out="val.get('margin')" t-options="{'widget':'float', 'precision':2}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -39,13 +39,13 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td>
-                                        <strong><t t-out="total.get('turnover_total')" t-options="{'widget':'float'}"/></strong>
+                                        <strong><t t-out="total.get('turnover_total')" t-options="{'widget':'float', 'precision':2}"/></strong>
                                     </td>
                                     <td>
-                                        <strong><t t-out="total.get('purchase_price_total')" t-options="{'widget':'float'}"/></strong>
+                                        <strong><t t-out="total.get('purchase_price_total')" t-options="{'widget':'float', 'precision':2}"/></strong>
                                     </td>
                                     <td>
-                                        <strong><t t-out="total.get('margin_total')" t-options="{'widget':'float'}"/></strong>
+                                        <strong><t t-out="total.get('margin_total')" t-options="{'widget':'float', 'precision':2}"/></strong>
                                     </td>
                                 </tr>
     
