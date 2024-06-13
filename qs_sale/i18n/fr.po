@@ -224,7 +224,7 @@ msgstr "Transfert"
 #. module: qs_sale
 #: model_terms:ir.ui.view,arch_db:qs_sale.report_sale_scheduler_template
 msgid "Turnover"
-msgstr ""
+msgstr "C.A"
 
 #. module: qs_sale
 #: model_terms:ir.ui.view,arch_db:qs_sale.sale_view_form_inherited
