@@ -12,8 +12,9 @@ class SaleReport(models.AbstractModel):
     @api.model
     def _cron_daily_sales_report(self):
         now = fields.Datetime.now()
-        # TODO: FETCH ORDERS ONLY IN 'ORDER' STATE
+        
         domain = [
+            ("state", "in", ["sale", "done"]),
             ("date", ">=", now.replace(hour=0, minute=0, second=1)),
             ("date", "<=", now.replace(hour=23, minute=59, second=59)),
         ]

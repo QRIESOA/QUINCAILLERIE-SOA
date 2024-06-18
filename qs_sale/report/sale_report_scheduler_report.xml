@@ -6,7 +6,8 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div style="text-align: center; padding: 10px;">
-                    <h3>Daily report</h3> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>
+                    <h3>Daily report</h3>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')" />
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -25,13 +26,16 @@
                                         <t t-out="val.get('categ_id')[-1].split('/')[-1]" />
                                     </td>
                                     <td>
-                                        <t t-out="val.get('price_total')" t-options="{'widget':'float', 'precision':2}"/>
+                                        <t t-out="val.get('price_total')"
+                                            t-options='{"widget": "float", "precision":2}' />
                                     </td>
                                     <td>
-                                        <t t-out="val.get('purchase_price')" t-options="{'widget':'float', 'precision':2}"/>
+                                        <t t-out="val.get('purchase_price')"
+                                            t-options='{"widget": "float", "precision":2}' />
                                     </td>
                                     <td>
-                                        <t t-out="val.get('margin')" t-options="{'widget':'float', 'precision':2}"/>
+                                        <t t-out="val.get('margin')"
+                                            t-options='{"widget": "float", "precision":2}' />
                                     </td>
                                 </tr>
                                 <tr>
@@ -39,16 +43,25 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td>
-                                        <strong><t t-out="total.get('turnover_total')" t-options="{'widget':'float', 'precision':2}"/></strong>
+                                        <strong>
+                                            <t t-out="total.get('turnover_total')"
+                                                t-options='{"widget": "float", "precision":2}' />
+                                        </strong>
                                     </td>
                                     <td>
-                                        <strong><t t-out="total.get('purchase_price_total')" t-options="{'widget':'float', 'precision':2}"/></strong>
+                                        <strong>
+                                            <t t-out="total.get('purchase_price_total')"
+                                                t-options='{"widget": "float", "precision":2}' />
+                                        </strong>
                                     </td>
                                     <td>
-                                        <strong><t t-out="total.get('margin_total')" t-options="{'widget':'float', 'precision':2}"/></strong>
+                                        <strong>
+                                            <t t-out="total.get('margin_total')"
+                                                t-options='{"widget": "float", "precision":2}' />
+                                        </strong>
                                     </td>
                                 </tr>
-    
+
                             </tbody>
                         </table>
                     </div>
