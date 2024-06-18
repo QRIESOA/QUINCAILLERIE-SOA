@@ -24,7 +24,7 @@ This module contains all the common features of Sales Management and eCommerce.
         "data/partner_data.xml",
         # REPORT
         "report/sale_report.xml",
-        "report/report_stockpicking_operations.xml",
+        # "report/report_stockpicking_operations.xml",
         "report/report_deliveryslip.xml",
         "report/report_invoice.xml",
         "report/sale_report_scheduler_report.xml",
