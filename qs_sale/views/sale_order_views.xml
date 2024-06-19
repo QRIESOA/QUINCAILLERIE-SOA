@@ -51,5 +51,33 @@
                 </field>
             </field>
         </record>
+
+        <record id="inherit_sale_margin_sale_order_line_form" model="ir.ui.view">
+            <field name="name">sale.order.view.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="groups">qs_sale.margin_access</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_sale_margin_sale_order" model="ir.ui.view">
+            <field name="name">sale.order.view.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='margin']" position="attributes">
+                    <attribute name="groups">qs_sale.margin_access</attribute>
+                </xpath>
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="groups">qs_sale.margin_access</attribute>
+                </xpath>
+                <xpath expr="//span[@class='oe_inline']" position="attributes">
+                    <attribute name="groups">qs_sale.margin_access</attribute>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
