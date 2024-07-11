@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="group_no_create_no_edit_sale" model="res.groups">
+    <field name="name">Création et modification Ventes</field>
+  </record>
+
+</odoo>
