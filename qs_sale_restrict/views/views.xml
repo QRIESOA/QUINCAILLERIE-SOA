@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="qs_sale_restrict.list">
+      <field name="name">qs_sale_restrict list</field>
+      <field name="model">qs_sale_restrict.qs_sale_restrict</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="qs_sale_restrict.action_window">
+      <field name="name">qs_sale_restrict window</field>
+      <field name="res_model">qs_sale_restrict.qs_sale_restrict</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="qs_sale_restrict.action_server">
+      <field name="name">qs_sale_restrict server</field>
+      <field name="model_id" ref="model_qs_sale_restrict_qs_sale_restrict"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="qs_sale_restrict" id="qs_sale_restrict.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="qs_sale_restrict.menu_1" parent="qs_sale_restrict.menu_root"/>
+    <menuitem name="Menu 2" id="qs_sale_restrict.menu_2" parent="qs_sale_restrict.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="qs_sale_restrict.menu_1_list" parent="qs_sale_restrict.menu_1"
+              action="qs_sale_restrict.action_window"/>
+    <menuitem name="Server to list" id="qs_sale_restrict" parent="qs_sale_restrict.menu_2"
+              action="qs_sale_restrict.action_server"/>
+-->
+  </data>
+</odoo>
