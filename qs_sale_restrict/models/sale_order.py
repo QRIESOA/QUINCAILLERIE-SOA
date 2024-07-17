@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
 
         _logger.info("fields_view_get called with view_type: %s", view_type)
 
-        if view_type in ("tree", "form", "kanban", "list") and not self.env.user.has_group(
+        if view_type in ("tree", "form", "kanban", "list") and self.env.user.has_group(
             "qs_sale_restrict.group_no_create_no_edit_sale"
         ):
             if toolbar:

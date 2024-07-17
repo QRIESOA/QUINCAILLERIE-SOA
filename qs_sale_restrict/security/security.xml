@@ -2,7 +2,7 @@
 <odoo>
 
   <record id="group_no_create_no_edit_sale" model="res.groups">
-    <field name="name">Création et modification Ventes</field>
+    <field name="name">Cacher création, modification, impression, action Ventes</field>
   </record>
 
 </odoo>
