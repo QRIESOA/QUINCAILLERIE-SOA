@@ -32,7 +32,7 @@
         <field name="inherit_id" ref="product.product_template_tree_view"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='qty_available']" position="before">
+            <xpath expr="//field[@name='responsible_id']" position="before">
                 <!-- Add new fields here -->
                 <field name="warehouse_quantity"
                        groups="product_warehouse_quantity.group_show_product_quantity_per_warehouse"/>
