@@ -36,6 +36,7 @@
                                     <td>
                                         <t t-out="val.get('margin')"
                                             t-options="{'widget':'float', 'precision':2}" />
+
                                     </td>
                                 </tr>
                                 <tr>
