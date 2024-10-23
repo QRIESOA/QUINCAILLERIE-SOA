@@ -40,7 +40,7 @@ class PosOrder(models.Model):
         res = super(PosOrder, self)._prepare_invoice_vals()
         list_note_client = list(set(self.lines.mapped('sale_order_origin_id').filtered(lambda so: so.note_client != "" or so.note_client != False).mapped('note_client')))
         if list_note_client:
-            note_client = ', '.join(list_note_client)
+            note_client = ', '.join(map(str, list_note_client))
             res['note_client'] = note_client
         return res
     
