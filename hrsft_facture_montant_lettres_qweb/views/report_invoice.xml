@@ -122,9 +122,7 @@
                             <!--Tax totals-->
                             <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
                             <t t-call="account.document_tax_totals"/>
-                            <tr>
-                                <td></td>
-                            </tr>
+
                             <!--Payments-->
                             <t t-if="print_with_payments">
                                 <t t-if="o.payment_state != 'invoicing_legacy'">
@@ -163,7 +161,7 @@
                         <tr>
                             <th style="width: 15%"></th>
                             <th style="width: 35%">Le client</th>
-                            <th style="width: 35%">Le magasin</th>
+                            <th style="width: 35%">Le magasinier</th>
                             <th style="width: 35%">Le contrôleur</th>
                         </tr>
                     </thead>
