@@ -20,7 +20,7 @@
         # views
 
         'views/account_move_views.xml',
-
+        'views/paperformat_a5.xml',
         # wizard
 
         # report
